@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/noise
+END
+UniformProportionalNoiseFunction.class
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/noise/UniformProportionalNoiseFunction.class
+END
+GaussianNoiseFunction.class
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/noise/GaussianNoiseFunction.class
+END
+DoubleGauge.class
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/noise/DoubleGauge.class
+END
+NoiseFunction.class
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/noise/NoiseFunction.class
+END
+UniformFixedNoiseFunction.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/noise/UniformFixedNoiseFunction.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/noise/package-info.class
+END
+BasicNoiseFunction.class
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/noise/BasicNoiseFunction.class
+END

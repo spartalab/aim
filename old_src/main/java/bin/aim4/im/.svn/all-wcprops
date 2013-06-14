@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4/im
+END
+LightState.class
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/LightState.class
+END
+RoadBasedTrackModel.class
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/RoadBasedTrackModel.class
+END
+RoadBasedIntersection.class
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/RoadBasedIntersection.class
+END
+LightState$1.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/LightState$1.class
+END
+LightState$2.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/LightState$2.class
+END
+LightState$3.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/LightState$3.class
+END
+IntersectionManager.class
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/IntersectionManager.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/package-info.class
+END
+RoadBasedTrackModel$ExitPointDistanceComparator.class
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/RoadBasedTrackModel$ExitPointDistanceComparator.class
+END
+TrackModel.class
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/TrackModel.class
+END
+DummyManager.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/DummyManager.class
+END
+Intersection.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/Intersection.class
+END

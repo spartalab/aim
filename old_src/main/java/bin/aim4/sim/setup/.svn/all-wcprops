@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4/sim/setup
+END
+BasicSimSetup.class
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/sim/setup/BasicSimSetup.class
+END
+AutoDriverOnlySimSetup.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/sim/setup/AutoDriverOnlySimSetup.class
+END
+SimFactory.class
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/sim/setup/SimFactory.class
+END
+ApproxNPhasesTrafficSignalSimSetup.class
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4/sim/setup/ApproxNPhasesTrafficSignalSimSetup.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/sim/setup/package-info.class
+END
+AutoDriverOnlySimSetup$TrafficType.class
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/sim/setup/AutoDriverOnlySimSetup$TrafficType.class
+END
+Approx4PhasesTrafficSignalSimSetup.class
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/sim/setup/Approx4PhasesTrafficSignalSimSetup.class
+END
+SimSetup.class
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/sim/setup/SimSetup.class
+END
+ApproxSimpleTrafficSignalSimSetup.class
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/sim/setup/ApproxSimpleTrafficSignalSimSetup.class
+END
+ApproxStopSignSimSetup.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/sim/setup/ApproxStopSignSimSetup.class
+END

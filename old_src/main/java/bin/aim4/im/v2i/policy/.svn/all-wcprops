@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy
+END
+AllStopPolicy.class
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/AllStopPolicy.class
+END
+BasePolicy$ReservationRecord.class
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/BasePolicy$ReservationRecord.class
+END
+Policy.class
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/Policy.class
+END
+BasePolicy$ProposalFilterResult.class
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/BasePolicy$ProposalFilterResult.class
+END
+TimeoutPolicy$TimeoutPolicyType.class
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/TimeoutPolicy$TimeoutPolicyType.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/package-info.class
+END
+TimeoutPolicy.class
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/TimeoutPolicy.class
+END
+BasePolicyCallback.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/BasePolicyCallback.class
+END
+ExtendedBasePolicyCallback.class
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/ExtendedBasePolicyCallback.class
+END
+BasePolicy.class
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/BasePolicy.class
+END
+BasePolicy$ReserveParam.class
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/v2i/policy/BasePolicy$ReserveParam.class
+END

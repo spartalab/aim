@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/destination
+END
+IdentityDestinationSelector.class
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/destination/IdentityDestinationSelector.class
+END
+RatioDestinationSelector.class
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/destination/RatioDestinationSelector.class
+END
+DestinationSelector.class
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/destination/DestinationSelector.class
+END
+RandomDestinationSelector.class
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/destination/RandomDestinationSelector.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/destination/package-info.class
+END
+UniqueDestinationSelector.class
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/destination/UniqueDestinationSelector.class
+END
+TurnBasedDestinationSelector.class
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/destination/TurnBasedDestinationSelector.class
+END

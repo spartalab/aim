@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+
+<head>
+<title>AIM4 Installation Guide</title>
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
+</head>
+<body>
+
+
+<div style="text-align:left; margin:20px">
+  <h1>AIM4 Installation Guide</h1>
+
+To compile and run the AIM4 simulator:
+<ul>
+<li> <B>Step 1.</B> Download and install the latest version of Java SDK from
+<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">
+the official Java website</a>.  The AIM4 simulator makes use of the
+features in Java SE 6, and it needs JDK SE 6 or any later version of JDK to compile the program.
+
+<li> <B>Step 2.</B> Download and install the lastest version of
+<a href="http://maven.apache.org">Apache Maven</a>, which is used to
+compile the source code of the simulator. The version of Maven we used is 2.2.1.</li>
+
+<li> <B>Step 3.</B> Download and unzip the source code of the AIM4 simulator.
+The latest version can be found at the AIM website at <a href="http://www.cs.utexas.edu/~aim">http://www.cs.utexas.edu/~aim</a>.  After uncompressing
+the file, you should find the root directory
+of the source code at <code>aim4-root</code>.
+</li>
+
+<li> <B>Step 4.</B> Compile the source code by using the following command in the
+root directory of the source code:
+<ul>
+  <br>
+  <code>mvn -Dmaven.test.skip=true assembly:assembly</code>
+</ul>
+<br>
+Alternatively, you can type this command to compile the files.
+<ul>
+  <br>
+  <code>make jar</code>
+</ul>
+<br>
+These commands genreate an executable located at:
+<ul>
+  <br>
+  <code>aim4-root/target/AIM4-1.0-SNAPSHOT-jar-with-dependencies.jar</code>.
+</ul>
+<br>
+If you use the <code>make jar</code> command,
+a copy of the executable can be found at
+<code>aim4-root/aim4.jar</code>, which is exactly
+the same at the one in <code>aim4-root/target</code>.
+</li>
+
+<li> <B>Step 5.</B> Run the executable by typing
+<ul>
+  <br>
+  <code>java -jar target/AIM4-1.0-SNAPSHOT-jar-with-dependencies.jar</code>
+</ul>
+<br>
+or type:
+<ul>
+  <br>
+  <code>make run</code>
+</ul>
+<br>
+Then the following window should appear on your computer screen:
+<div style="text-align:center; margin:20px">
+<img src="images/auto_config.png"/ width=500>
+</div>
+If the simulator runs out of memory, use the -Xmx option when you start
+the simulator:
+<ul>
+  <br>
+  <code>java -jar -Xmx1000M target/AIM4-1.0-SNAPSHOT-jar-with-dependencies.jar</code>
+</ul>
+<br>
+
+
+
+Please read the <a href="user.html">AIM4 User Guide</a> to see how to use the simulator.
+</ul>
+
+To generate the API documentations, type:
+<ul>
+  <code>mvn javadoc:javadoc</code>
+</ul>
+or
+<ul>
+<code>make javadoc</code>
+</ul>
+<br>
+Then the API documentation are generated.
+The start page of the documentation is located at:
+<ul>
+<code>aim4-root/target/site/apidocs/index.html</code>
+</ul>
+You can open it using a web browser.
+
+Finally, if you want to remove the executable and clean up the directory,
+type:
+  <ul>
+    <code>mvn clean</code><br>
+    <code>rm -f aim4.jar</code>
+  </ul>
+  or simply type:
+  <ul>
+    <code>make clean</code>
+  </ul>
+  Then the executable <code>aim4.jar</code> and the files in the <code>target</code> directory are removed.
+
+
+<pre style="text-align:left; margin:20px; padding:10px; font-size:x-small; background-color:#EEEEEE; ">
+Copyright (c) 2011 Tsz-Chiu Au (chiu@cs.utexas.edu), Peter Stone (pstone@cs.utexas.edu)
+University of Texas at Austin
+All rights reserved.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</pre>
+
+
+</div>
+
+
+</body>
+
+</html>

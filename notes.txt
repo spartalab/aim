@@ -1,0 +1,16 @@
+level = vehicle / second / length
+
+Target Traffice Level vs Effective TL
+
+>= 600 simulation time (180 try)
+
+traffice signal; FCFS
+
+>= 30 times for each data point (>= 5)
+e, var
+.95 confidence
+
+
+===========
+FCFS, SIGNAL. TTL vs ETL
+no_vehicle_zone_length

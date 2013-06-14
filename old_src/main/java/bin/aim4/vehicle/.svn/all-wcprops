@@ -1,0 +1,179 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle
+END
+AutoVehicleSimView.class
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/AutoVehicleSimView.class
+END
+VehicleUtil.class
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/VehicleUtil.class
+END
+AutoVehicleDriverView.class
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/AutoVehicleDriverView.class
+END
+VehicleSpecDatabase.class
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/VehicleSpecDatabase.class
+END
+BasicVehicle$MoveToTargetVelocityMovement.class
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicVehicle$MoveToTargetVelocityMovement.class
+END
+BasicVehicle.class
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicVehicle.class
+END
+ProxyVehicle.class
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/ProxyVehicle.class
+END
+VehicleSimView.class
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/VehicleSimView.class
+END
+BasicVehicle$MovementWithAccel.class
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicVehicle$MovementWithAccel.class
+END
+AccelSchedule.class
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/AccelSchedule.class
+END
+HumanDrivenVehicleSimView.class
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/HumanDrivenVehicleSimView.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/package-info.class
+END
+BasicVehicle$TrackMovement.class
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicVehicle$TrackMovement.class
+END
+ProxyVehicleSimView.class
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/ProxyVehicleSimView.class
+END
+VinRegistry.class
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/VinRegistry.class
+END
+VehicleDriverView.class
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/VehicleDriverView.class
+END
+HumanDrivenVehicleDriverView.class
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/HumanDrivenVehicleDriverView.class
+END
+BasicVehicle$MovementFactory.class
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicVehicle$MovementFactory.class
+END
+AccelProfile.class
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/AccelProfile.class
+END
+VehicleSpec.class
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/VehicleSpec.class
+END
+AutoVehicleDriverView$LRFMode.class
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/AutoVehicleDriverView$LRFMode.class
+END
+BasicVehicle$PhysicalMovement.class
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicVehicle$PhysicalMovement.class
+END
+AccelSchedule$TimeAccel.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/AccelSchedule$TimeAccel.class
+END
+AccelProfile$DurAccel.class
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/AccelProfile$DurAccel.class
+END
+BasicVehicle$Movement.class
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicVehicle$Movement.class
+END
+BasicVehicle$SteeringMovement.class
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicVehicle$SteeringMovement.class
+END
+BasicVehicle$NonAccelMovement.class
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicVehicle$NonAccelMovement.class
+END
+BasicVehicle$AccelScheduleMovement.class
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicVehicle$AccelScheduleMovement.class
+END
+BasicAutoVehicle.class
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/vehicle/BasicAutoVehicle.class
+END

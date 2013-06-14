@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/.classpath
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/.project
+END
+Main.class
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/Main.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/package-info.class
+END
+svn-commit.2.tmp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/svn-commit.2.tmp
+END
+svn-commit.tmp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/svn-commit.tmp
+END

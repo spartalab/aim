@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4/config
+END
+SimConfig.class
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4/config/SimConfig.class
+END
+Constants$CardinalDirection.class
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Constants$CardinalDirection.class
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/.project
+END
+DebugPoint.class
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/DebugPoint.class
+END
+Condor.class
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Condor.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/package-info.class
+END
+Debug.class
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Debug.class
+END
+Constants$TurnDirection.class
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Constants$TurnDirection.class
+END
+Resources.class
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4/config/Resources.class
+END
+Constants$LightStatus.class
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Constants$LightStatus.class
+END
+Constants.class
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Constants.class
+END
+TrafficSignal.class
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/TrafficSignal.class
+END
+TrafficSignalPhase.class
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/TrafficSignalPhase.class
+END

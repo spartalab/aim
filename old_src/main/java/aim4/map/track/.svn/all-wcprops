@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/map/track/package-info.java
+END
+Track.class
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track/Track.class
+END
+LineTrack$Position.class
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track/LineTrack$Position.class
+END
+TrackPosition.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/map/track/TrackPosition.java
+END
+ArcTrack.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/map/track/ArcTrack.java
+END
+WayPoint.class
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track/WayPoint.class
+END
+PathTrack$Position.class
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track/PathTrack$Position.class
+END
+LineTrack.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track/LineTrack.class
+END
+Track.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/map/track/Track.java
+END
+PathTrack.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track/PathTrack.class
+END
+ArcTrack$Position.class
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track/ArcTrack$Position.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track/package-info.class
+END
+WayPoint.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/map/track/WayPoint.java
+END
+LineTrack.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/map/track/LineTrack.java
+END
+TrackPosition.class
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track/TrackPosition.class
+END
+ArcTrack.class
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/map/track/ArcTrack.class
+END
+PathTrack.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/map/track/PathTrack.java
+END

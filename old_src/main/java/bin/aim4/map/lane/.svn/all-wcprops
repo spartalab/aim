@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/lane
+END
+AbstractLane.class
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/lane/AbstractLane.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/lane/package-info.class
+END
+LaneIM.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/lane/LaneIM.class
+END
+LineSegmentLane.class
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/lane/LineSegmentLane.class
+END
+Lane.class
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/map/lane/Lane.class
+END

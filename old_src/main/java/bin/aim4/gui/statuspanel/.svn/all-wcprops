@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/gui/statuspanel
+END
+AdminControlPanel.class
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/gui/statuspanel/AdminControlPanel.class
+END
+SimControlPanel.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/gui/statuspanel/SimControlPanel.class
+END
+StatPanel.class
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/gui/statuspanel/StatPanel.class
+END
+VehicleInfoPanel.class
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/gui/statuspanel/VehicleInfoPanel.class
+END
+ConsolePanel.class
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/gui/statuspanel/ConsolePanel.class
+END
+SystemPanel.class
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/gui/statuspanel/SystemPanel.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/gui/statuspanel/package-info.class
+END

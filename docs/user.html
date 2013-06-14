@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+
+<head>
+<title>AIM4 User Guide</title>
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
+</head>
+<body>
+
+<div style="text-align:left; margin:20px">
+  <h1>AIM4 User Guide</h1>
+
+This document helps users to understand the user interface of the AIM4
+simulator and learn how to start and control simulations in the
+simulator.  In Section 1, we discuss how to set up a simulation in
+which all intersections are controlled by the AIM protocol.  In
+Section 2, we present the set up of a simulation in which all
+intersections use traffic signals.  In Section 3, we present how to
+run a simulation in which stop signs are used.  In Section 4, we
+present the elements in the user interface for controlling
+simulations.
+
+<!-- ------------------------------------------------------ -->
+<h2>1. Choosing a Simulation Setup Screen</h2>
+<!-- ------------------------------------------------------ -->
+
+When you start the simulator, you should see the following window:
+
+<div style="text-align:center; margin:20px">
+<img src="images/auto_config.png" width=500 />
+</div>
+
+This window is the setup screen for configuring a simulation in which
+all intersections are controlled by the AIM protocol.
+On the top of this setup screen, there is a pull down menu.
+On the pull down menu, you can choose other setup screens.
+For instance, if you choose "Traffic Signals", you will see the following screen:
+
+<div style="text-align:center; margin:20px">
+<img src="images/signal_config.png" width=500/>
+</div>
+
+This is the setup screen for the configuring a simulation in which
+all intersection controls are traffic signals.  Likewise,
+if you choose "Stop signs", you will see the following setup screen:
+
+<div style="text-align:center; margin:20px">
+<img src="images/stop_config.png" width=500/>
+</div>
+
+This is the setup screen for simulation in which all intersection controls are
+stop signs.  Currently the setup screen for stop signs "controller"
+does not have any settings.
+
+<!-- ------------------------------------------------------ -->
+<h2>2. Simulations with the AIM Protocol</h2>
+<!-- ------------------------------------------------------ -->
+
+Now let us go to the setup screen for the AIM protocol only settings
+by choosing the "AIM Protocol" in the pull down menu:
+
+<div style="text-align:center; margin:20px">
+<img src="images/auto_config.png" width=500 />
+</div>
+
+On this setup screen, you will see a number of simulation parameters:
+
+<ul>
+<li> <B>Traffic Level.</B>
+  The number of vehicles spawned at each spawn point per hour per
+  lane. The default value is 1000 vehicles / hour / lane.
+</li>
+
+<li> <B>Speed Limit.</B>
+  The speed limit of the roads.
+  The default value is 25 meters / second.
+</li>
+
+<li> <B>Stopping Distance Before Intersection.</B>
+  The distance from an intersection that a vehicle
+  must stop completely if the vehicle cannot get a reservation.
+  The default value is 1 meter.
+</li>
+
+<li> <B>Number of North-bound/South-bound Roads.</B>
+  The number of roads in the north-south direction.
+  The default value is 1.
+</li>
+
+<li> <B>Number of East-bound/West-bound Roads.</B>
+  The number of roads in the east-west direction.
+  The default value is 1.
+</li>
+
+<li> <B>Number of Lanes per Road.</B>
+  The number of lanes per road.
+  The default value is 3.
+</li>
+</ul>
+
+After adjusting the simulation parameters, press the Start button at
+the lower left corner of the window to start the simulation.  For
+example, to start a simulation with a map consists of a 3 &times; 3
+intersections, set the number of north-bound/south-bound roads to 3
+and the number of east-bound/west-bound roads to 3.  Press the Start
+button and you will then see the following screen.
+
+<div style="text-align:center; margin:20px">
+<img src="images/3x3map.png" width=500/>
+</div>
+
+<h3>Understanding the Simulation Screen</h3>
+
+Suppose you started a simulation with only one intersection:
+
+<div style="text-align:center; margin:20px">
+<img src="images/one-intersection.png" width=500/>
+</div>
+
+In this screen, vehicles are spawned at the <B>spawn points</B>
+at the edge of the screen. The rate at which vehicles are spawned
+at the spawn points are determined by the traffic level at the screen.
+At the top left corner of the screen is the current <B>simulation time</B>,
+which is the amount of time the simulation has passed since the
+beginning of the simulation. The initial simulation time is 0 and
+it increases at an increment of 0.02 second by default.
+Notice that a simulation second is not the same as a second in real
+life, and this allows the simulation runs at a much faster speed.
+The speed of the simulation can be adjusted in the control panel
+at the bottom of the screen.  We will discuss the control panel in
+detail in Section 5.
+
+The color of a vehicle indicates the state of the reservation of
+the vehicle:
+<ul>
+  <li><b>Yellow vehicles</b> - vehicles that have not yet received a
+  reservation and are not currently waiting for a reservation</li>
+  <li><b>Blue vehicles</b> - vehicles that have sent a reservation
+  request but have not received a reply from the intersection managers</li>
+  <li><b>White vehicles</b> - vehicles that have got reservations and
+  can enter the intersections.</li>
+</ul>
+
+The white lines near the beginning and the end of the roads in the map
+are the <B>data collection lines</B>, which are used to collect the
+data about the vehicles.  Whenever a vehicle passes through a data
+collection line, the VIN of the vehicle, in conjunction with the
+time at which the vehicle crossing the line, will be recorded.
+Users can export these data to a file by choosing
+<B>Dump Data Collection Lines' Data</B> in the menu bar.
+We will talk about the menu bar in Section 5.
+
+
+<!-- ------------------------------------------------------ -->
+<h2>3. Simulations with Traffic Signals</h2>
+<!-- ------------------------------------------------------ -->
+
+Now press the Escape key to go back to the setup screen, and
+then choose "Traffic Signals" in the pull down menu.
+We will see the following setup screen:
+
+<div style="text-align:center; margin:20px">
+<img src="images/signal_config.png" width=500/>
+</div>
+
+On this setup screen, there are some simulation parameters for
+simulations in which all intersections are controlled by
+traffic signals.
+
+<ul>
+<li> <B>Traffic Level.</B>
+  The number of vehicles spawned at each spawn point per hour per
+  lane. The default value is 800 vehicles / hour / lane.
+</li>
+
+<li> <B>Number of Lanes per Road.</B>
+  The number of lanes per road.
+  The default value is 3.
+</li>
+
+<li> <B>Green Signal Duration.</B>
+  The duration of the green signals.
+  The default value is 30 seconds.
+</li>
+
+<li> <B>Yellow Signal Duration.</B>
+ The duration of the yellow signals.
+  The default value is 5 seconds.
+</li>
+</ul>
+
+Currently, only one intersection is allowed in this setup with traffic
+signals.  Press the Start button and the simulation screen appears:
+
+<div style="text-align:center; margin:20px">
+<img src="images/traffic-signal-simulation.png" width=500/>
+</div>
+
+The traffic signal in the simulation is a six-phase traffic signals
+with two protected left-turn phases. Also, vehicles can make a
+right-turn at any time.
+
+As can be seen, there are traffic signals at all incoming lanes of the
+intersection.  There are three different traffic signals: green,
+yellow and red.  The duration of the green and yellow signals are
+determined by the chosen values in the setup screen.  The duration of
+the red signal is equal to the sum of the duration of the green signal
+and the duration of the yellow signal.
+
+All vehicles in this simulation are yellow and the color has no
+special meaning, as there is no need to indicate the reservation status.
+
+
+<!-- ------------------------------------------------------ -->
+<h2>4. Simulations with Stop Signs</h2>
+<!-- ------------------------------------------------------ -->
+
+Let us try out the setup for stop signs by pressing
+the Escape key and then choose "Stop Signs" in the pull down menu.
+We will see the following setup screen:
+
+<div style="text-align:center; margin:20px">
+<img src="images/stop_config.png" width=500/>
+</div>
+
+Currently, there is no parameters for simulations with stop signs.
+Furthermore, only one intersection is allowed in this setup with stop
+signs.  Press the Start button and the simulation screen appears:
+
+<div style="text-align:center; margin:20px">
+<img src="images/stop-sign-simulation.png" width=500/>
+</div>
+
+At first glance, only one vehicle has the right of way to enter the
+intersection at any time.  But it is not true: when the vehicle inside
+the intersection almost completes its traversal and is leaving the
+intersection, another vehicle can move into into the intersection.
+
+Under the stop signs, vehicles are first-come, first-serve---the first
+vehicle who stops at the intersection is allowed to enter intersection.
+If multiple vehicles stop at the intersection, the right of ways are
+granted in a counter-clockwise direction of the entering roads.
+
+<!-- ------------------------------------------------------ -->
+<h2>5. Simlulation Controls</h2>
+<!-- ------------------------------------------------------ -->
+
+In this section, we will explain other functions for controlling
+simulations in the simulator.  At the bottom of the simulator window
+is the simulation control panel:
+
+<div style="text-align:center; margin:20px">
+<img src="images/control_panel.png" width=500/ >
+</div>
+
+The control panel is used for controlling the simulation process and
+display various information related to the simulation.  Apart from the
+control panel, the menu items in the menu bar also provides several
+useful function for conducting experiments and displaying useful
+information.
+
+
+<h3>5.1 Buttons, Keyboard shortcuts, and Mouse Controls</h3>
+
+On the left of the control panel, there are two buttons. The first one
+is the Start/Pause/Resume button.  The second one is the Step button.
+In previous sections, we have already used the Start button to start a
+simulation.  Once the Start button is pressed, it will turn into the
+Pause botton, which is used to pause the simulation. Once the
+simulation is paused, the Pause button becomes the Resume button,
+which is used to resume the simulation.  When the simulation is
+paused, users can press the Step button beneath the Resume button to
+advance the simulation step by step, at an increment of 0.02 second.
+
+You can control the simulation by using the following keyboard
+shortcuts, which functions are similar to the buttons:
+
+<UL>
+<li> <B>Enter key.</B>
+  Pause/resume the simulation process.
+  Press the Enter key to pause the simulation, and then press the Enter
+  key again to resume the simulation.
+</li>
+<li> <B>Space key.</B>
+  Pause/step the simulation process.
+  Press the Space key to pause the simulation process if it is
+  running. Then press the Space key again to advance the paused
+  simulation by one time step.
+</li>
+<li> <B>Escape key.</B>
+  Terminate the simulation process and return to the setup screen.
+</li>
+</UL>
+
+You can use your mouse's scroll wheel to zoom-in and zoom-out of the
+map.  Put the mouse cursor on the map and scroll the mouse's scroll
+wheel in the up direction to magnify the location at the
+cursor. Likewise, turn the scroll wheel to down direction will zoom
+out of the map.
+
+When you zoom into a map, the outer part of the map will be out of
+view area of the window.  You can drag the map to view those areas by
+left clicking a position of a map, hold the left mouse button, and
+move your mouse cursor.
+
+
+<h3>5.2 Control Tabs</h3>
+
+There are six control tabs to control simulations and display useful
+information about the simulations.  These tabs are:
+
+<ul>
+<li><B>Simulation Tab</B> - for controlling the speed of the simulation process</li>
+<li><B>Statistics Tab</B> - for showing the statistics of the simulation process</li>
+<li><B>System Tab</B> - for showing the information of the system</li>
+<li><B>Console Tab</B> - for displaying the message generated by the simulation process</li>
+<li><B>Vehicle Tab</B> - for presenting the information of a selected vehicle</li>
+<li><B>Admin Tab</B> - for changing the intersection managers when the simulation process is running</li>
+</ul>
+
+In the following sections, we will discuss the functions of each tabs
+in detail.
+
+<h4>5.2.1 Simulation Tab</h4>
+
+In the simulation tab, there are two sliders:
+
+<div style="text-align:center; margin:20px">
+<img src="images/control_panel.png" width=500/ >
+</div>
+
+<ul>
+<li><B>Simulation speed slider</B> -
+  The simulation speed is the number of simulations seconds for one
+  real second.  If the simulation speed is 1, then the simulation will
+  run in the "normal" speed---each simulation second takes exactly 1
+  second in the real life.  If the simulation speed is 2, the
+  simulation process runs twice. If the simulation speed is less than
+  1, the simulation will run in a slow motion. If the simulation speed
+  is 0, the simulation process will pause. Usually, we want to set the
+  simulation speed to a larger value to save time.  But the simulation
+  speed is too large, the simulation may not be able to update the
+  screen at the expected simulation speed and the actual simulation
+  speed is smaller than the chosen one.  The default simulation speed
+  is maximum, which means that the simulation process should run as
+  quickly as possible.
+  </li>
+
+<li><B>Target frame rate slider</B> -
+  Frame rate is the frequency at which the simulation screen is
+  updated.  The target frame rate is the expected frequency at which
+  the simulator should update the simulation screen.  The update of
+  the simulation screen takes a lot of CPU cycles, thus by reducing
+  the target frame rate, the simulation process can run much faster.
+  Notice that if the target frame rate is set too large, the simulator
+  would not be able to update the screen at the target frame rate,
+  and the actual framte rate will be less than the target frame rate.
+  The default target frame rate is 20 frames per second.
+  </li>
+</ul>
+
+<h4>5.2.2 Statistics Tab</h4>
+
+The statistics tab shows several important statistics of the
+current simulation process:
+
+<div style="text-align:center; margin:20px">
+<img src="images/statistics-tab.png" width=500/ >
+</div>
+
+<ul>
+<li><B>Current Time</B> -
+  The current simulation time.
+  </li>
+<li><B>Completed Vehicles</B> -
+  The number of vehicles that have reached their destination and
+  left the map.
+  </li>
+<li><B>Average Data Transmitted</B> -
+  The amount of data, on average, sent from a vehicle to intersection
+  managers.  The unit is kilobytes.
+ </li>
+<li><B>Average Data Received</B> -
+  The amount of data, on average, sent from intersection
+  managers to a vehicle.  The unit is kilobytes.
+  </li>
+</ul>
+
+
+<h4>5.2.3 System Tab</h4>
+
+The system tab shows the information about the system and the memory
+usage of the simulator.
+
+<div style="text-align:center; margin:20px">
+<img src="images/system-tab.png" width=500/ >
+</div>
+
+<ul>
+<li><B>Operating System</B> -
+  The information of the operating system in which
+  the Java virtual machine is running.
+  </li>
+<li><B>Jave Version</B> -
+  The version of the Java virtual machine.
+  </li>
+<li><B>Memory Usage</B> -
+  The amount of memory that is currently used by the simulator.
+ </li>
+<li><B>Allocated JVM Memory</B> -
+  The amount of memory allocated by the Jave virtual machine.
+  for the simulation.
+  </li>
+<li><B>maximum JVM Memory</B> -
+  The maximum amount of memory the simulator can use.
+  </li>
+</ul>
+
+
+<h4>5.2.4 Console Tab</h4>
+
+The console screen is a text area for a simulation process to output
+various information pertinent to the simulation.  This tab is mainly
+for debugging purpose.  In this release, simulation processes do
+not send any message to the console.
+
+<div style="text-align:center; margin:20px">
+<img src="images/console-tab.png" width=500/ >
+</div>
+
+
+<h4>5.2.5 Vehicle Tab</h4>
+
+The vehicle tab and the vehicle information window show the
+information of the selected vehicle.  To select vehicle, click a
+vehicle in the map. Once a vehicle is selected,
+the color of the vehicle will change to orange:
+
+<div style="text-align:center; margin:20px">
+<img src="images/selected-vehicle.png" width=500/ >
+</div>
+
+At the same time, the vehicle information window will appear:
+
+<div style="text-align:center; margin:20px">
+<img src="images/vehicle-info-window.png" width=300/ >
+</div>
+
+The vehicle information shows the following information:
+<ul>
+<li><B>VIN</B> - 
+  The VIN of the vehicle.
+  </li>
+<li><B>Velocity</B> - 
+  The current velocity of the vehicle. The unit is meter per second.
+  </li>
+<li><B>Heading</B> - 
+  The current direction of the vehicle. The unit is radian. The
+  vehicle moving in the east-bound direction (x-axis) has a heading
+  of 0 radian.  The heading increases in the counter-clockwise direction.
+ </li>
+<li><B>Acceleration</B> - 
+  The current velocity of the vehicle.  The unit is m<sup>2</sup>/s.
+  </li>
+</ul>
+
+Then select the vehicle tab:
+
+<div style="text-align:center; margin:20px">
+<img src="images/vehicle-tab.png" width=500/ >
+</div>
+
+In addition to the VIN, the current velocity and the
+current acceleration, the vehicle tab shows the following additional
+information.
+<ul>
+<li><B>Vehicle Type</B> -
+  The type of the selected vehicle.
+  </li>
+<li><B>Data Transmitted</B> -
+  The amount of data sent from the selected vehicle to intersection managers.
+  </li>
+<li><B>Data received</B> - 
+  The amount of data sent from intersection managers to the selected vehicle.
+  </li>
+</ul>
+
+
+<h4>5.2.6 Admin Tab</h4>
+
+The admin tab allows users to replace the intersection manager of the
+selected intersection on the fly when the simulation process is
+running. First, you have to select an intersection by clicking
+the intersection.  The color of the outline of selected intersection
+will change to orange after the selection:
+
+<div style="text-align:center; margin:20px">
+<img src="images/selected-intersection.png" width=500/ >
+</div>
+
+Then click the admin tab and you can select one of the following
+three intersection managers:
+
+<div style="text-align:center; margin:20px">
+<img src="images/admin-tab.png" width=500/ >
+</div>
+
+<ul>
+<li><B>FCFS</B> -
+  The AIM protocol with the First-Come, First-Served policy.
+  </li>
+<li><B>Stop</B> -
+  Stop signs.  
+  </li>
+<li><B>Alternate</B> -
+  A traffic signal protocol with four phases. First, vehicles are only
+  allowed to go straight through the intersection.  Second, all
+  vehicles stop before the intersection.  Third, vehicles are only
+  allowed to make a turn. Fourth, all vehicles stop before the
+  intersection.
+  </li>
+</ul>
+
+
+<h3>5.4 Menu bar</h3>
+
+More functions are accessible from the menu bar of the simulator.
+In this section, we will describe some of these functions.
+
+<UL>
+<LI><B>aim4.Main / About aim4.Main</B> -
+  The "About" Screen.
+ </LI>
+<LI><B>aim4.Main / Quit aim4.Main</B> -
+ Terminate the simulation and exit.
+ </LI>
+<LI><B>Simulator / Start</B> -
+  Same as the Start button.
+  </LI>
+<LI><B>Simulator / Pause</B> -
+  Same as the Pause button.
+  </LI>
+<LI><B>Simulator / Step</B> -
+  Same as the Step button.
+  </LI>
+<LI><B>Simulator / Reset</B> -
+  Reset the simulation and return to the setup screen.
+  Same as the Escape key.
+  </LI>
+<LI><B>Data / Dump Data Collection Lines' Data</B> -
+  Export the data collected by data collection lines to a file.
+  </LI>
+<LI><B>Recording / Start</B> -
+  Record the simulation.
+  </LI>
+<LI><B>Recording / Stop</B> -
+  Stop recording the simulation.
+  </LI>
+<LI><B>UDP / Start Listening</B> -
+  Start to listen to the real autonomous message.  Used for mixed
+  reality experiments.
+  </LI>
+<LI><B>UDP / Stop Listening</B> -
+  Stop to listen to the real autonomous message.  Used for mixed
+  reality experiments.
+  </LI>
+<LI><B>View / Show Simulation Time</B> -
+  Show/hide the simulation time at the top left corner of the simulation.
+  </LI>
+<LI><B>View / Show VIN numbers</B> -
+  Show/hide the VINs of the vehicles on the map.
+  </LI>
+<LI><B>View / Show IM Shapes</B> -
+  Show/hide the reserved tiles at the intersecton.
+  </LI>
+<LI><B>Debug / Clear Debug Points</B> -
+  Remove debug points (for debugging).
+  </LI>
+</UL>
+
+<pre style="text-align:left; margin:20px; padding:10px; font-size:x-small; background-color:#EEEEEE; ">
+Copyright (c) 2011 Tsz-Chiu Au (chiu@cs.utexas.edu), Peter Stone (pstone@cs.utexas.edu)
+University of Texas at Austin
+All rights reserved.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</pre>
+
+</div>
+
+</body>
+
+</html>

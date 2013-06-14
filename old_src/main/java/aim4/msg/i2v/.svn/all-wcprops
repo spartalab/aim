@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/i2v
+END
+Reject.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/msg/i2v/Reject.java
+END
+Reject$Reason.class
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/i2v/Reject$Reason.class
+END
+Confirm.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/msg/i2v/Confirm.java
+END
+I2VMessage$Type.class
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/i2v/I2VMessage$Type.class
+END
+Reject.class
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/i2v/Reject.class
+END
+Confirm.class
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/i2v/Confirm.class
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/msg/i2v/package-info.java
+END
+I2VMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/msg/i2v/I2VMessage.java
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/i2v/package-info.class
+END
+I2VMessage.class
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/i2v/I2VMessage.class
+END
