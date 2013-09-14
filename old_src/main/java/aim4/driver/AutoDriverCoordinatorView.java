@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package aim4.driver;
 
+import aim4.driver.coordinator.V2ICoordinator.State;
 import aim4.im.IntersectionManager;
 import aim4.map.Road;
 import aim4.map.lane.Lane;
@@ -129,5 +130,17 @@ public interface AutoDriverCoordinatorView {
    */
   boolean inCurrentIntersection();
 
-
+  /**
+   * Set the state of the driver
+   * 
+   * @param state
+   */
+  void setState(State state);
+  
+  /**
+   * Get the state of the driver
+   * 
+   * @return the state
+   */
+  State getState();
 }

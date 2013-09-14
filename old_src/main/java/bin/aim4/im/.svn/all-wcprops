@@ -1,77 +1,125 @@
 K 25
 svn:wc:ra_dav:version-url
-V 47
-/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4/im
-END
-LightState.class
-K 25
-svn:wc:ra_dav:version-url
-V 64
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/LightState.class
-END
-RoadBasedTrackModel.class
-K 25
-svn:wc:ra_dav:version-url
-V 73
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/RoadBasedTrackModel.class
+V 43
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im
 END
 RoadBasedIntersection.class
 K 25
 svn:wc:ra_dav:version-url
-V 75
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/RoadBasedIntersection.class
+V 71
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/RoadBasedIntersection.class
 END
-LightState$1.class
+IntersectionManager.java
 K 25
 svn:wc:ra_dav:version-url
-V 66
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/LightState$1.class
+V 68
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/im/IntersectionManager.java
 END
-LightState$2.class
+Intersection.java
 K 25
 svn:wc:ra_dav:version-url
-V 66
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/LightState$2.class
-END
-LightState$3.class
-K 25
-svn:wc:ra_dav:version-url
-V 66
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/LightState$3.class
-END
-IntersectionManager.class
-K 25
-svn:wc:ra_dav:version-url
-V 73
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/IntersectionManager.class
+V 61
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/im/Intersection.java
 END
 package-info.class
 K 25
 svn:wc:ra_dav:version-url
-V 66
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/package-info.class
+V 62
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/package-info.class
 END
-RoadBasedTrackModel$ExitPointDistanceComparator.class
+LightState.java
 K 25
 svn:wc:ra_dav:version-url
-V 101
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/RoadBasedTrackModel$ExitPointDistanceComparator.class
+V 59
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/im/LightState.java
 END
 TrackModel.class
 K 25
 svn:wc:ra_dav:version-url
-V 64
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/TrackModel.class
+V 60
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/TrackModel.class
 END
 DummyManager.class
 K 25
 svn:wc:ra_dav:version-url
-V 66
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/DummyManager.class
+V 62
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/DummyManager.class
+END
+RoadBasedIntersection.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/im/RoadBasedIntersection.java
+END
+RoadBasedTrackModel.class
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/RoadBasedTrackModel.class
+END
+LightState$1.class
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/LightState$1.class
+END
+LightState$2.class
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/LightState$2.class
+END
+LightState$3.class
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/LightState$3.class
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/im/package-info.java
+END
+TrackModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/im/TrackModel.java
+END
+IntersectionManager.class
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/IntersectionManager.class
+END
+DummyManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/im/DummyManager.java
+END
+RoadBasedTrackModel$ExitPointDistanceComparator.class
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/RoadBasedTrackModel$ExitPointDistanceComparator.class
+END
+RoadBasedTrackModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/im/RoadBasedTrackModel.java
 END
 Intersection.class
 K 25
 svn:wc:ra_dav:version-url
-V 66
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/im/Intersection.class
+V 62
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/Intersection.class
+END
+LightState.class
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/im/LightState.class
 END

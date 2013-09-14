@@ -146,7 +146,7 @@ public class ApproxStopSignRequestHandler implements RequestHandler {
       return;
     }
     // try to see if reservation is possible for the remaining proposals.
-    ReserveParam reserveParam = basePolicy.findReserveParam(msg, proposals);
+    ReserveParam reserveParam = basePolicy.findReserveParam(msg, proposals, false);
     if (reserveParam != null) {
       basePolicy.sendComfirmMsg(msg.getRequestId(), reserveParam);
     } else {

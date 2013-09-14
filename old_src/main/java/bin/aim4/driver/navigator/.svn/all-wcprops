@@ -1,29 +1,47 @@
 K 25
 svn:wc:ra_dav:version-url
-V 61
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/navigator
+V 57
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/navigator
 END
-package-info.class
+Navigator.java
 K 25
 svn:wc:ra_dav:version-url
-V 80
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/navigator/package-info.class
+V 72
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/navigator/Navigator.java
 END
 BasicNavigator$Node.class
 K 25
 svn:wc:ra_dav:version-url
-V 87
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/navigator/BasicNavigator$Node.class
+V 83
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/navigator/BasicNavigator$Node.class
+END
+BasicNavigator.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/navigator/BasicNavigator.java
 END
 Navigator.class
 K 25
 svn:wc:ra_dav:version-url
-V 77
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/navigator/Navigator.class
+V 73
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/navigator/Navigator.class
 END
 BasicNavigator.class
 K 25
 svn:wc:ra_dav:version-url
-V 82
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/navigator/BasicNavigator.class
+V 78
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/navigator/BasicNavigator.class
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/navigator/package-info.java
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/navigator/package-info.class
 END

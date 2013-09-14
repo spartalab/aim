@@ -36,6 +36,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,7 @@ import java.util.Set;
 import aim4.config.Constants;
 import aim4.config.Debug;
 import aim4.config.SimConfig;
+import aim4.config.SimConfig.VEHICLE_TYPE;
 import aim4.driver.CrashTestDummy;
 import aim4.driver.Driver;
 import aim4.im.Intersection;
@@ -549,7 +551,7 @@ public class ReservationGridManager implements
     this.internalTileTimeBufferSteps =
       (int) (config.getInternalTileTimeBufferSize() / config.getGridTimeStep());
     this.internalTileTimeBufferStepsForHuman =
-    	(int)(this.internalTileTimeBufferSteps * SimConfig.HUMAN_TARDINESS);
+    	(int)(this.internalTileTimeBufferSteps);
     this.edgeTileTimeBufferSteps =
       (int) (config.getEdgeTileTimeBufferSize() / config.getGridTimeStep());
 
@@ -611,13 +613,14 @@ public class ReservationGridManager implements
    * a request message.  This attempt can be either with attempting to
    * setMaxAccelWithMaxTargetVelocity to maximum velocity or with a constant velocity.
    * @param q  the query object
+   * @param green wheather it's green signal
    * @param isHuman if it's a human driver
    *
    * @return a set of space-time tiles on the trajectory and
    *         the exit velocity of the vehicle if the reservation is
    *         successful; otherwise return null.
    */
-  public Plan query(Query q, boolean isHuman) {
+  public Plan query(Query q, VEHICLE_TYPE vehicleType, boolean green) {
 
     // Position the Vehicle to be ready to start the simulation
     Lane arrivalLane =
@@ -631,21 +634,31 @@ public class ReservationGridManager implements
                         q.getArrivalVelocity(),
                         q.getMaxTurnVelocity(),
                         arrivalLane,
-                        isHuman);
+                        vehicleType);
 
     // Create a dummy driver to steer it
     Driver dummy = new CrashTestDummy(testVehicle, arrivalLane, departureLane);
-
+    
     // assign the drive to the vehicle
     // testVehicle.setDriver(dummy);  // TODO fix this later.
 
     // Keep track of the TileTimes that will make up this reservation
     FindTileTimesBySimulationResult fResult = null;
     
-    fResult = findTileTimesBySimulation(testVehicle,
+    if (testVehicle.getVehicleType() == VEHICLE_TYPE.INFORMED_HUMAN && !green) {
+    	// Now it's green signal and it's an informed human vehicle.
+    	// Find the result by stuffing it.
+    	fResult = findTileTimesByStuffing(testVehicle,
+																          dummy,
+																          q.getArrivalTime(),
+																          q.isAccelerating());
+    }
+    else {
+    	fResult = findTileTimesBySimulation(testVehicle,
 				                                  dummy,
 				                                  q.getArrivalTime(),
 				                                  q.isAccelerating());
+    }
 
     if (fResult != null) {
       List<TimeTile> workingList = fResult.getWorkingList();
@@ -709,7 +722,7 @@ public class ReservationGridManager implements
                                           double arrivalVelocity,
                                           double maxVelocity,
                                           Lane arrivalLane,
-                                          boolean isHuman) {
+                                          VEHICLE_TYPE vehicleType) {
 
     VehicleSpec newSpec = new VehicleSpec(
         "TestVehicle",
@@ -736,7 +749,7 @@ public class ReservationGridManager implements
       0.0, // target velocity
       0.0, // Acceleration
       0.0,
-      isHuman); // the current time   // TODO: need to think about the appropriate
+      vehicleType); // the current time   // TODO: need to think about the appropriate
                                   // current time
 
     return testVehicle;
@@ -792,6 +805,7 @@ public class ReservationGridManager implements
    * @param arrivalTime   the arrival time of the vehicle
    * @param accelerating  whether or not to setMaxAccelWithMaxTargetVelocity to maximum velocity
    *                      during the traversal
+   * @param green 				whether it's green signal
    *
    * @return A list of tiles that can be reserved by the vehicle. If returns
    *         null, the trajectory hits some reserved tiles and the reservation
@@ -826,21 +840,14 @@ public class ReservationGridManager implements
       // Find out which tiles are occupied by the vehicle
       currentIntTime++;  // Record that we've moved forward one time step
       
-      // if it's not human driver, we should simulate its position
-      // otherwise, use the occupied in argument
-    	occupied = tiledArea.findOccupiedTiles(testVehicle.getShape(staticBufferSize));
+      occupied = tiledArea.findOccupiedTiles(testVehicle.getShape(staticBufferSize));
 
       // Make sure none of these tiles are reserved by someone else already
       for(Tile tile : occupied) {
-
         // Figure out how large of a time buffer to use, based on whether or
         // not this is an edge tile
         int buffer;
         double expand = 1;
-        
-        if (SimConfig.FCFS_APPLIED_FOR_SIGNAL && testVehicle.isHuman()) {
-        	expand = SimConfig.HUMAN_TARDINESS;
-        }
         
         if (isEdgeTileTimeBufferEnabled && tile.isEdgeTile()) {
           buffer = (int)(edgeTileTimeBufferSteps * expand);
@@ -848,7 +855,13 @@ public class ReservationGridManager implements
           buffer = (int)(internalTileTimeBufferSteps * expand);
         }
         int tileId = tile.getId();
-        for(int t = currentIntTime - buffer; t <= currentIntTime + buffer; t++){
+        
+        int lowerBounder, upperBounder;
+        
+      	lowerBounder = currentIntTime - buffer;
+      	upperBounder = currentIntTime + buffer;
+        
+        for(int t = lowerBounder; t <= upperBounder; t++){
           // If the tile is already reserved and it isn't by us, we've failed
           if (!reservationGrid.isReserved(t, tileId)) {
             workingList.add(reservationGrid.new TimeTile(t, tile.getId()));
@@ -866,6 +879,94 @@ public class ReservationGridManager implements
   }
 
   /**
+   * Find a list of unreserved tiletimes by simulation
+   *
+   * @param TestVehicle   the test vehicle
+   * @param dummy         the dummy driver
+   * @param arrivalTime   the arrival time of the vehicle
+   * @param accelerating  whether or not to setMaxAccelWithMaxTargetVelocity to maximum velocity
+   *                      during the traversal
+   * @param green 				whether it's green signal
+   *
+   * @return A list of tiles that can be reserved by the vehicle. If returns
+   *         null, the trajectory hits some reserved tiles and the reservation
+   *         fails.
+   */
+  private FindTileTimesBySimulationResult
+            findTileTimesByStuffing(BasicAutoVehicle testVehicle,
+                                      Driver dummy,
+                                      double arrivalTime,
+                                      boolean accelerating) {
+    // The area of the intersection
+    Area areaPlus = intersection.getAreaPlus();
+    // The following must be true because the test vehicle
+    // starts at the entry point of the intersection.
+    assert areaPlus.contains(testVehicle.getPointAtMiddleFront(
+             Constants.DOUBLE_EQUAL_PRECISION));
+
+    // The list of tile-times that will make up this reservation
+    List<TimeTile> workingList = new ArrayList<TimeTile>();
+    // for occupation estimate
+    List<Tile> occupied = null;
+
+    // A discrete representation of the time throughout the internal simulation
+    // Notice that currentIntTime != arrivalTime
+    int currentIntTime = reservationGrid.calcDiscreteTime(arrivalTime);
+    // The duration in the current time interval
+    double currentDuration = reservationGrid.calcRemainingTime(arrivalTime);
+    
+    int timeCounting = currentIntTime;
+    // drive the test vehicle until it leaves the intersection
+    while(VehicleUtil.intersects(testVehicle, areaPlus)) {
+      moveTestVehicle(testVehicle, dummy, currentDuration, accelerating);
+      // Find out which tiles are occupied by the vehicle
+      timeCounting++;  // Record that we've moved forward one time step
+      
+      if (occupied != null) {
+      	occupied = tileUnion(occupied, tiledArea.findOccupiedTiles(testVehicle.getShape(staticBufferSize)));
+      }
+      else {
+      	occupied = tiledArea.findOccupiedTiles(testVehicle.getShape(staticBufferSize));
+      }
+      
+      currentDuration = reservationGrid.getGridTimeStep();
+    }
+	  
+    timeCounting += SimConfig.HUMAN_TARDINESS;
+    
+    for (int t = currentIntTime; t <= timeCounting; t++) {
+    	// Make sure none of these tiles are reserved by someone else already
+	    for(Tile tile : occupied) {
+	      int tileId = tile.getId();
+	      
+        // If the tile is already reserved and it isn't by us, we've failed
+        if (!reservationGrid.isReserved(t, tileId)) {
+          workingList.add(reservationGrid.new TimeTile(t, tile.getId()));
+        } else {
+          return null; // Failure! Just bail!
+        }
+	    }
+    }
+
+    if (workingList.size() == 0) {
+    	return null;
+    }
+    else {return new FindTileTimesBySimulationResult(workingList,
+                                               reservationGrid
+                                               .calcTime(timeCounting));
+    }
+  }
+  
+  private List<Tile> tileUnion(List<Tile> tiles1, List<Tile> tiles2) {
+  	Set<Tile> set = new HashSet<Tile>();
+  	
+  	set.addAll(tiles1);
+  	set.addAll(tiles2);
+  	
+  	return new ArrayList<Tile>(set);
+  }
+  
+	/**
    * Advance the test vehicle by one time step
    *
    * @param testVehicle   the test vehicle
@@ -918,6 +1019,7 @@ public class ReservationGridManager implements
     Queue<double[]> accelerationProfile = new LinkedList<double[]>();
     // Figure out how long we took to traverse the intersection
     double traversalTime = exitTime - arrivalTime;
+    
     if (traversalTime <= 0.0) {
       System.err.printf("traversalTime = %.10f\n", traversalTime);
     }

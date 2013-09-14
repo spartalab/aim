@@ -1,14 +1,14 @@
 10
 
 dir
-8
-https://subversion.assembla.com/svn/aim4-src3/main/java/bin/aim4/driver
+9
+https://subversion.assembla.com/svn/aim4-src3/main/java/aim4/driver
 https://subversion.assembla.com/svn/aim4-src3
 
 
 
-2012-06-21T19:22:12.349944Z
-3
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 
 
@@ -18,7 +18,7 @@ jensen.zhang
 
 
 
-copied
+
 
 
 
@@ -26,71 +26,16 @@ copied
 
 0faaed0e-6b32-4c15-b4e3-85fac2616f46
 
-navigator
-dir
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-copied
-
-AutoV2VDriver$State.class
-file
-
-
-
-
-2012-06-16T22:02:16.000000Z
-dad3b8879a5cbd5a14d4b922118cd2ca
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-1471
-
 AutoDriverPilotView.class
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:31.000000Z
 1a30e1f7e7c54d752ad014b07a616cc2
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -100,7 +45,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -115,16 +60,16 @@ copied
 
 394
 
-DriverUtil.class
+AutoV2VDriver$State.class
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
-af4538f15647828522dbd4077219d667
-2012-06-16T22:14:50.530299Z
-2
+2012-06-26T00:42:31.000000Z
+79d5c9cc9051b979c7e62c8ba217c4c7
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -134,7 +79,75 @@ has-props
 
 
 
-copied
+
+
+
+
+
+
+
+
+
+
+
+
+
+1443
+
+CrashTestDummy.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+a4cd526766a2fbfd6793358a12ebaed8
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7334
+
+DriverUtil.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+af4538f15647828522dbd4077219d667
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
 
 
 
@@ -155,10 +168,10 @@ file
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:31.000000Z
 21e33794195928842873210154c7f6ef
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -168,7 +181,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -183,50 +196,16 @@ copied
 
 3920
 
-CrashTestDummy.class
-file
-
-
-
-
-2012-06-16T22:02:16.000000Z
-11d37957e22047bd567158c1a99f035a
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-2557
-
 ProxyDriver.class
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:31.000000Z
 1e8019694d327013c6c12c054be72026
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -236,7 +215,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -251,8 +230,17 @@ copied
 
 715
 
-coordinator
-dir
+AutoV2VDriver.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+ed429df731416ca3618ef8007c8d1581
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
 
 
 
@@ -270,7 +258,45 @@ dir
 
 
 
-copied
+
+
+
+
+5985
+
+AutoDriverCoordinatorView.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+93d6543e5bdd2d550aee8c32fa0ed377
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4382
 
 DriverSimView.class
 file
@@ -278,10 +304,10 @@ file
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:31.000000Z
 f37aa11e292083e4ea529c5bf67e1797
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -291,7 +317,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -306,16 +332,254 @@ copied
 
 608
 
-AutoV2VDriver.class
+package-info.java
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
-eb4898162b6d7f3969ff6a70912d2dc9
+2012-06-16T22:01:16.000000Z
+871423bd059a5efbe7659cddc68f5eac
 2012-06-16T22:14:50.530299Z
 2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+73
+
+AutoDriver.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+cb28111c99c5a044fdb0ee08149e455c
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9516
+
+AutoDriverPilotView.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+6f677e9923eeb7b2de3f31ea8c6b046d
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2924
+
+DriverUtil.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+e3ff4454c083570006f66ac9fc361afe
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3615
+
+Driver.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+c35940684bb734d2880d4bae56927913
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8030
+
+ProxyDriver.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+5a757e73a668d32f115531b872324fb1
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2600
+
+DriverSimView.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+cce873e719c82fb572317d4e97b677cb
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3720
+
+CrashTestDummy.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+11d37957e22047bd567158c1a99f035a
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -325,7 +589,6 @@ has-props
 
 
 
-copied
 
 
 
@@ -338,28 +601,48 @@ copied
 
 
 
-1275
+
+2557
+
+coordinator
+dir
+
+AutoV2VDriver.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+078a20ef0656a31a1bd4d3e7950fb3a1
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1177
 
 pilot
 dir
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-copied
 
 AutoDriverCoordinatorView.class
 file
@@ -367,10 +650,10 @@ file
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:31.000000Z
 083288ef8649aca04965bc6ab83093a5
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -380,7 +663,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -401,10 +684,10 @@ file
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:31.000000Z
 902b9820e2ccdb7eeab3daeeff622be8
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -414,7 +697,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -435,10 +718,10 @@ file
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:31.000000Z
 5b7f36a280ac9d8b720e2f137ee12daa
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -448,7 +731,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -462,4 +745,7 @@ copied
 
 
 3721
+
+navigator
+dir
 

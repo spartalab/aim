@@ -1,44 +1,61 @@
-/*
-Copyright (c) 2011 Tsz-Chiu Au, Peter Stone
-University of Texas at Austin
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-1. Redistributions of source code must retain the above copyright notice, this
-list of conditions and the following disclaimer.
-
-2. Redistributions in binary form must reproduce the above copyright notice,
-this list of conditions and the following disclaimer in the documentation
-and/or other materials provided with the distribution.
-
-3. Neither the name of the University of Texas at Austin nor the names of its
-contributors may be used to endorse or promote products derived from this
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
 package aim4.config;
+
+import java.awt.geom.Point2D;
 
 /**
  * The configuration of a simulation.
  */
 public class SimConfig {
+	
+	public static enum SIGNAL_TYPE {
+		DEFAULT,
+		TRADITIONAL,
+		RED_PHASE_ADAPTIVE,
+		ONE_LANE_VERSION,
+		REVISED_PHASE,
+		HUMAN_ADAPTIVE,
+		DEDICATED_LANES,
+		SEMI_AUTO_EXPR
+	}
+	
+	public static enum VOLUME_TYPE {
+		FILE,
+		RANDOM
+	}
+	
+	public static enum VEHICLE_TYPE {
+		AUTO,
+		HUMAN,
+		INFORMED_HUMAN,
+		CRUISE,
+		ADAPTIVE_CRUISE
+	}
+	
+	public static double RED_PHASE_LENGTH = 5;
+	
+	/**
+	 * The specific type of fcfs_signal, if it's applied
+	 */
+	public static SIGNAL_TYPE signalType;
+	
+	/**
+	 * How the traffic volume information is generated.
+	 * Generally, it should be read from file.
+	 * When doing experiments on best green signal length, this might need randomly generated
+	 * to find the best green signal length for different volume. 
+	 */
+	public static VOLUME_TYPE volumeType = VOLUME_TYPE.FILE;
+	
+	/**
+	 * Whether dedicated lanes are enabled.
+	 */
+	public static int DEDICATED_LANES = 0;
+	
   /**
    * The time the simulation should run.
    * If it is less than or equal to zero, the simulation will run forever.
    */
-  public static double TOTAL_SIMULATION_TIME = -1.0;
+  public static double TOTAL_SIMULATION_TIME = 1800;
 
   /**
    * The number of cycles per second ({@value}) at which the simulator runs.
@@ -64,13 +81,33 @@ public class SimConfig {
   
   /**
    * The portion of human drivers
+   * This data shoule be passed through command line for experiment.
    */
-  public static double HUMAN_PORTION = 0.4; 
+  public static Double HUMAN_PERCENTAGE = 0.0; 
   
   /**
-   * times for human of time buffer
+   * THe portion of informed human drivers.
+   * They don't have cruise controls, but they have communication devices, which can be used to
+   * communicate with IM.
    */
-  public static final double HUMAN_TARDINESS = 2;
+  public static Double INFORMED_HUMAN_PERCENTAGE = 0.0;
+  
+  /**
+   * These percentage of drivers are told by the IM whether they should slow down or speed up.
+   * Sure, this info is inquired only when human_percentage > 0.
+   */
+  public static Double SIMPLE_CRUISE_PERCENTAGE = 0.0;
+  
+  /**
+   * The percentage of drivers who can strictly follow the vehicles in front of it.
+   */
+  public static Double ADAPTIVE_CRUISE_PERCENTAGE = 0.0;
+  
+  /**
+   * Allowing the assumption that the IM can also have the information of the positions of the 
+   * human-driven vehicles.
+   */
+  public static boolean FULLY_OBSERVING = false;
   
   /**
    * This deals with a specific situation in FCFS-SIGNAL.
@@ -104,14 +141,26 @@ public class SimConfig {
   public static boolean MUST_STOP_BEFORE_INTERSECTION = false;
 
   /**
+   * The phase plan that is currently applied.
+   * By default, it's 6phases.
+   */
+	public static String phaseDir = "6phases";
+
+  /**
    * The distance before the stopping distance before an intersection
    * such that a vehicle can consider moving again when
    * MUST_STOP_BEFORE_INTERSECTION is true.
    */
   public static final double ADDITIONAL_STOP_DIST_BEFORE_INTERSECTION = 0.01;
-  
+
   /**
-   * whether FCFS is applied for signal policy
+   * If an adaptive vehicle find a vehicle in front of it within such distance, it can follow
    */
-  public static boolean FCFS_APPLIED_FOR_SIGNAL = false;
+	public static final double FOLLOW_DISTANTCE = 15;
+
+	/**
+	 * Simulation time + HUMAN_TARDINESS is the maximum possible time for human driver to
+	 * enter the intersection.
+	 */
+	public static final int HUMAN_TARDINESS = 10;
 }

@@ -86,4 +86,10 @@ public class RandomDestinationSelector implements DestinationSelector {
     }
     return dest;
   }
+
+	@Override
+	public List<Road> getPossibleDestination(Lane currentLane) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

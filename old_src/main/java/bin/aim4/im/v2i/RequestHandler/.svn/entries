@@ -1,12 +1,73 @@
 10
 
 dir
-8
-https://subversion.assembla.com/svn/aim4-src3/main/java/bin/aim4/im/v2i/RequestHandler
+9
+https://subversion.assembla.com/svn/aim4-src3/main/java/aim4/im/v2i/RequestHandler
 https://subversion.assembla.com/svn/aim4-src3
 
 
 
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0faaed0e-6b32-4c15-b4e3-85fac2616f46
+
+BatchModeRequestHandler.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+f8a3cbe1bbcbba4738a43f71814c1e3f
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+22435
+
+ApproxNPhasesTrafficSignalRequestHandler.java
+file
+
+
+
+
+2012-06-22T04:44:30.000000Z
+81cfb1a670e3c228cfc857fbea966603
 2012-06-22T05:00:17.222438Z
 5
 jensen.zhang
@@ -18,13 +79,20 @@ jensen.zhang
 
 
 
-copied
 
 
 
 
 
-0faaed0e-6b32-4c15-b4e3-85fac2616f46
+
+
+
+
+
+
+
+
+12615
 
 BatchModeRequestHandler$RequestStatCollector.class
 file
@@ -32,10 +100,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 9b329efbf0b54a56c97631e8d2e8adec
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -45,7 +113,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -60,26 +128,17 @@ copied
 
 2070
 
-GoStraightRequestHandler.class
+ApproxNPhasesSignalFcfsRequestHandler.java
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-e5b69c8e8daea54856fc589f049f86b7
+2012-06-16T22:01:17.000000Z
+9eaec9cb02c307b440ac311ae6cb88b2
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -92,7 +151,50 @@ copied
 
 
 
-3809
+
+
+
+
+
+
+
+
+
+8354
+
+Approx4PhasesTrafficSignalRequestHandler.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+dda6a7756123bda52314e916403ccab0
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8295
 
 BatchModeRequestHandler$IndexedProposal.class
 file
@@ -100,10 +202,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 51d49cd1d66f0480f1b5bfddeaf25c4f
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -113,7 +215,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -128,16 +230,16 @@ copied
 
 3398
 
-TrafficSignalRequestHandler.class
+GoStraightRequestHandler.class
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-412498bed7286e1ab898a20f95b409fa
-2012-06-16T22:14:50.530299Z
-2
+2012-06-26T00:42:31.000000Z
+e5b69c8e8daea54856fc589f049f86b7
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -147,7 +249,75 @@ has-props
 
 
 
-copied
+
+
+
+
+
+
+
+
+
+
+
+
+
+3809
+
+ApproxStopSignRequestHandler.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+a19e577d68568c0f568c0f036b034d50
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8348
+
+TrafficSignalRequestHandler.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+412498bed7286e1ab898a20f95b409fa
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
 
 
 
@@ -168,10 +338,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 b978d1417f5267aed212109d569203e1
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -181,7 +351,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -202,10 +372,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 44860d884e0f8f05ab877e4dd2d42b4d
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -215,7 +385,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -236,10 +406,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 8baa3df47052c72dab0be0ca267e3a2c
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -249,7 +419,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -270,10 +440,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 a6b2607eb0dfb8b2f25b5b1e0afcd21c
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -283,7 +453,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -304,10 +474,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 ceb51c58458eca0ec0570680e0e476bc
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -317,7 +487,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -338,10 +508,10 @@ file
 
 
 
-2012-06-24T02:34:13.000000Z
+2012-06-26T00:42:31.000000Z
 6214ea5981a5ca6109ce9563fe54f913
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -351,7 +521,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -372,10 +542,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 f04a075de15026f6f9d32792571ed20f
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -385,7 +555,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -400,16 +570,84 @@ copied
 
 10006
 
+GoStraightRequestHandler.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+31b9480b9275536cb059e72945d8f878
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5835
+
+TrafficSignalRequestHandler.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+d1e295be4ed48117da675901fdbae50c
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1908
+
 ApproxNPhasesTrafficSignalRequestHandler.class
 file
 
 
 
 
-2012-06-22T04:44:31.000000Z
+2012-06-26T00:42:31.000000Z
 0673b227788e61e60893e9665d8e6aca
-2012-06-22T05:00:17.222438Z
-5
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -419,7 +657,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -440,10 +678,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 815dc35ad96a51db8f62daaea2f9839a
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -453,7 +691,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -468,16 +706,118 @@ copied
 
 1957
 
+package-info.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+148b7745397671337212e85530b73633
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+149
+
+AllStopRequestHandler.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+5d5d31a49d4bbd3343c43a7d51797841
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2958
+
+RequestHandler.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+16a3990c5d12b7fc613e1a54b2688c5e
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2323
+
 ApproxNPhasesSignalFcfsRequestHandler.class
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 6b988b0e97fba2a8dbec03bbffc313bf
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -487,7 +827,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -502,16 +842,84 @@ copied
 
 4541
 
+ApproxSimpleTrafficSignalRequestHandler.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+d4d3841c7319a362da9578351bc176ac
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8132
+
+FCFSRequestHandler.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+b8ea7f2ffe2ee1748982d5a70fa984cd
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4099
+
 ApproxNPhasesTrafficSignalRequestHandler$SignalController.class
 file
 
 
 
 
-2012-06-24T02:34:13.000000Z
+2012-06-26T00:42:31.000000Z
 37b79d6a6b1a11ee1bc4aa7ae98dede1
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -521,7 +929,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -542,10 +950,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 957f65e3c37524002b55427eacaffe9b
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -555,7 +963,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -576,10 +984,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 32292e558af20ca9697e8322c040256b
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -589,7 +997,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -610,10 +1018,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 0c21a99f6c2e378681eacc33f08a24ac
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -623,7 +1031,7 @@ has-props
 
 
 
-copied
+
 
 
 

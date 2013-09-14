@@ -49,20 +49,31 @@ import java.util.TreeMap;
 
 import aim4.config.Debug;
 import aim4.config.DebugPoint;
+import aim4.config.RedPhaseData;
 import aim4.config.Resources;
+import aim4.config.SimConfig;
+import aim4.config.SimConfig.SIGNAL_TYPE;
+import aim4.config.SimConfig.VEHICLE_TYPE;
+import aim4.config.TrafficSignalPhase;
 import aim4.driver.AutoDriver;
 import aim4.driver.DriverSimView;
 import aim4.driver.ProxyDriver;
 import aim4.im.IntersectionManager;
 import aim4.im.v2i.V2IManager;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.CyclicSignalController;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.SignalController;
+import aim4.im.v2i.policy.BasePolicy;
 import aim4.map.DataCollectionLine;
 import aim4.map.BasicMap;
+import aim4.map.GridMapUtil;
 import aim4.map.Road;
 import aim4.map.SpawnPoint;
 import aim4.map.SpawnPoint.SpawnSpec;
 import aim4.map.lane.Lane;
 import aim4.msg.i2v.I2VMessage;
 import aim4.msg.v2i.V2IMessage;
+import aim4.sim.setup.AdaptiveTrafficSignalSuperviser;
 import aim4.vehicle.AutoVehicleSimView;
 import aim4.vehicle.BasicAutoVehicle;
 import aim4.vehicle.HumanDrivenVehicleSimView;
@@ -165,6 +176,12 @@ public class AutoDriverOnlySimulator implements Simulator {
       System.err.printf("------SIM:spawnVehicles---------------\n");
     }
     
+    // update red signal for dynamic FCFS-SIGNAL 
+    if (SimConfig.signalType == SimConfig.SIGNAL_TYPE.RED_PHASE_ADAPTIVE
+    		&& ApproxNPhasesTrafficSignalRequestHandler.CyclicSignalController.needRecalculate(currentTime)) {
+    	updateTrafficSignal();
+    }
+    
     // spawning vehicles from spawning points according to traffic level
     spawnVehicles(timeStep);
     if (Debug.PRINT_SIMULATOR_STAGE) {
@@ -198,6 +215,13 @@ public class AutoDriverOnlySimulator implements Simulator {
     moveVehicles(timeStep);
     if (Debug.PRINT_SIMULATOR_STAGE) {
       System.err.printf("------SIM:cleanUpCompletedVehicles---------------\n");
+    }
+    
+    // for human-adaptive traffic signals, run green phases periodically
+    if (SimConfig.signalType == SIGNAL_TYPE.HUMAN_ADAPTIVE) {
+    	if (currentTime % AdaptiveTrafficSignalSuperviser.getPhaseLength() < timeStep) {
+    		AdaptiveTrafficSignalSuperviser.runGreenLight(currentTime);
+    	}
     }
     
     List<Integer> completedVINs = cleanUpCompletedVehicles();
@@ -331,13 +355,16 @@ public class AutoDriverOnlySimulator implements Simulator {
    */
   private void spawnVehicles(double timeStep) {
     for(SpawnPoint spawnPoint : basicMap.getSpawnPoints()) {
+    	// figure out whether it can spawn - now vehicles too near
       List<SpawnSpec> spawnSpecs = spawnPoint.act(timeStep);
       if (!spawnSpecs.isEmpty()) {
 	     for(SpawnSpec spawnSpec : spawnSpecs) {
 	    	 if (canSpawnVehicle(spawnPoint)) {
-		       VehicleSimView vehicle = makeVehicle(spawnPoint, spawnSpec, spawnSpec.isHuman());
+		       VehicleSimView vehicle = makeVehicle(spawnPoint, spawnSpec);
 		       VinRegistry.registerVehicle(vehicle); // Get vehicle a VIN number
+		       
 		       vinToVehicles.put(vehicle.getVIN(), vehicle);
+		       spawnPoint.vehicleGenerated(); // so it knows a platooning vehicle is generated.
 		        
 		       generatedVehicles++; // counter for vehicles generated
 	    	 }
@@ -380,7 +407,7 @@ public class AutoDriverOnlySimulator implements Simulator {
    * @return the vehicle
    */
   private VehicleSimView makeVehicle(SpawnPoint spawnPoint,
-                                     SpawnSpec spawnSpec, boolean isHuman) {
+                                     SpawnSpec spawnSpec) {
     VehicleSpec spec = spawnSpec.getVehicleSpec();
     Lane lane = spawnPoint.getLane();
     // Now just take the minimum of the max velocity of the vehicle, and
@@ -396,7 +423,7 @@ public class AutoDriverOnlySimulator implements Simulator {
                            initVelocity,  // target velocity
                            spawnPoint.getAcceleration(),
                            spawnSpec.getSpawnTime(),
-                           isHuman);
+                           spawnSpec.getVehicleType());
     // Set the driver
     AutoDriver driver = new AutoDriver(vehicle, basicMap);
     driver.setCurrentLane(lane);
@@ -958,6 +985,10 @@ public class AutoDriverOnlySimulator implements Simulator {
       vehicle.move(timeStep);
       Point2D p2 = vehicle.getPosition();
       
+      if (p1.distance(p2) < 0.001) {
+      	vehicle.askedToStop();
+      }
+      
       // if this vehicle is in the intersection, judged by DCL,
       // vehiclesInside++, it's the counter
       // TODO not understanding where to get intersection boundary data!!
@@ -1039,5 +1070,38 @@ public class AutoDriverOnlySimulator implements Simulator {
     }
   }
 
+  /////////////////////////////////
+	// PUBLIC METHODS
+	/////////////////////////////////
+	
+	// information retrieval
+	
+	/**
+   * If the current time exceeds the end of the total duration of traffic lights,
+   * re-select the proper red signal time. 
+   */
+  private void updateTrafficSignal() {
+  	// get the list of signal controllers
+  	double tl = GridMapUtil.getTrafficLevel(); // traffic level
+  	double hp = SimConfig.HUMAN_PERCENTAGE; // human percentage
+  	
+  	double rp = RedPhaseData.getRedPhase(hp, tl); // red phase
+  	double offset = ApproxNPhasesTrafficSignalRequestHandler.CyclicSignalController.getEndTime(); 
+  	
+  	TrafficSignalPhase phase = Resources.phase;
+  	Map<Integer, SignalController> signalControllers = Resources.signalControllers;
 
+  	phase.resetRedDurations(rp);
+  	System.out.printf("Appropriate Red Phase Length: %f\n", rp);
+    
+  	for(Road road : Resources.im.getIntersection().getEntryRoads()) {
+      for(Lane lane : road.getLanes()) {
+    		CyclicSignalController controller =
+            phase.calcCyclicSignalController(road);
+    		controller.setOffset(offset);
+    		
+    		signalControllers.put(lane.getId(), controller);
+      }
+  	}
+  }
 }

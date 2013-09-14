@@ -1,23 +1,41 @@
 K 25
 svn:wc:ra_dav:version-url
-V 47
-/svn/aim4-src3/!svn/ver/2/main/java/bin/6phases
+V 43
+/svn/aim4-src3/!svn/ver/2/main/java/6phases
+END
+AIM4NaiveVolumes.csv
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/aim4-src3/!svn/ver/2/main/java/6phases/AIM4NaiveVolumes.csv
+END
+AIM4StrangeVolumes.csv
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/2/main/java/6phases/AIM4StrangeVolumes.csv
 END
 AIM4Phases.csv
 K 25
 svn:wc:ra_dav:version-url
-V 62
-/svn/aim4-src3/!svn/ver/2/main/java/bin/6phases/AIM4Phases.csv
+V 58
+/svn/aim4-src3/!svn/ver/2/main/java/6phases/AIM4Phases.csv
+END
+AIM4_4phases.csv
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/aim4-src3/!svn/ver/2/main/java/6phases/AIM4_4phases.csv
 END
 AIM4UnbalancedVolumes.csv
 K 25
 svn:wc:ra_dav:version-url
-V 73
-/svn/aim4-src3/!svn/ver/2/main/java/bin/6phases/AIM4UnbalancedVolumes.csv
+V 69
+/svn/aim4-src3/!svn/ver/2/main/java/6phases/AIM4UnbalancedVolumes.csv
 END
 AIM4Volumes.csv
 K 25
 svn:wc:ra_dav:version-url
-V 63
-/svn/aim4-src3/!svn/ver/2/main/java/bin/6phases/AIM4Volumes.csv
+V 59
+/svn/aim4-src3/!svn/ver/2/main/java/6phases/AIM4Volumes.csv
 END

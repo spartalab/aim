@@ -1,8 +1,14 @@
 package expr.trb;
 
+import java.text.DecimalFormat;
+
 import aim4.config.Condor;
 import aim4.config.Debug;
+import aim4.config.GreenPhaseData;
+import aim4.config.Platoon;
+import aim4.config.RedPhaseData;
 import aim4.config.SimConfig;
+import aim4.config.SimConfig.SIGNAL_TYPE;
 import aim4.driver.pilot.V2IPilot;
 import aim4.gui.Viewer;
 import aim4.map.BasicMap;
@@ -13,7 +19,6 @@ import aim4.sim.setup.AutoDriverOnlySimSetup;
 import aim4.sim.setup.BasicSimSetup;
 import aim4.util.Util;
 
-
 public class TrafficSignalExpr {
 
   private enum SIM_TYPE {
@@ -23,68 +28,146 @@ public class TrafficSignalExpr {
   }
   
   private static boolean GENERATE_BASELINE = false;
-  private static final boolean SHOW_GUI = true;
+  private static boolean SHOW_GUI = true;
 
   /**
    * The main function of this experiment
    * 
-   * @param args  the command line argument:
-   *   args[0] = the type of the simulation
-   *   args[1] = traffic pattern/signal pattern data directory
-   *   args[2] = static buffer size for FCFS
-   *   args[3] = time buffer size for FCFSxi
-   *   args[4] = edge time buffer size for FCFS
-   *   args[5] = traffic level (0 - 0.7) (max is 2500 / 3600)
-   *   args[6] = human portion
-   *   args[7] = simulation time
+   * See the output for the arguments setting. MAKE SURE YOU UPDATE THEM EACH TIME AFTER MODIFICATION.
    */
   public static void main(String[] args) {
     
     /////////////////////////////////
     // Settings
     /////////////////////////////////
-        
-    if (args.length == 0) {
-      args = new String[]{"FCFS-SIGNAL", "6phases", ".25", "0.10", "0.25", "0.2", "0.1", "1"};
-      // args = new String[]{"FCFS", "2phases", ".25", "0.10", "0.25"};
-      // args = new String[]{"FCFS", "2phases", ".50", "0.50", "1.00"};
+    //String[] myArgs = {"-r", "30", ".2", "0", "1", "0", "0"};
+    //args = myArgs;
+    
+  	if (args.length < 4 || args[0].endsWith("-help")) {
+  		System.out.println("Arguments -> OPTIONS PARAMETERS\n"
+  	   +"OPTIONS -> [-ng] [-r redPhaseLength] [-d number of dedicated lanes] [-o] [-h] [-p] [-t] [-s] [-f]\n"
+  		 +"-ng generate data file instead of showing GUI\n"
+  	   +"-r set the red phase length manually. 4 secs by default.\n"
+  	   +"-d with dedicated lanes\n"
+  		 +"-o one lane version\n"
+  	   +"-h the traffic signal phases would adapt to the human traffic - the lights are on for the lanes with most number of human drivers\n"
+  		 +"-p turn on platooning\n"
+  	   +"-t manually set simulation time, 1800s by default.\n"
+  		 +"-s semi-autonomous experiments baseline.\n"
+  	   +"-f fully observable. The IM knows the positions of human drivers. IM only knows the info of auto and semi-auto vehicles by default.\n"
+  	   +"PARAMETERS -> trafficLeveL humanPercentage informedHumanPercentage simpleCruiseControlPercentage adaptiveCruiseControlPercentage");
+  		
+  		return;
+  	}
+  	
+  	SimConfig.signalType = SIGNAL_TYPE.TRADITIONAL;
+  	
+  	// read parameters
+    Double trafficLevel = Double.parseDouble(args[args.length - 5]);
+		SimConfig.HUMAN_PERCENTAGE = Double.parseDouble(args[args.length - 4]);
+		SimConfig.INFORMED_HUMAN_PERCENTAGE = Double.parseDouble(args[args.length - 3]);
+		SimConfig.SIMPLE_CRUISE_PERCENTAGE = Double.parseDouble(args[args.length - 2]);
+		SimConfig.ADAPTIVE_CRUISE_PERCENTAGE = Double.parseDouble(args[args.length - 1]);
+		
+		if (SimConfig.HUMAN_PERCENTAGE
+				+ SimConfig.INFORMED_HUMAN_PERCENTAGE
+				+ SimConfig.SIMPLE_CRUISE_PERCENTAGE
+				+ SimConfig.ADAPTIVE_CRUISE_PERCENTAGE > 1) {
+			throw new RuntimeException("The sum of percentages of vehicles exceeds 1.");
+		}
+		
+		// read options
+		boolean readRedPhase = false, readDedicatedLanes = false, readSimulationTime = false;
+		
+		for (int i = 0; i < args.length - 5; i++) {
+  		String flag = args[i];
+  		
+  		if (readRedPhase) {
+  			SimConfig.RED_PHASE_LENGTH = Double.parseDouble(flag);
+  			readRedPhase = false;
+  		}
+  		else if (readDedicatedLanes) {
+  			SimConfig.signalType = SIGNAL_TYPE.DEDICATED_LANES;
+  			
+  			SimConfig.DEDICATED_LANES = Integer.parseInt(flag);
+  			if (SimConfig.DEDICATED_LANES > 2) {
+  				throw new RuntimeException("The number of dedicated lanes should be smaller than the number of total lanes!");
+  			}
+  			else if (SimConfig.DEDICATED_LANES < 0) {
+  				throw new RuntimeException("The number of dedicated lanes should be positive!");
+  			}
+  			readDedicatedLanes = false;
+  		}
+  		else if (readSimulationTime) {
+  			SimConfig.TOTAL_SIMULATION_TIME = Double.parseDouble(flag);
+  			readSimulationTime = false;
+  		}
+  		else if (flag.equals("-ng")) {
+  			SHOW_GUI = false;
+  		}
+  		else if (flag.equals("-o")) {
+  			SimConfig.signalType = SIGNAL_TYPE.ONE_LANE_VERSION;
+  		}
+  		else if (flag.equals("-h")) {
+  			SimConfig.signalType = SIGNAL_TYPE.HUMAN_ADAPTIVE;
+  		}
+  		else if (flag.equals("-f")) {
+  			SimConfig.FULLY_OBSERVING = true;
+  		}
+  		else if (flag.equals("-p")) {
+  			Platoon.platooning = true;
+  		}
+  		else if (flag.equals("-r")) {
+  			readRedPhase = true;
+  		}
+  		else if (flag.equals("-d")) {
+  			readDedicatedLanes = true;
+  		}
+  		else if (flag.equals("-t")) {
+  			readSimulationTime = true;
+  		}
+  		else if (flag.equals("-s")) {
+  			SimConfig.signalType = SIGNAL_TYPE.SEMI_AUTO_EXPR;
+  		}
+  		else {
+  			throw new RuntimeException("Unknown flag!");
+  		}
+  	}
+    
+		if (SHOW_GUI) {
+	  	System.out.println("YELLOW : fully autonomous vehicles.\n" +
+	  			"GREEN  : simple cruise control vehicles.\n" +
+	  			"BLUE   : adaptive cruise control vehicles.\n" +
+	  			"WHITE  : human-driven vehicles with communication devices.\n" +
+	  			"MAGENTA: human-driven vehicles.\n");
+		}
+		else {
+			System.out.println("Start running..");
+		}
+		
+    SIM_TYPE simType = SIM_TYPE.APPROX_TRAFFIC_SIGNAL;
+
+    double staticBufferSize = 0.25;
+    double internalTileTimeBufferSize = 0.10;
+    double edgeTileTimeBufferSize = 0.25;
+    
+    /**
+     * for source files to read
+     */
+    String trafficSignalPhaseFileName = SimConfig.phaseDir + "/AIM4Phases.csv";
+    
+    String trafficVolumeFileName = "";
+    if (SimConfig.signalType == SIGNAL_TYPE.DEDICATED_LANES) {
+    	trafficVolumeFileName = SimConfig.phaseDir + "/AIM4BalancedVolumes.csv";
+    }
+    else {
+    	trafficVolumeFileName = SimConfig.phaseDir + "/AIM4Volumes.csv";
     }
     
-    if (args[0] == "BASELINE") {
-      args[0] = "FCFS";
-      GENERATE_BASELINE = true;
+    if (SimConfig.signalType == SIGNAL_TYPE.SEMI_AUTO_EXPR) {
+    	// for the purpose of this experiment
+    	SimConfig.DEDICATED_LANES = 1;
     }
-    
-    SIM_TYPE simType;
-
-    if (args[0].equals("FCFS")) {
-      simType = SIM_TYPE.FCFS;
-    } else if (args[0].equals("SIGNAL")) {
-      simType = SIM_TYPE.APPROX_TRAFFIC_SIGNAL;
-    } else if (args[0].equals("STOP")) {
-      simType = SIM_TYPE.APPROX_STOP_SIGN;
-    } else if (args[0].equals("FCFS-SIGNAL")) {
-      simType = SIM_TYPE.APPROX_TRAFFIC_SIGNAL;
-      SimConfig.FCFS_APPLIED_FOR_SIGNAL = true;
-      SimConfig.HUMAN_PORTION = Double.parseDouble(args[6]);
-    } else {
-      throw new RuntimeException("Incorrect arguments: the sim type should " +
-          "be equal to FCFS, LIGHT, STOP or FCFS-SIGNAL.");
-    }
-
-    String trafficSignalPhaseFileName = args[1] + "/AIM4Phases.csv";
-    String trafficVolumeFileName = args[1] + "/AIM4Volumes.csv";
-
-//    double staticBufferSize = 0.25;
-//    double internalTileTimeBufferSize = 0.1;
-//    double edgeTileTimeBufferSize = 0.25;
-
-    double staticBufferSize = Double.parseDouble(args[2]);
-    double internalTileTimeBufferSize = Double.parseDouble(args[3]);
-    double edgeTileTimeBufferSize = Double.parseDouble(args[4]);
-    double trafficLevel = Double.parseDouble(args[5]);
-    // the number of (simulated) seconds the simulator should run
-    SimConfig.TOTAL_SIMULATION_TIME = Double.parseDouble(args[7]); // seconds
     
     BasicSimSetup basicSimSetup =
         new BasicSimSetup(1, // columns
@@ -187,14 +270,21 @@ public class TrafficSignalExpr {
 
       // output the collected data of DCL
       
+      // keep the formats of #.## to keep consistency with python, octave, etc..
+      DecimalFormat df = new DecimalFormat("0.00");
+      String[] arguments = {df.format(trafficLevel).toString(),
+      											df.format(SimConfig.HUMAN_PERCENTAGE).toString(),
+      											df.format(SimConfig.INFORMED_HUMAN_PERCENTAGE).toString(),
+      											df.format(SimConfig.SIMPLE_CRUISE_PERCENTAGE).toString(),
+      											df.format(SimConfig.ADAPTIVE_CRUISE_PERCENTAGE).toString(),
+      											df.format(SimConfig.RED_PHASE_LENGTH).toString()};
       
       String dclOutFileName =
-        "ts_dcl_" + Util.concatenate(args, "_").replace('/', '_')
+        "ts_dcl_" + Util.concatenate(arguments, "_").replace('/', '_')
         + Condor.CONDOR_FILE_SUFFIX + ".csv";
       map.printDataCollectionLinesData(dclOutFileName);
       
       System.out.printf("%s: done.\n", TrafficSignalExpr.class);
     }
-
   }
 }

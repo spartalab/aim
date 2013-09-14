@@ -31,13 +31,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package aim4.map;
 
 import aim4.config.Constants;
+import aim4.config.SimConfig;
 import aim4.map.lane.Lane;
 import aim4.util.Util;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * The record for traffic volume.
@@ -199,11 +202,20 @@ public class TrafficVolume {
    * @param csvFileName  the file name of the CSV file
    * @return the traffic volume object
    */
-  public static TrafficVolume makeFromFile(GridMap map,
+  public static TrafficVolume makeVolume(GridMap map,
                                            String csvFileName) {
     List<String> strs = null;
     try {
-      strs = Util.readFileToStrArray(csvFileName);
+    	if (SimConfig.volumeType == SimConfig.VOLUME_TYPE.FILE) {
+    		strs = Util.readFileToStrArray(csvFileName);
+    	}
+    	else if (SimConfig.volumeType == SimConfig.VOLUME_TYPE.RANDOM) {
+    		strs = randomGenerateStrArray();
+    	}
+    	else {
+    		strs = null;
+    		System.err.println("Unknown volume source!");
+    	}
     } catch (IOException e) {
       System.err.println("Error: " + e.getMessage());
     }
@@ -214,8 +226,47 @@ public class TrafficVolume {
     }
   }
 
+  /**
+   * This would generate the traffic volume strings with random data.
+   * This is used for finding the best green phase length, we need to find this result
+   * by providing many instances of traffic volumes
+   * @return
+   */
+	private static List<String> randomGenerateStrArray() {
+		List<String> data = new LinkedList<String>(); // no road name added - used for result
+		List<String> result = new LinkedList<String>();
+		
+		// We are not implicitly show the content of the head of the table
+		result.add("HEAD");
+		
+		// Generate random volumes for north and south
+		Random randomGenerater = new Random(); 
+		for (int roadCtr = 0; roadCtr < 2; roadCtr ++) {
+			// Only left lanes turn left 
+			data.add("Left," + randomGenerater.nextInt(100) + ",0,0");
+			// Only middle and right lanes go straight
+			data.add("Through,0," + randomGenerater.nextInt(100) + "," + randomGenerater.nextInt(100));
+			// Only right lanes turn right
+			data.add("Right,0,0," + randomGenerater.nextInt(100));
+		}
+		
+		// road information
+		List<String> roadNames = new LinkedList<String>();
+		roadNames.add("NB");
+		roadNames.add("SB");
+		roadNames.add("EB");
+		roadNames.add("WB");
+		
+		// generate result
+		for (int laneCtr = 0; laneCtr < 12; laneCtr++) {
+			result.add(roadNames.get((int)(laneCtr / 3)) + "," + data.get(laneCtr % 6));
+		}
+		
+		return result;
+	}
 
-  /////////////////////////////////
+
+	/////////////////////////////////
   // PUBLIC METHODS
   /////////////////////////////////
 

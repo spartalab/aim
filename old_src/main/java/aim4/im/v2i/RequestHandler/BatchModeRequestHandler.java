@@ -474,7 +474,7 @@ public class BatchModeRequestHandler implements RequestHandler {
     if (isAllProposalsLate(msg)) {
       // Immediately confirm/reject the remaining proposals.
       ReserveParam reserveParam =
-        basePolicy.findReserveParam(msg, filterResult.getProposals());
+        basePolicy.findReserveParam(msg, filterResult.getProposals(), false);
       if (reserveParam != null) {
         basePolicy.sendComfirmMsg(msg.getRequestId(), reserveParam);
       } else {
@@ -546,7 +546,7 @@ public class BatchModeRequestHandler implements RequestHandler {
     List<Proposal> l = new ArrayList<Proposal>(1);
     l.add(iProposal.getProposal());
     Request msg = iProposal.getRequest();
-    ReserveParam reserveParam = basePolicy.findReserveParam(msg, l);
+    ReserveParam reserveParam = basePolicy.findReserveParam(msg, l, false);
     if (reserveParam != null) {
       basePolicy.sendComfirmMsg(msg.getRequestId(), reserveParam);
       // Remove a set of indexed proposals (including the given one)

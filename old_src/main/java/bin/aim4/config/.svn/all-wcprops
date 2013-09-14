@@ -1,83 +1,137 @@
 K 25
 svn:wc:ra_dav:version-url
-V 51
-/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4/config
+V 47
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config
 END
-SimConfig.class
+TrafficSignal.java
 K 25
 svn:wc:ra_dav:version-url
-V 67
-/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4/config/SimConfig.class
+V 66
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/config/TrafficSignal.java
 END
-Constants$CardinalDirection.class
+Constants.java
 K 25
 svn:wc:ra_dav:version-url
-V 85
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Constants$CardinalDirection.class
+V 62
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/config/Constants.java
 END
-.project
+SimConfig.java
 K 25
 svn:wc:ra_dav:version-url
-V 60
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/.project
-END
-DebugPoint.class
-K 25
-svn:wc:ra_dav:version-url
-V 68
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/DebugPoint.class
-END
-Condor.class
-K 25
-svn:wc:ra_dav:version-url
-V 64
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Condor.class
-END
-package-info.class
-K 25
-svn:wc:ra_dav:version-url
-V 70
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/package-info.class
-END
-Debug.class
-K 25
-svn:wc:ra_dav:version-url
-V 63
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Debug.class
+V 62
+/svn/aim4-src3/!svn/ver/4/main/java/aim4/config/SimConfig.java
 END
 Constants$TurnDirection.class
 K 25
 svn:wc:ra_dav:version-url
-V 81
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Constants$TurnDirection.class
-END
-Resources.class
-K 25
-svn:wc:ra_dav:version-url
-V 67
-/svn/aim4-src3/!svn/ver/5/main/java/bin/aim4/config/Resources.class
-END
-Constants$LightStatus.class
-K 25
-svn:wc:ra_dav:version-url
-V 79
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Constants$LightStatus.class
-END
-Constants.class
-K 25
-svn:wc:ra_dav:version-url
-V 67
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/Constants.class
-END
-TrafficSignal.class
-K 25
-svn:wc:ra_dav:version-url
-V 71
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/TrafficSignal.class
+V 77
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/Constants$TurnDirection.class
 END
 TrafficSignalPhase.class
 K 25
 svn:wc:ra_dav:version-url
-V 76
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/config/TrafficSignalPhase.class
+V 72
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/TrafficSignalPhase.class
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/config/package-info.java
+END
+Condor.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/config/Condor.java
+END
+DebugPoint.class
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/DebugPoint.class
+END
+Debug.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/config/Debug.java
+END
+TrafficSignalPhase.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/config/TrafficSignalPhase.java
+END
+Resources.class
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/Resources.class
+END
+Constants.class
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/Constants.class
+END
+Constants$LightStatus.class
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/Constants$LightStatus.class
+END
+TrafficSignal.class
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/TrafficSignal.class
+END
+DebugPoint.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/config/DebugPoint.java
+END
+SimConfig.class
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/SimConfig.class
+END
+Constants$CardinalDirection.class
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/Constants$CardinalDirection.class
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/config/.project
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/package-info.class
+END
+Condor.class
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/Condor.class
+END
+Resources.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/aim4-src3/!svn/ver/5/main/java/aim4/config/Resources.java
+END
+Debug.class
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/config/Debug.class
 END

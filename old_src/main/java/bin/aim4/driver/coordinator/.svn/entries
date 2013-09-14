@@ -1,14 +1,14 @@
 10
 
 dir
-8
-https://subversion.assembla.com/svn/aim4-src3/main/java/bin/aim4/driver/coordinator
+9
+https://subversion.assembla.com/svn/aim4-src3/main/java/aim4/driver/coordinator
 https://subversion.assembla.com/svn/aim4-src3
 
 
 
-2012-06-21T19:22:12.349944Z
-3
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 
 
@@ -18,7 +18,7 @@ jensen.zhang
 
 
 
-copied
+
 
 
 
@@ -26,26 +26,17 @@ copied
 
 0faaed0e-6b32-4c15-b4e3-85fac2616f46
 
-V2ICoordinator$State.class
+MaxAccelReservationCheck.java
 file
 
 
 
 
-2012-06-21T17:11:38.000000Z
-c6e085ad266130516a149c23a56130f7
+2012-06-16T22:01:16.000000Z
+462be033fdaa53cc3eeb3e6642a4492c
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -58,7 +49,16 @@ copied
 
 
 
-1731
+
+
+
+
+
+
+
+
+
+40384
 
 ArrivalEstimationException.class
 file
@@ -66,10 +66,10 @@ file
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:30.000000Z
 abec1db5b0524eba36a5b213e0c25c41
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -79,7 +79,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -94,26 +94,17 @@ copied
 
 482
 
-ReservationCheckException.class
+V2ICoordinator.java
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
-a01903efd4e0fbbba44c7be5979eb261
-2012-06-16T22:14:50.530299Z
-2
+2012-06-21T17:11:37.000000Z
+8e8e4d96de071ae24b49c29ea212f79c
+2012-06-21T19:22:12.349944Z
+3
 jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -126,28 +117,6 @@ copied
 
 
 
-479
-
-V2ICoordinator$V2IPlanningStateHandler.class
-file
-
-
-
-
-2012-06-21T17:11:38.000000Z
-ff42e96dbcca2e6f855a27ba91e1a270
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -157,10 +126,7 @@ copied
 
 
 
-
-
-
-1984
+71665
 
 V2ICoordinator$LaneChangeController.class
 file
@@ -168,10 +134,10 @@ file
 
 
 
-2012-06-21T17:11:38.000000Z
+2012-06-26T00:42:30.000000Z
 78530e4b73b0a1641a5536fbcadb862a
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -181,7 +147,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -196,50 +162,16 @@ copied
 
 8942
 
-V2ICoordinator$V2IPreparingReservationStateHandler.class
-file
-
-
-
-
-2012-06-21T17:11:38.000000Z
-773af60339b39478cc4903431ac3ab57
-2012-06-21T19:22:12.349944Z
-3
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-10635
-
 Coordinator.class
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:30.000000Z
 5834f6c2b24badc2d46da286cb2f59da
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -249,7 +181,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -264,16 +196,50 @@ copied
 
 176
 
+NoIntersectionCoordinator.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+dd3e42db37d7a85912a2faf92eea1a67
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2836
+
 VelocityFirstArrivalEstimation.class
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:30.000000Z
 cdf90240b1f2b29f588e048959279afa
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -283,7 +249,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -298,26 +264,17 @@ copied
 
 8406
 
-package-info.class
+ArrivalEstimationException.java
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
-b10fb02ee853481eb4659945229f4a87
+2012-06-16T22:01:16.000000Z
+bbe282931701d3166728caa04c63761b
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -330,28 +287,6 @@ copied
 
 
 
-129
-
-V2ICoordinator$LaneChangeController$State.class
-file
-
-
-
-
-2012-06-21T17:11:38.000000Z
-e901e0e367a0a1730de18acc25682edb
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -361,10 +296,7 @@ copied
 
 
 
-
-
-
-1523
+1932
 
 V2ICoordinator$V2IMaintainingReservationStateHandler.class
 file
@@ -372,10 +304,10 @@ file
 
 
 
-2012-06-21T17:11:38.000000Z
+2012-06-26T00:42:30.000000Z
 04cb2b0b1435494c138f84d3fd6e8501
-2012-06-21T19:22:12.349944Z
-3
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -385,7 +317,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -406,10 +338,10 @@ file
 
 
 
-2012-06-21T17:11:38.000000Z
+2012-06-26T00:42:30.000000Z
 f2718357a647ce6b43d9752c72e8b8a8
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -419,7 +351,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -434,50 +366,16 @@ copied
 
 582
 
-V2ICoordinator$V2IAwaitingResponseStateHandler.class
-file
-
-
-
-
-2012-06-21T17:11:38.000000Z
-5ca069b5830e239a4bf35cde9da87a03
-2012-06-21T19:22:12.349944Z
-3
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-2034
-
 V2ICoordinator$ReservationParameter.class
 file
 
 
 
 
-2012-06-21T17:11:38.000000Z
+2012-06-26T00:42:30.000000Z
 d4d174e5bee01e6d7598654b39d6ceb9
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -487,7 +385,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -502,118 +400,16 @@ copied
 
 2136
 
-ArrivalEstimationResult.class
-file
-
-
-
-
-2012-06-16T22:02:16.000000Z
-db4188ecf80d10170bc53bcf3efada72
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-856
-
-V2ICoordinator$V2IClearingStateHandler.class
-file
-
-
-
-
-2012-06-21T17:11:38.000000Z
-cc0cf7ce1642eaaf333ab57fcf41a873
-2012-06-21T19:22:12.349944Z
-3
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-2095
-
-MaxAccelReservationCheck.class
-file
-
-
-
-
-2012-06-16T22:02:16.000000Z
-f5d47560ae1959d77783dcae242f4780
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-12342
-
 V2ICoordinator$V2ITraversingStateHandler.class
 file
 
 
 
 
-2012-06-21T17:11:38.000000Z
+2012-06-26T00:42:30.000000Z
 888f181bfd27f4f99b90c3ee21962889
-2012-06-21T19:22:12.349944Z
-3
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -623,7 +419,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -638,16 +434,16 @@ copied
 
 2683
 
-V2ICoordinator$LaneChangeController$LcWaitingLaneChangeStateHandler.class
+MaxAccelReservationCheck.class
 file
 
 
 
 
-2012-06-21T17:11:38.000000Z
-8d934278724b932c81274b005c676464
-2012-06-16T22:14:50.530299Z
-2
+2012-06-26T00:42:30.000000Z
+f5d47560ae1959d77783dcae242f4780
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -657,7 +453,6 @@ has-props
 
 
 
-copied
 
 
 
@@ -670,41 +465,8 @@ copied
 
 
 
-4187
-
-V2ICoordinator$V2ILaneChangeStateHandler.class
-file
 
-
-
-
-2012-06-21T17:11:38.000000Z
-4d2710a6970309072795f32a7953ab81
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-1855
+12342
 
 MaxAccelReservationCheck$TrapezoidSpec.class
 file
@@ -712,10 +474,10 @@ file
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:30.000000Z
 befb6a098b9fd2cb4bb04e12b44ef170
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -725,7 +487,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -746,10 +508,10 @@ file
 
 
 
-2012-06-21T17:11:38.000000Z
+2012-06-26T00:42:30.000000Z
 f97a6d7e406d38f32b5487a6fa9f5033
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -759,7 +521,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -774,16 +536,50 @@ copied
 
 1453
 
+VelocityFirstArrivalEstimation.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+3ad8dae5a0701e6d2efee1b44fcddea6
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+32790
+
 V2ICoordinator$LaneChangeController$LcChangingLaneStateHandler.class
 file
 
 
 
 
-2012-06-21T17:11:38.000000Z
+2012-06-26T00:42:30.000000Z
 a4aa8f9c75bfca7e3c8546ea7c77f27c
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -793,7 +589,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -808,50 +604,16 @@ copied
 
 2934
 
-V2ICoordinator.class
-file
-
-
-
-
-2012-06-21T17:11:38.000000Z
-0ba1479122faafee7fcb0e2c97f0af4c
-2012-06-21T19:22:12.349944Z
-3
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-21424
-
 V2ICoordinator$StateHandler.class
 file
 
 
 
 
-2012-06-21T17:11:38.000000Z
+2012-06-26T00:42:30.000000Z
 84d43dd4bc226cd4c909f50deb144f48
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -861,7 +623,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -882,10 +644,10 @@ file
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:30.000000Z
 7cd7837c2b4062df977bb3d1052b1fa6
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -895,7 +657,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -909,4 +671,548 @@ copied
 
 
 868
+
+V2ICoordinator$State.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+cf2ab3c691c39f5912a02a8972666337
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1695
+
+ReservationCheckException.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+a01903efd4e0fbbba44c7be5979eb261
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+479
+
+V2ICoordinator$V2IPlanningStateHandler.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+ff42e96dbcca2e6f855a27ba91e1a270
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1984
+
+V2ICoordinator$V2IPreparingReservationStateHandler.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+773af60339b39478cc4903431ac3ab57
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10635
+
+package-info.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+b10fb02ee853481eb4659945229f4a87
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+129
+
+V2ICoordinator$LaneChangeController$State.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+7943c9892e44144cac614194e5de4533
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1511
+
+ReservationCheckException.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+40fe1175e013848f025d2002485bc461
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1927
+
+V2ICoordinator$V2IAwaitingResponseStateHandler.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+5ca069b5830e239a4bf35cde9da87a03
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2034
+
+ArrivalEstimationResult.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+db4188ecf80d10170bc53bcf3efada72
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+856
+
+V2ICoordinator$LaneChangeController$LcWaitingLaneChangeStateHandler.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+8d934278724b932c81274b005c676464
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4187
+
+V2ICoordinator$V2IClearingStateHandler.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+cc0cf7ce1642eaaf333ab57fcf41a873
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2095
+
+V2ICoordinator$V2ILaneChangeStateHandler.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+4d2710a6970309072795f32a7953ab81
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1855
+
+Coordinator.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+59fbd1e914f11c0220d201b10415a835
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2238
+
+package-info.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+a9cc41db34e9748ce62bf6c9468239cc
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+153
+
+V2ICoordinator.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+0ba1479122faafee7fcb0e2c97f0af4c
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21424
+
+ArrivalEstimationResult.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+4f3cf3841482504e0b45a63fd2ee5598
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3158
 

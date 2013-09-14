@@ -1,12 +1,39 @@
 10
 
 dir
-8
-https://subversion.assembla.com/svn/aim4-src3/main/java/bin/aim4/driver/pilot
+9
+https://subversion.assembla.com/svn/aim4-src3/main/java/aim4/driver/pilot
 https://subversion.assembla.com/svn/aim4-src3
 
 
 
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0faaed0e-6b32-4c15-b4e3-85fac2616f46
+
+V2IPilot.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+7a74b4761f3bc09149b10789313f8c4a
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
@@ -18,24 +45,31 @@ jensen.zhang
 
 
 
-copied
 
 
 
 
 
-0faaed0e-6b32-4c15-b4e3-85fac2616f46
+
+
+
+
+
+
+
+
+12969
 
-V2IPilot.class
+package-info.class
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
-a82f34efce62d9dcaab11fc7161dcd33
-2012-06-16T22:14:50.530299Z
-2
+2012-06-26T00:42:30.000000Z
+510bc3782c970d481e52f97d77ffcd38
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -45,7 +79,75 @@ has-props
 
 
 
-copied
+
+
+
+
+
+
+
+
+
+
+
+
+
+123
+
+BasicPilot.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+918b1965c29e416840af48b9a0f1a38a
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6155
+
+V2IPilot.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+a82f34efce62d9dcaab11fc7161dcd33
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
 
 
 
@@ -66,10 +168,10 @@ file
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:30.000000Z
 30144aa06fe492d45520417d1a6fdb14
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -79,7 +181,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -94,26 +196,17 @@ copied
 
 2811
 
-package-info.class
+package-info.java
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
-510bc3782c970d481e52f97d77ffcd38
+2012-06-16T22:01:16.000000Z
+975b091e2118e9bdce52bc3833d6fc77
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -126,5 +219,14 @@ copied
 
 
 
-123
+
+
+
+
+
+
+
+
+
+141
 

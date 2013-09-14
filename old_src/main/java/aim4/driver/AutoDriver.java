@@ -35,6 +35,7 @@ import java.awt.geom.Area;
 import aim4.driver.coordinator.NoIntersectionCoordinator;
 import aim4.driver.coordinator.V2ICoordinator;
 import aim4.driver.coordinator.Coordinator;
+import aim4.driver.coordinator.V2ICoordinator.State;
 import aim4.im.IntersectionManager;
 import aim4.map.BasicMap;
 import aim4.vehicle.AutoVehicleDriverView;
@@ -52,7 +53,7 @@ public class AutoDriver extends Driver
   /////////////////////////////////
   // PRIVATE FIELDS
   /////////////////////////////////
-
+	
   /** The vehicle this driver will control */
   private AutoVehicleDriverView vehicle;
 
@@ -285,5 +286,6 @@ public class AutoDriver extends Driver
     memoDistanceToNextIntersection = null;
     memoDistanceFromPrevIntersection = null;
   }
+
 
 }

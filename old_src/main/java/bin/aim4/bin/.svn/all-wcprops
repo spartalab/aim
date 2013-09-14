@@ -1,17 +1,17 @@
 K 25
 svn:wc:ra_dav:version-url
-V 48
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/bin
-END
-.classpath
-K 25
-svn:wc:ra_dav:version-url
-V 59
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/bin/.classpath
+V 44
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/bin
 END
 .project
 K 25
 svn:wc:ra_dav:version-url
-V 57
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/bin/.project
+V 53
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/bin/.project
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/bin/.classpath
 END

@@ -41,12 +41,14 @@ import java.util.List;
 import java.util.Map;
 
 import aim4.config.Debug;
+import aim4.config.Resources;
 import aim4.im.IntersectionManager;
 import aim4.map.lane.Lane;
 import aim4.map.lane.LineSegmentLane;
 import aim4.util.ArrayListRegistry;
 import aim4.util.GeomMath;
 import aim4.util.Registry;
+import aim4.vehicle.VehicleSimView;
 import aim4.vehicle.VinRegistry;
 
 
@@ -61,7 +63,7 @@ public class GridMap implements BasicMap {
 
   /** The length of the no vehicle zone */
   // private static final double NO_VEHICLE_ZONE_LENGTH = 28.0;
-  private static final double NO_VEHICLE_ZONE_LENGTH = 5.0;
+  private static final double NO_VEHICLE_ZONE_LENGTH = 5;
 
   /** The position of the data collection line on a lane */
   private static final double DATA_COLLECTION_LINE_POSITION = 28.0;
@@ -111,6 +113,8 @@ public class GridMap implements BasicMap {
 
   /**
    * Create a grid map.
+   * 
+   * I have changed the id of lanes - clockwise!
    *
    * @param initTime         the initial time
    * @param columns          the number of columns
@@ -621,9 +625,19 @@ public class GridMap implements BasicMap {
     outfile.printf("VIN,Time,DCLname,vType,startLaneId,destRoad\n");
     for (DataCollectionLine line : dataCollectionLines) {
       for (int vin : line.getAllVIN()) {
-        for(double time : line.getTimes(vin)) {
+        for(int id = 0; id < line.getTimes(vin).size(); id++) {
+        	double time = line.getTimes(vin).get(id);
+        	boolean isHuman = line.getIfHumans(vin).get(id);
+        	
+        	int realVin = vin;
+        	if (isHuman) {
+        		// for identification, add 1 at the begining
+        		// FIXME when simulation time is very long
+        		realVin += 10000;
+        	}
+        	
           outfile.printf("%d,%.4f,%s,%s,%d,%s\n",
-                         vin, time, line.getName(),
+                         realVin, time, line.getName(),
                          VinRegistry.getVehicleSpecFromVIN(vin).getName(),
                          VinRegistry.getSpawnPointFromVIN(vin).getLane().getId(),
                          VinRegistry.getDestRoadFromVIN(vin).getName());

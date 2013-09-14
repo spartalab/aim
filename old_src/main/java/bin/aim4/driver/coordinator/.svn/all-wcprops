@@ -1,161 +1,215 @@
 K 25
 svn:wc:ra_dav:version-url
-V 63
-/svn/aim4-src3/!svn/ver/3/main/java/bin/aim4/driver/coordinator
+V 59
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator
 END
-V2ICoordinator$LaneChangeController.class
+ReservationCheckException.java
 K 25
 svn:wc:ra_dav:version-url
-V 105
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$LaneChangeController.class
-END
-V2ICoordinator$V2IPreparingReservationStateHandler.class
-K 25
-svn:wc:ra_dav:version-url
-V 120
-/svn/aim4-src3/!svn/ver/3/main/java/bin/aim4/driver/coordinator/V2ICoordinator$V2IPreparingReservationStateHandler.class
-END
-Coordinator.class
-K 25
-svn:wc:ra_dav:version-url
-V 81
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/Coordinator.class
-END
-VelocityFirstArrivalEstimation.class
-K 25
-svn:wc:ra_dav:version-url
-V 100
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/VelocityFirstArrivalEstimation.class
-END
-package-info.class
-K 25
-svn:wc:ra_dav:version-url
-V 82
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/package-info.class
-END
-V2ICoordinator$LaneChangeController$State.class
-K 25
-svn:wc:ra_dav:version-url
-V 111
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$LaneChangeController$State.class
-END
-V2ICoordinator$1.class
-K 25
-svn:wc:ra_dav:version-url
-V 86
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$1.class
-END
-V2ICoordinator$V2IMaintainingReservationStateHandler.class
-K 25
-svn:wc:ra_dav:version-url
-V 122
-/svn/aim4-src3/!svn/ver/3/main/java/bin/aim4/driver/coordinator/V2ICoordinator$V2IMaintainingReservationStateHandler.class
+V 90
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/coordinator/ReservationCheckException.java
 END
 V2ICoordinator$ReservationParameter.class
 K 25
 svn:wc:ra_dav:version-url
-V 105
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$ReservationParameter.class
+V 101
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$ReservationParameter.class
 END
 V2ICoordinator$V2IAwaitingResponseStateHandler.class
 K 25
 svn:wc:ra_dav:version-url
-V 116
-/svn/aim4-src3/!svn/ver/3/main/java/bin/aim4/driver/coordinator/V2ICoordinator$V2IAwaitingResponseStateHandler.class
-END
-ArrivalEstimationResult.class
-K 25
-svn:wc:ra_dav:version-url
-V 93
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/ArrivalEstimationResult.class
+V 112
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$V2IAwaitingResponseStateHandler.class
 END
 V2ICoordinator$V2IClearingStateHandler.class
 K 25
 svn:wc:ra_dav:version-url
-V 108
-/svn/aim4-src3/!svn/ver/3/main/java/bin/aim4/driver/coordinator/V2ICoordinator$V2IClearingStateHandler.class
-END
-MaxAccelReservationCheck.class
-K 25
-svn:wc:ra_dav:version-url
-V 94
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/MaxAccelReservationCheck.class
-END
-V2ICoordinator$LaneChangeController$LcWaitingLaneChangeStateHandler.class
-K 25
-svn:wc:ra_dav:version-url
-V 137
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$LaneChangeController$LcWaitingLaneChangeStateHandler.class
-END
-V2ICoordinator$V2ITraversingStateHandler.class
-K 25
-svn:wc:ra_dav:version-url
-V 110
-/svn/aim4-src3/!svn/ver/3/main/java/bin/aim4/driver/coordinator/V2ICoordinator$V2ITraversingStateHandler.class
-END
-MaxAccelReservationCheck$TrapezoidSpec.class
-K 25
-svn:wc:ra_dav:version-url
-V 108
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/MaxAccelReservationCheck$TrapezoidSpec.class
+V 104
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$V2IClearingStateHandler.class
 END
 V2ICoordinator$V2ILaneChangeStateHandler.class
 K 25
 svn:wc:ra_dav:version-url
-V 110
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$V2ILaneChangeStateHandler.class
+V 106
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$V2ILaneChangeStateHandler.class
 END
-V2ICoordinator$V2IDefaultDrivingBehaviorStateHandler.class
+Coordinator.java
 K 25
 svn:wc:ra_dav:version-url
-V 122
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$V2IDefaultDrivingBehaviorStateHandler.class
+V 76
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/coordinator/Coordinator.java
 END
-V2ICoordinator$LaneChangeController$LcChangingLaneStateHandler.class
+VelocityFirstArrivalEstimation.java
 K 25
 svn:wc:ra_dav:version-url
-V 132
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$LaneChangeController$LcChangingLaneStateHandler.class
+V 95
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/coordinator/VelocityFirstArrivalEstimation.java
 END
 V2ICoordinator.class
 K 25
 svn:wc:ra_dav:version-url
-V 84
-/svn/aim4-src3/!svn/ver/3/main/java/bin/aim4/driver/coordinator/V2ICoordinator.class
+V 80
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator.class
 END
 V2ICoordinator$StateHandler.class
 K 25
 svn:wc:ra_dav:version-url
-V 97
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$StateHandler.class
+V 93
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$StateHandler.class
 END
 NoIntersectionCoordinator.class
 K 25
 svn:wc:ra_dav:version-url
-V 95
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/NoIntersectionCoordinator.class
+V 91
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/NoIntersectionCoordinator.class
 END
-V2ICoordinator$State.class
+ArrivalEstimationResult.java
 K 25
 svn:wc:ra_dav:version-url
-V 90
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$State.class
+V 88
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/coordinator/ArrivalEstimationResult.java
 END
 ArrivalEstimationException.class
 K 25
 svn:wc:ra_dav:version-url
-V 96
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/ArrivalEstimationException.class
+V 92
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/ArrivalEstimationException.class
 END
 ReservationCheckException.class
 K 25
 svn:wc:ra_dav:version-url
-V 95
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/ReservationCheckException.class
+V 91
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/ReservationCheckException.class
+END
+NoIntersectionCoordinator.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/coordinator/NoIntersectionCoordinator.java
+END
+VelocityFirstArrivalEstimation.class
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/VelocityFirstArrivalEstimation.class
+END
+V2ICoordinator$LaneChangeController$State.class
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$LaneChangeController$State.class
+END
+V2ICoordinator$V2IMaintainingReservationStateHandler.class
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$V2IMaintainingReservationStateHandler.class
+END
+V2ICoordinator$1.class
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$1.class
+END
+ArrivalEstimationResult.class
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/ArrivalEstimationResult.class
+END
+V2ICoordinator$V2ITraversingStateHandler.class
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$V2ITraversingStateHandler.class
+END
+MaxAccelReservationCheck.class
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/MaxAccelReservationCheck.class
+END
+V2ICoordinator$LaneChangeController$LcWaitingLaneChangeStateHandler.class
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$LaneChangeController$LcWaitingLaneChangeStateHandler.class
+END
+MaxAccelReservationCheck$TrapezoidSpec.class
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/MaxAccelReservationCheck$TrapezoidSpec.class
+END
+V2ICoordinator$V2IDefaultDrivingBehaviorStateHandler.class
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$V2IDefaultDrivingBehaviorStateHandler.class
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/coordinator/package-info.java
+END
+V2ICoordinator$LaneChangeController$LcChangingLaneStateHandler.class
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$LaneChangeController$LcChangingLaneStateHandler.class
+END
+MaxAccelReservationCheck.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/coordinator/MaxAccelReservationCheck.java
+END
+V2ICoordinator$State.class
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$State.class
 END
 V2ICoordinator$V2IPlanningStateHandler.class
 K 25
 svn:wc:ra_dav:version-url
-V 108
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/coordinator/V2ICoordinator$V2IPlanningStateHandler.class
+V 104
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$V2IPlanningStateHandler.class
+END
+V2ICoordinator.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/aim4-src3/!svn/ver/3/main/java/aim4/driver/coordinator/V2ICoordinator.java
+END
+V2ICoordinator$LaneChangeController.class
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$LaneChangeController.class
+END
+V2ICoordinator$V2IPreparingReservationStateHandler.class
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/V2ICoordinator$V2IPreparingReservationStateHandler.class
+END
+Coordinator.class
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/Coordinator.class
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/coordinator/package-info.class
+END
+ArrivalEstimationException.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/coordinator/ArrivalEstimationException.java
 END

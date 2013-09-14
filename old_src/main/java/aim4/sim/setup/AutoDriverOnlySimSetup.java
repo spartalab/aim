@@ -306,7 +306,6 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
       GridMapUtil.setBaselineSpawnPoints(layout, 12.0);
     }
 
-
     V2IPilot.DEFAULT_STOP_DISTANCE_BEFORE_INTERSECTION =
       stopDistBeforeIntersection;
     return new AutoDriverOnlySimulator(layout);

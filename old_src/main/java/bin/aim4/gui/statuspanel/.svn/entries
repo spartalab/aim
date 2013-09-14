@@ -1,12 +1,39 @@
 10
 
 dir
-8
-https://subversion.assembla.com/svn/aim4-src3/main/java/bin/aim4/gui/statuspanel
+9
+https://subversion.assembla.com/svn/aim4-src3/main/java/aim4/gui/statuspanel
 https://subversion.assembla.com/svn/aim4-src3
 
 
 
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0faaed0e-6b32-4c15-b4e3-85fac2616f46
+
+package-info.java
+file
+
+
+
+
+2012-06-16T22:01:15.000000Z
+d99ec445861ea90c28b8d6b6a1093959
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
@@ -18,13 +45,54 @@ jensen.zhang
 
 
 
-copied
 
 
 
 
 
-0faaed0e-6b32-4c15-b4e3-85fac2616f46
+
+
+
+
+
+
+
+
+161
+
+SystemPanel.java
+file
+
+
+
+
+2012-06-16T22:01:15.000000Z
+6d77043eb8146faecbd68a3abdaebf3e
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5613
 
 ConsolePanel.class
 file
@@ -32,10 +100,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:30.000000Z
 696fe91c64771a867fb869e2db21a557
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -45,7 +113,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -66,10 +134,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:30.000000Z
 2f3f1dda01b6517cfdb62d9a8ab5204f
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -79,7 +147,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -100,10 +168,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:30.000000Z
 cc493a8e178674f0c5cc7819550b5d72
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -113,7 +181,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -128,26 +196,17 @@ copied
 
 126
 
-SimControlPanel.class
+AdminControlPanel.java
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-780512325dabaa0b4c50c07840dc2b58
+2012-06-16T22:01:15.000000Z
+9932feead942a592e9033e5aadef9a7d
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -160,7 +219,118 @@ copied
 
 
 
-3129
+
+
+
+
+
+
+
+
+
+5200
+
+SimControlPanel.java
+file
+
+
+
+
+2012-06-16T22:01:15.000000Z
+fbae030b8d8f6733ce4084501923901b
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4649
+
+VehicleInfoPanel.java
+file
+
+
+
+
+2012-06-16T22:01:15.000000Z
+00fff664201b69efe4e1fb8f5963c955
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5842
+
+StatPanel.java
+file
+
+
+
+
+2012-06-16T22:01:15.000000Z
+810e19e13f213741bc0d3e342dfbc458
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4916
 
 AdminControlPanel.class
 file
@@ -168,10 +338,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:30.000000Z
 0dbe97d5184d6259b897b0241f3c2926
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -181,7 +351,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -196,16 +366,16 @@ copied
 
 4004
 
-StatPanel.class
+SimControlPanel.class
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-f03705800a9caefbe36da09861efd20a
-2012-06-16T22:14:50.530299Z
-2
+2012-06-26T00:42:30.000000Z
+780512325dabaa0b4c50c07840dc2b58
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -215,7 +385,41 @@ has-props
 
 
 
-copied
+
+
+
+
+
+
+
+
+
+
+
+
+
+3129
+
+StatPanel.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+f03705800a9caefbe36da09861efd20a
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
 
 
 
@@ -236,10 +440,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:30.000000Z
 d68d1f41335a085f7f726d665efb66d6
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -249,7 +453,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -263,4 +467,38 @@ copied
 
 
 2918
+
+ConsolePanel.java
+file
+
+
+
+
+2012-06-16T22:01:15.000000Z
+835a4118fff573d0fdd2e8b04d4b3038
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3452
 

@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package aim4.im.v2i.policy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -38,6 +39,7 @@ import java.util.Map;
 
 import aim4.config.Debug;
 import aim4.config.Resources;
+import aim4.config.SimConfig.VEHICLE_TYPE;
 import aim4.im.TrackModel;
 import aim4.im.v2i.V2IManager;
 import aim4.im.v2i.V2IManagerCallback;
@@ -139,6 +141,8 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
     private AczManager aczManager;
     /** The ACZ plan */
     private aim4.im.v2i.reservation.AczManager.Plan aczPlan;
+    /** The time the vehicle would exit the intersection */
+	private double exitTime;
 
     /**
      * Create a reservation parameter record.
@@ -148,14 +152,16 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
      * @param gridPlan            the reservation plan
      * @param aczManager          the ACZ manager
      * @param aczPlan             the ACZ plan
+     * @param exitTime 
      */
     public ReserveParam(int vin, Proposal successfulProposal, Plan gridPlan,
-        AczManager aczManager, aim4.im.v2i.reservation.AczManager.Plan aczPlan) {
+        AczManager aczManager, aim4.im.v2i.reservation.AczManager.Plan aczPlan, double exitTime) {
       this.vin = vin;
       this.successfulProposal = successfulProposal;
       this.gridPlan = gridPlan;
       this.aczManager = aczManager;
       this.aczPlan = aczPlan;
+      this.exitTime = exitTime;
     }
 
     /** Get the VIN of the vehicle */
@@ -163,6 +169,11 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
       return vin;
     }
 
+    /** Get the time the vehicle would exit */
+    public double getExitTime() {
+    	return this.exitTime;
+    }
+    
     /** Get the successful proposal */
     public Proposal getSuccessfulProposal() {
       return successfulProposal;
@@ -371,6 +382,13 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
     new HashMapRegistry<ReservationRecord>();
 
   /**
+   * This is a list of vin of vehicles who have been sent reject message.
+   * The vehicles in this list are typically now stopping.
+   */
+  private ArrayList<Integer> rejectedVehiclesList =
+  	new ArrayList<Integer>();
+  
+  /**
    * A mapping from VIN numbers to reservation Id
    */
   private Map<Integer,Integer> vinToReservationId =
@@ -528,6 +546,9 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
                                  im.getCurrentTime(), // can re-send request
                                                       // immediately
                                  reason));
+    
+    // mark the vehicles who have been rejected.
+    rejectedVehiclesList.add(vin);
   }
 
   /**
@@ -535,15 +556,17 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
    */
   @Override
   public ReserveParam findReserveParam(Request msg,
-                                       List<Request.Proposal> proposals) {
+                                       List<Request.Proposal> proposals, boolean green) {
     int vin = msg.getVin();
     VehicleSimView vehicle = Resources.vinToVehicles.get(vin);
+    double exitTime = -1; // find a initial value; the time it would exit
 
     // Okay, now let's actually try some of these proposals
     Request.Proposal successfulProposal = null;
     ReservationGridManager.Plan gridPlan = null;
     AczManager aczManager = null;
     AczManager.Plan aczPlan = null;
+    boolean accelerating = true;
 
     for(Request.Proposal proposal : proposals) {
       ReservationGridManager.Query gridQuery =
@@ -554,10 +577,11 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
                                          proposal.getDepartureLaneID(),
                                          msg.getSpec(),
                                          proposal.getMaximumTurnVelocity(),
-                                         true);
-      boolean isHuman = vehicle.isHuman();
-      gridPlan = im.getReservationGridManager().query(gridQuery, isHuman);
+                                         accelerating);
+      VEHICLE_TYPE vehicleType = vehicle.getVehicleType();
+      gridPlan = im.getReservationGridManager().query(gridQuery, vehicleType, green);
       if (gridPlan != null) {
+      	exitTime = gridPlan.getExitTime();
         double stopDist =
           VehicleUtil.calcDistanceToStop(gridPlan.getExitVelocity(),
                                          msg.getSpec().getMaxDeceleration());
@@ -586,8 +610,9 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
     }
 
     if (successfulProposal != null) {
+      assert exitTime != -1;
       return new ReserveParam(vin, successfulProposal, gridPlan, aczManager,
-                              aczPlan);
+                              aczPlan, exitTime);
     } else {
       return null;
     }
@@ -617,12 +642,19 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
     return vinToReservationId.containsKey(vin);
   }
 
-
   /////////////////////////////////
   // PUBLIC METHODS
   /////////////////////////////////
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+	public boolean hasBeenRejected(int vin) {
+		return rejectedVehiclesList.contains(vin);
+	}
+
+	/**
    * Process a V2I message
    *
    * @param msg  the V2I message

@@ -1,23 +1,41 @@
 K 25
 svn:wc:ra_dav:version-url
-V 57
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/pilot
+V 53
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/pilot
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/pilot/package-info.java
+END
+V2IPilot.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/pilot/V2IPilot.java
 END
 package-info.class
 K 25
 svn:wc:ra_dav:version-url
-V 76
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/pilot/package-info.class
+V 72
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/pilot/package-info.class
+END
+BasicPilot.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/driver/pilot/BasicPilot.java
 END
 V2IPilot.class
 K 25
 svn:wc:ra_dav:version-url
-V 72
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/pilot/V2IPilot.class
+V 68
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/pilot/V2IPilot.class
 END
 BasicPilot.class
 K 25
 svn:wc:ra_dav:version-url
-V 74
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/driver/pilot/BasicPilot.class
+V 70
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/driver/pilot/BasicPilot.class
 END

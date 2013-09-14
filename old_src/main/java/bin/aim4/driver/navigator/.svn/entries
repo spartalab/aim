@@ -1,14 +1,14 @@
 10
 
 dir
-8
-https://subversion.assembla.com/svn/aim4-src3/main/java/bin/aim4/driver/navigator
+9
+https://subversion.assembla.com/svn/aim4-src3/main/java/aim4/driver/navigator
 https://subversion.assembla.com/svn/aim4-src3
 
 
 
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 
 
@@ -18,7 +18,7 @@ jensen.zhang
 
 
 
-copied
+
 
 
 
@@ -26,84 +26,16 @@ copied
 
 0faaed0e-6b32-4c15-b4e3-85fac2616f46
 
-package-info.class
-file
-
-
-
-
-2012-06-16T22:02:16.000000Z
-aa5810f7dab1a545c8c606a65a88f902
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-127
-
-BasicNavigator$Node.class
-file
-
-
-
-
-2012-06-16T22:02:16.000000Z
-f063a6ef97fbaf7585487ccf89b65869
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-3059
-
 Navigator.class
 file
 
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:31.000000Z
 019cc1fa8d537a318e373b7a5568ff6a
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -113,7 +45,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -134,10 +66,10 @@ file
 
 
 
-2012-06-16T22:02:16.000000Z
+2012-06-26T00:42:31.000000Z
 53694f1bc05be73f4d38d720ef006442
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -147,7 +79,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -161,4 +93,174 @@ copied
 
 
 5804
+
+package-info.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+ddc589fa1b6d6bb9ffe00c65f2982a8b
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+149
+
+package-info.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+aa5810f7dab1a545c8c606a65a88f902
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+127
+
+Navigator.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+eed00813012ec05cded2492ee2e5aaa8
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2587
+
+BasicNavigator$Node.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+affff723e79a656f8f0fbf011991ee55
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3051
+
+BasicNavigator.java
+file
+
+
+
+
+2012-06-16T22:01:16.000000Z
+246e590101b0bfa7b492b7fbf0c81948
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+14283
 

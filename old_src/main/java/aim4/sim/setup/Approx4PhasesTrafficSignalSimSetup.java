@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package aim4.sim.setup;
 
 import aim4.config.Debug;
+import aim4.config.Resources;
 import aim4.config.SimConfig;
 import aim4.driver.pilot.V2IPilot;
 import aim4.im.v2i.reservation.ReservationGridManager;
@@ -127,7 +128,7 @@ public class Approx4PhasesTrafficSignalSimSetup extends BasicSimSetup
                                        lanesPerRoad,
                                        medianSize,
                                        distanceBetween);
-
+    
     ReservationGridManager.Config gridConfig =
       new ReservationGridManager.Config(SimConfig.TIME_STEP,
                                         SimConfig.GRID_TIME_STEP,

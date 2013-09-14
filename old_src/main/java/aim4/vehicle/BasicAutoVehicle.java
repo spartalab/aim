@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Queue;
 
 import aim4.config.Debug;
+import aim4.config.SimConfig.VEHICLE_TYPE;
 import aim4.driver.AutoDriver;
 import aim4.driver.DriverSimView;
 import aim4.map.lane.Lane;
@@ -251,9 +252,25 @@ public class BasicAutoVehicle extends BasicVehicle
    * The last V2I message
    */
   private V2IMessage lastV2IMessage;
-  private boolean isHuman;
+  /**
+   * it's unique id!!
+   */
+  private int uid;
+  /**
+   * The type of vehicle
+   */
+	private VEHICLE_TYPE vehicleType;
 
-
+	/**
+	 * Whether this vehicle is asked to stopped before.
+	 * If so, we conclude that it turned off the cruise control, for simple cruise control vehicles.
+	 */
+	private boolean stopped = false;
+	
+  /**
+   * how many vehicles are generated
+   */
+  private static int vehicleNum = 0;
 
   /////////////////////////////////
   // CONSTRUCTORS
@@ -282,10 +299,13 @@ public class BasicAutoVehicle extends BasicVehicle
                           double targetVelocity,
                           double acceleration,
                           double currentTime,
-                          boolean isHuman) {
+                          VEHICLE_TYPE vehicleType) {
     super(spec, pos, heading, velocity, steeringAngle, acceleration,
           targetVelocity, currentTime);
-    this.isHuman = isHuman;
+    this.vehicleType = vehicleType;
+    
+    this.uid = vehicleNum;
+    vehicleNum++;
   }
 
 
@@ -480,16 +500,40 @@ public class BasicAutoVehicle extends BasicVehicle
     return transmissionPower;
   }
   
-  /**
+  @Override
+	public VEHICLE_TYPE getVehicleType() {
+		// TODO Auto-generated method stub
+		return this.vehicleType;
+	}
+
+
+	/**
    * return whether it's human
    * 
    * @return
    */
   public boolean isHuman() {
-	  return this.isHuman;
+	  return (this.vehicleType == VEHICLE_TYPE.HUMAN);
   }
 
-  /**
+  @Override
+	public boolean isInformendHuman() {
+		// TODO Auto-generated method stub
+		return (this.vehicleType == VEHICLE_TYPE.INFORMED_HUMAN);
+	}
+
+	@Override
+	public boolean withCruiseControll() {
+  	return (this.vehicleType == VEHICLE_TYPE.CRUISE);
+	}
+
+	@Override
+	public boolean withAdaptiveCruiseControll() {
+		return this.getVehicleType() == VEHICLE_TYPE.ADAPTIVE_CRUISE;
+	}
+
+
+	/**
    * {@inheritDoc}
    */
   @Override
@@ -567,6 +611,17 @@ public class BasicAutoVehicle extends BasicVehicle
 	@Override
 	public VehicleSimView getFrontVehicle() {
 		return this.frontVehicle;
+	}
+
+
+	@Override
+	public void askedToStop() {
+		this.stopped = true;
+	}
+
+	@Override
+	public boolean hasStopped() {
+		return this.stopped;
 	}
 
 }

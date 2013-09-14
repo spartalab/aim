@@ -1,14 +1,14 @@
 10
 
 dir
-8
-https://subversion.assembla.com/svn/aim4-src3/main/java/bin/aim4/im
+9
+https://subversion.assembla.com/svn/aim4-src3/main/java/aim4/im
 https://subversion.assembla.com/svn/aim4-src3
 
 
 
-2012-06-22T05:00:17.222438Z
-5
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 
 
@@ -18,7 +18,7 @@ jensen.zhang
 
 
 
-copied
+
 
 
 
@@ -26,50 +26,16 @@ copied
 
 0faaed0e-6b32-4c15-b4e3-85fac2616f46
 
-RoadBasedTrackModel.class
-file
-
-
-
-
-2012-06-16T22:02:15.000000Z
-fa2d763a62de2a4fe2a3ef5d168faa57
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-7728
-
 RoadBasedIntersection.class
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 1f44e5e1c9585e61e2ebe698016d07ae
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -79,7 +45,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -94,37 +60,84 @@ copied
 
 12656
 
-v2i
-dir
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-copied
-
-LightState$1.class
+IntersectionManager.java
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-eac3c8f0ca852ad48bf19db702883737
+2012-06-16T22:01:17.000000Z
+1b431bb129ffede7f4ecba54b22d770f
 2012-06-16T22:14:50.530299Z
 2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9605
+
+Intersection.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+f7a7ff1786889f6beb0459b76a0927d7
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5507
+
+package-info.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+2f3555311172afd13a68448fd3e4f2d1
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -134,7 +147,214 @@ has-props
 
 
 
-copied
+
+
+
+
+
+
+
+
+
+
+
+
+
+113
+
+LightState.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+513b1df09a6099e6384837f34205248a
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2187
+
+TrackModel.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+901c9444507bc6b66483b4654e4a7cb3
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+534
+
+DummyManager.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+b8797b0935983ffff07b22edcaed0129
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+979
+
+RoadBasedIntersection.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+e44e23056e65bfa2dd184bb5e97c9f6a
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21165
+
+RoadBasedTrackModel.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+fa2d763a62de2a4fe2a3ef5d168faa57
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7728
+
+v2i
+dir
+
+LightState$1.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+eac3c8f0ca852ad48bf19db702883737
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
 
 
 
@@ -155,10 +375,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 be37a99c5b5c14675bda7ab1dcd4cfac
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -168,7 +388,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -189,10 +409,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 0e1ed2b72c5da833738caacd754253d7
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -202,7 +422,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -217,16 +437,84 @@ copied
 
 580
 
+package-info.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+4968a08e91e6404d13d2b0cea8360282
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+98
+
+TrackModel.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+7664480a8f960644cd99443f41659902
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4398
+
 IntersectionManager.class
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 8e5542ba167d0306044ce5694b416c7e
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -236,7 +524,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -251,26 +539,17 @@ copied
 
 4676
 
-package-info.class
+DummyManager.java
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-2f3555311172afd13a68448fd3e4f2d1
+2012-06-16T22:01:17.000000Z
+ab27829fc96369c02ea27f8c3769903b
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -283,28 +562,6 @@ copied
 
 
 
-113
-
-TrackModel.class
-file
-
-
-
-
-2012-06-16T22:02:15.000000Z
-901c9444507bc6b66483b4654e4a7cb3
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -314,10 +571,7 @@ copied
 
 
 
-
-
-
-534
+2427
 
 RoadBasedTrackModel$ExitPointDistanceComparator.class
 file
@@ -325,10 +579,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
-aba69633df1b53e866d9f516d4fcb38a
-2012-06-16T22:14:50.530299Z
-2
+2012-06-26T00:42:31.000000Z
+10fc0fd02422f1f12a050ed78dc804d3
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -338,7 +592,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -353,16 +607,50 @@ copied
 
 1760
 
+RoadBasedTrackModel.java
+file
+
+
+
+
+2012-06-16T22:01:17.000000Z
+6106b9467d78e3054f98e01bace5b7de
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+16708
+
 Intersection.class
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 87f9d960dad354baeb08a4b8f00eaabb
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -372,7 +660,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -387,50 +675,16 @@ copied
 
 1047
 
-DummyManager.class
-file
-
-
-
-
-2012-06-16T22:02:15.000000Z
-b8797b0935983ffff07b22edcaed0129
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-979
-
 LightState.class
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-5b80cd31702273a76885167731c021eb
-2012-06-16T22:14:50.530299Z
-2
+2012-06-26T00:42:31.000000Z
+3edb5d3d039637cd2bb7af04f1628467
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -440,7 +694,6 @@ has-props
 
 
 
-copied
 
 
 
@@ -453,5 +706,6 @@ copied
 
 
 
-1295
+
+1283
 

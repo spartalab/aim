@@ -1,14 +1,14 @@
 10
 
 dir
-8
-https://subversion.assembla.com/svn/aim4-src3/main/java/bin/aim4/map/track
+9
+https://subversion.assembla.com/svn/aim4-src3/main/java/aim4/map/track
 https://subversion.assembla.com/svn/aim4-src3
 
 
 
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 
 
@@ -18,7 +18,7 @@ jensen.zhang
 
 
 
-copied
+
 
 
 
@@ -26,26 +26,17 @@ copied
 
 0faaed0e-6b32-4c15-b4e3-85fac2616f46
 
-LineTrack.class
+Track.java
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-04808555b0766e6cf9b0ece19fac99c8
+2012-06-16T22:01:19.000000Z
+6e13891496a81603018517bb0152c621
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -58,7 +49,16 @@ copied
 
 
 
-2144
+
+
+
+
+
+
+
+
+
+2547
 
 PathTrack.class
 file
@@ -66,10 +66,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 5ef829ff79bd2b41eea5b3f19acea77a
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -79,7 +79,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -100,10 +100,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
-7d8b88f641105d742d22f3da15e16e3e
-2012-06-16T22:14:50.530299Z
-2
+2012-06-26T00:42:31.000000Z
+56d2fcf8b668666fc14d30849f1813dd
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -113,7 +113,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -128,50 +128,16 @@ copied
 
 2093
 
-Track.class
-file
-
-
-
-
-2012-06-16T22:02:15.000000Z
-b28d803076c2fb7a5e97019eb71ff5cd
-2012-06-16T22:14:50.530299Z
-2
-jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
-
-
-
-
-
-
-
-
-
-
-
-
-312
-
 package-info.class
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 dce77cc149966e64604d826b9c17b466
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -181,7 +147,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -196,26 +162,17 @@ copied
 
 120
 
-LineTrack$Position.class
+WayPoint.java
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-6d0ddfd60f748d4895fe20d3553974ba
+2012-06-16T22:01:19.000000Z
+23d0a7b955041b4f9f585ee0009adf57
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -228,7 +185,50 @@ copied
 
 
 
-1987
+
+
+
+
+
+
+
+
+
+2395
+
+LineTrack.java
+file
+
+
+
+
+2012-06-16T22:01:19.000000Z
+8c53b1a61cfd59263d06a664386a5805
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5609
 
 TrackPosition.class
 file
@@ -236,10 +236,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 139e2629825eac4b54652ade643ca0f9
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -249,7 +249,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -270,10 +270,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:31.000000Z
 c6ec32a2c858dfd98645e27151ec4981
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -283,7 +283,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -298,16 +298,84 @@ copied
 
 3025
 
-WayPoint.class
+PathTrack.java
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-a0bfa4d50886861751b14baf3fa92471
+2012-06-16T22:01:19.000000Z
+74123031a5631e8ff7cfe4e6c4784598
 2012-06-16T22:14:50.530299Z
 2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6614
+
+package-info.java
+file
+
+
+
+
+2012-06-16T22:01:19.000000Z
+56891b063fdff25ade4e3a5cc1ec7351
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+88
+
+Track.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+b28d803076c2fb7a5e97019eb71ff5cd
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -317,7 +385,143 @@ has-props
 
 
 
-copied
+
+
+
+
+
+
+
+
+
+
+
+
+
+312
+
+LineTrack$Position.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+96bcdb25e69218e462b45845c56673bc
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1987
+
+TrackPosition.java
+file
+
+
+
+
+2012-06-16T22:01:19.000000Z
+d9503dd5f06a5f24a04a3c11cff6e9c9
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2492
+
+ArcTrack.java
+file
+
+
+
+
+2012-06-16T22:01:19.000000Z
+5adcc31a7b6455b4075f61fab83deff5
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7034
+
+WayPoint.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+a0bfa4d50886861751b14baf3fa92471
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
 
 
 
@@ -338,10 +542,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
-025ab4ddbc43d568b7c872c50846825c
-2012-06-16T22:14:50.530299Z
-2
+2012-06-26T00:42:31.000000Z
+ecda9a838a247befaa08e4c436cb0857
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -351,7 +555,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -365,4 +569,38 @@ copied
 
 
 2226
+
+LineTrack.class
+file
+
+
+
+
+2012-06-26T00:42:31.000000Z
+04808555b0766e6cf9b0ece19fac99c8
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2144
 

@@ -1,14 +1,14 @@
 10
 
 dir
-8
-https://subversion.assembla.com/svn/aim4-src3/main/java/bin/aim4/gui/component
+9
+https://subversion.assembla.com/svn/aim4-src3/main/java/aim4/gui/component
 https://subversion.assembla.com/svn/aim4-src3
 
 
 
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 
 
@@ -18,7 +18,7 @@ jensen.zhang
 
 
 
-copied
+
 
 
 
@@ -26,26 +26,17 @@ copied
 
 0faaed0e-6b32-4c15-b4e3-85fac2616f46
 
-LabeledSlider.class
+package-info.java
 file
 
 
 
 
-2012-06-16T22:02:15.000000Z
-18e2db3c64637a0df1d3ba6263664011
+2012-06-16T22:01:15.000000Z
+06258034d4b7fe99556234feddd8ac1b
 2012-06-16T22:14:50.530299Z
 2
 jensen.zhang
-has-props
-
-
-
-
-
-
-
-copied
 
 
 
@@ -58,7 +49,50 @@ copied
 
 
 
-4474
+
+
+
+
+
+
+
+
+
+98
+
+FormattedLabel.java
+file
+
+
+
+
+2012-06-16T22:01:15.000000Z
+6081e16bd10288594adbe91b7f4aec19
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4712
 
 package-info.class
 file
@@ -66,10 +100,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:30.000000Z
 891513acaa8205020be1b41ec1de0803
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -79,7 +113,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -100,10 +134,10 @@ file
 
 
 
-2012-06-16T22:02:15.000000Z
+2012-06-26T00:42:30.000000Z
 8b0e7e526a26a388757f7f95c507bdfb
-2012-06-16T22:14:50.530299Z
-2
+2012-06-22T18:48:19.729891Z
+9
 jensen.zhang
 has-props
 
@@ -113,7 +147,7 @@ has-props
 
 
 
-copied
+
 
 
 
@@ -127,4 +161,72 @@ copied
 
 
 2106
+
+LabeledSlider.java
+file
+
+
+
+
+2012-06-16T22:01:15.000000Z
+82601dffc4485df2bc911cd15d4c2cfe
+2012-06-16T22:14:50.530299Z
+2
+jensen.zhang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7343
+
+LabeledSlider.class
+file
+
+
+
+
+2012-06-26T00:42:30.000000Z
+18e2db3c64637a0df1d3ba6263664011
+2012-06-22T18:48:19.729891Z
+9
+jensen.zhang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4474
 

@@ -1203,6 +1203,8 @@ public class V2ICoordinator implements Coordinator {
    * @param msg the reject message.
    */
   private void processRejectMessageForAwaitingResponseState(Reject msg) {
+  	// disable this
+  	
     switch(msg.getReason()) {
     case NO_CLEAR_PATH:
       // normal reason for rejection, just go back to the planning state.
@@ -2015,6 +2017,9 @@ public class V2ICoordinator implements Coordinator {
     }
     this.state = state;
     lastStateChangeTime = vehicle.gaugeTime();
+    
+    // let the driver know his current state
+    driver.setState(state);
   }
 
   /**
@@ -2055,7 +2060,7 @@ public class V2ICoordinator implements Coordinator {
    * check whether it's okay to propose.
    * 
    * for normal situation, this will call isLaneClearToIntersection;
-   * for SIGNAL-based FCFS, this will check wether the vehicle
+   * for SIGNAL-based FCFS, this will check weather the vehicle
    * in front of it has got reservations. 
    * 
    * TODO problems in implementation
@@ -2065,29 +2070,6 @@ public class V2ICoordinator implements Coordinator {
   private boolean isAllowedToPropose() {
 		if (isLaneClearToIntersection()) {
 			return true;
-		}
-		
-		else if (SimConfig.FCFS_APPLIED_FOR_SIGNAL) {
-			BasePolicy policy = (BasePolicy) Resources.im.getPolicy();
-			VehicleSimView frontVehicle = vehicle.getFrontVehicle();
-			
-			/**
-			 * this should not happen here. This would satisfy {@link isLaneClearToIntersection}
-			 * it's better than sorry.
-			 */
-			if (frontVehicle == null) {
-				return true;
-			}
-			
-			int frontVehicleVin = frontVehicle.getVIN();
-			
-			if (policy.hasReservation(frontVehicleVin)) {
-				/**
-				 * the vehicle in the front has got the reservation!
-				 * So, give it a try!
-				 */
-				return true;
-			}
 		}
 		
 		return false;

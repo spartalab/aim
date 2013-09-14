@@ -1,59 +1,95 @@
 K 25
 svn:wc:ra_dav:version-url
-V 52
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/msg/v2i
-END
-V2IMessage$Type.class
-K 25
-svn:wc:ra_dav:version-url
-V 74
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/msg/v2i/V2IMessage$Type.class
-END
-Request$Proposal.class
-K 25
-svn:wc:ra_dav:version-url
-V 75
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/msg/v2i/Request$Proposal.class
-END
-Request$VehicleSpecForRequestMsg.class
-K 25
-svn:wc:ra_dav:version-url
-V 91
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/msg/v2i/Request$VehicleSpecForRequestMsg.class
-END
-Away.class
-K 25
-svn:wc:ra_dav:version-url
-V 63
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/msg/v2i/Away.class
-END
-package-info.class
-K 25
-svn:wc:ra_dav:version-url
-V 71
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/msg/v2i/package-info.class
-END
-Cancel.class
-K 25
-svn:wc:ra_dav:version-url
-V 65
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/msg/v2i/Cancel.class
-END
-Done.class
-K 25
-svn:wc:ra_dav:version-url
-V 63
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/msg/v2i/Done.class
-END
-V2IMessage.class
-K 25
-svn:wc:ra_dav:version-url
-V 69
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/msg/v2i/V2IMessage.class
+V 48
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/v2i
 END
 Request.class
 K 25
 svn:wc:ra_dav:version-url
+V 62
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/v2i/Request.class
+END
+Request$VehicleSpecForRequestMsg.class
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/v2i/Request$VehicleSpecForRequestMsg.class
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
 V 66
-/svn/aim4-src3/!svn/ver/2/main/java/bin/aim4/msg/v2i/Request.class
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/msg/v2i/package-info.java
+END
+Away.class
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/v2i/Away.class
+END
+Done.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/msg/v2i/Done.java
+END
+Cancel.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/msg/v2i/Cancel.java
+END
+Request.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/msg/v2i/Request.java
+END
+V2IMessage.class
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/v2i/V2IMessage.class
+END
+V2IMessage$Type.class
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/v2i/V2IMessage$Type.class
+END
+Request$Proposal.class
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/v2i/Request$Proposal.class
+END
+Away.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/msg/v2i/Away.java
+END
+V2IMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/aim4-src3/!svn/ver/2/main/java/aim4/msg/v2i/V2IMessage.java
+END
+package-info.class
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/v2i/package-info.class
+END
+Done.class
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/v2i/Done.class
+END
+Cancel.class
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/aim4-src3/!svn/ver/9/main/java/aim4/msg/v2i/Cancel.class
 END
