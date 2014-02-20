@@ -79,11 +79,12 @@ def print_traversal_time(traversal_time):
     for (type,laneId,destRoad),t in traversal_time.items():
         print("[", type, ",", laneId, ",", destRoad, "] = ", t);
 
-def avg_delay(delay_time):
+def avg_delay(delay_time, delayFunc):
     count = 0
     total_delay = 0
     for vin,delay in delay_time.items():
-        total_delay += delay
+		# delay may or may not be linear. consult delayFunc
+        total_delay += delayFunc(delay)
         count += 1
 
     if count == 0:
@@ -105,6 +106,11 @@ def main():
     global runningTime
     global runningForOneData
 
+	# delay functions
+	linearDelay = lambda x: x
+	squaredDelay = lambda x: x ** 2
+	cubeDelay = lambda x: x ** 3
+
     if len(sys.argv) < 3:
       usage()
 
@@ -122,7 +128,7 @@ def main():
       # get the file name of the csv
       filename = "ts_dcl_FCFS-SIGNAL_6phases_.25_0.10_0.25_" + format(level, ".2f") + "_" + str(human_portion) + "_" + str(runningTime) + ".csv"
       delay_time = read_delay(filename)
-      avg_delay_time = avg_delay(delay_time)
+      avg_delay_time = avg_delay(delay_time, linearDelay)
       print "delay time is " + str(avg_delay_time)
       data.append(avg_delay_time)
     
@@ -130,14 +136,6 @@ def main():
     print row
     print "================="
     writer.writerow(row)
-
-    # for vin,delay in delay_time.items():
-    #     print(vin, ' => ', format(delay, '.8f'))
-
-    # print(format(avg_delay(delay_time), '.4f'))
-
-    # for vin,delay in delay_time.items():
-    #     print(vin, ' => ', format(delay, '.8f'))
 
 if __name__ == "__main__":
   main()

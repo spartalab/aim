@@ -25,4 +25,9 @@ To clean up, type
 
   mvn clean
 
+=============================
+Places need to look at:
 
+aim4.sim.AutoDriverOnlySimulator
+	spawnVehicles
+		uses aim4.map.GridMapUtil.UniformSpawnSpecGenerator
