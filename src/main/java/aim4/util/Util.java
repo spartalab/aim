@@ -55,8 +55,8 @@ public class Util {
   /////////////////////////////////
 
   /** The random seed for all random number generators in the simulation */
-  public static long randSeed = (new Random()).nextLong();
-  // public static final long randSeed = -6397397808339168785L;
+  //public static long randSeed = (new Random()).nextLong();
+  public static long randSeed = -6397397808339168785L;
 
   /** The global random number generator */
   public static final Random random = new Random(randSeed);

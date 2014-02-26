@@ -234,10 +234,13 @@ public class GridMapUtil {
                                      DestinationSelector destinationSelector) {
       int n = VehicleSpecDatabase.getNumOfSpec();
       proportion = new ArrayList<Double>(n);
+      
+      // FIXME assumes balanced traffic
       double p = 1.0 / n;
       for(int i=0; i<n; i++) {
         proportion.add(p);
       }
+      
       this.destinationSelector = destinationSelector;
       Resources.destinationSelector = destinationSelector;
 
