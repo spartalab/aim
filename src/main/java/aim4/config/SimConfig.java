@@ -144,23 +144,28 @@ public class SimConfig {
    * The phase plan that is currently applied.
    * By default, it's 6phases.
    */
-	public static String phaseDir = "6phases";
+  public static String phaseDir = "6phases";
 
   /**
    * The distance before the stopping distance before an intersection
    * such that a vehicle can consider moving again when
    * MUST_STOP_BEFORE_INTERSECTION is true.
    */
-	public static final double ADDITIONAL_STOP_DIST_BEFORE_INTERSECTION = 0.01;
+  public static final double ADDITIONAL_STOP_DIST_BEFORE_INTERSECTION = 0.01;
 
   /**
    * If an adaptive vehicle find a vehicle in front of it within such distance, it can follow
    */
-	public static final double FOLLOW_DISTANTCE = 15;
+  public static final double FOLLOW_DISTANTCE = 15;
 
-	/**
-	 * Simulation time + HUMAN_TARDINESS is the maximum possible time for human driver to
-	 * enter the intersection.
-	 */
-	public static final int HUMAN_TARDINESS = 10;
+  /**
+   * Simulation time + HUMAN_TARDINESS is the maximum possible time for human driver to
+   * enter the intersection.
+   */
+  public static final int HUMAN_TARDINESS = 10;
+  
+  /**
+   * Switch for batch mode
+   */
+  public static final boolean BATCH_MODE = false;
 }

@@ -33,5 +33,13 @@ aim4.sim.AutoDriverOnlySimulator
 		uses aim4.map.GridMapUtil.UniformSpawnSpecGenerator
 
 AutoDriverOnlySimSetup
+	batch mode on/off (interface in SimConfig)
 GridMapUtil.setBatchManagers
+GridMapUtil.setFCFSManagers
+aim4.im.v2i.RequestHandler.BatchModeRequestHandler
 	batch mode, etc.
+	control highlight of vehicles in batch mode
+aim4.map.GridMapUtil.setBatchManagers
+	set batch managers to each intersection
+aim4.im.v2i.batch.RoadBasedReordering
+	used by batch manager

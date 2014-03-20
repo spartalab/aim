@@ -67,7 +67,7 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
   /** Whether the base line mode is on */
   private boolean isBaseLineMode = false;
   /** Whether the batch mode is on */
-  private boolean isBatchMode = true;
+  private boolean isBatchMode = SimConfig.BATCH_MODE;
   /** The traffic type */
   private TrafficType trafficType = TrafficType.UNIFORM_RANDOM;
   /** The traffic level in the horizontal direction */
