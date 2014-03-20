@@ -33,5 +33,5 @@ aim4.sim.AutoDriverOnlySimulator
 		uses aim4.map.GridMapUtil.UniformSpawnSpecGenerator
 
 AutoDriverOnlySimSetup
+GridMapUtil.setBatchManagers
 	batch mode, etc.
-
