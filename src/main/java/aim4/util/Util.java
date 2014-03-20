@@ -54,7 +54,9 @@ public class Util {
   // PUBLIC METHODS
   /////////////////////////////////
 
-  /** The random seed for all random number generators in the simulation */
+  /** The random seed for all random number generators in the simulation.
+   * Fix the dynamics by using the constant randSeed.
+   */
   //public static long randSeed = (new Random()).nextLong();
   public static long randSeed = -6397397808339168785L;
 

@@ -46,14 +46,14 @@ public class TrafficSignalExpr {
   	if (args.length < 4 || args[0].endsWith("-help")) {
   		System.out.println("Arguments -> OPTIONS PARAMETERS\n"
   	   +"OPTIONS -> [-ng] [-r redPhaseLength] [-d number of dedicated lanes] [-o] [-h] [-p] [-t] [-s] [-f]\n"
-  		 +"-ng generate data file instead of showing GUI\n"
+  	   +"-ng generate data file instead of showing GUI\n"
   	   +"-r set the red phase length manually. 4 secs by default.\n"
   	   +"-d with dedicated lanes\n"
-  		 +"-o one lane version\n"
+  	   +"-o one lane version\n"
   	   +"-h the traffic signal phases would adapt to the human traffic - the lights are on for the lanes with most number of human drivers\n"
-  		 +"-p turn on platooning\n"
+  	   +"-p turn on platooning\n"
   	   +"-t manually set simulation time, 1800s by default.\n"
-  		 +"-s semi-autonomous experiments baseline.\n"
+  	   +"-s semi-autonomous experiments baseline.\n"
   	   +"-f fully observable. The IM knows the positions of human drivers. IM only knows the info of auto and semi-auto vehicles by default.\n"
   	   +"PARAMETERS -> trafficLeveL humanPercentage informedHumanPercentage simpleCruiseControlPercentage adaptiveCruiseControlPercentage");
   		
@@ -145,7 +145,7 @@ public class TrafficSignalExpr {
 			System.out.println("Start running..");
 		}
 		
-    SIM_TYPE simType = SIM_TYPE.APPROX_TRAFFIC_SIGNAL;
+    SIM_TYPE simType = SIM_TYPE.FCFS;
 
     double staticBufferSize = 0.25;
     double internalTileTimeBufferSize = 0.10;

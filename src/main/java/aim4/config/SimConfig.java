@@ -151,7 +151,7 @@ public class SimConfig {
    * such that a vehicle can consider moving again when
    * MUST_STOP_BEFORE_INTERSECTION is true.
    */
-  public static final double ADDITIONAL_STOP_DIST_BEFORE_INTERSECTION = 0.01;
+	public static final double ADDITIONAL_STOP_DIST_BEFORE_INTERSECTION = 0.01;
 
   /**
    * If an adaptive vehicle find a vehicle in front of it within such distance, it can follow

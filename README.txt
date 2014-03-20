@@ -32,8 +32,6 @@ aim4.sim.AutoDriverOnlySimulator
 	spawnVehicles
 		uses aim4.map.GridMapUtil.UniformSpawnSpecGenerator
 
-Communication between vehicle and intersection
-aim4.driver.coordinator.V2ICoordinator:959
-package aim4.driver.AutoDriver
-
+AutoDriverOnlySimSetup
+	batch mode, etc.
 

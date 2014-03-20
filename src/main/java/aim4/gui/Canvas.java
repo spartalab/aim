@@ -840,34 +840,34 @@ public class Canvas extends JPanel implements ComponentListener,
 		else if (type == VEHICLE_TYPE.INFORMED_HUMAN) {
 			buffer.setPaint(INFORMED_HUMAN_COLOR);
 		}
-  	/*} else if (selectedVehicle) {
-      buffer.setPaint(VEHICLE_SELECTED_COLOR);
-    } else if (vehicle.getVIN() == MARVIN_VEHICLE_VIN) {
-      buffer.setPaint(MARVIN_VEHICLE_COLOR);
-    } else if (Debug.getVehicleColor(vehicle.getVIN()) != null) {
-      buffer.setPaint(Debug.getVehicleColor(vehicle.getVIN()));
-    } else if (Debug.SHOW_VEHICLE_COLOR_BY_MSG_STATE) {
-      if (vehicle.getDriver() instanceof AutoDriver) {
-        AutoDriver autoDriver = (AutoDriver) vehicle.getDriver();
-        if (autoDriver.getCurrentCoordinator() instanceof V2ICoordinator) {
-          V2ICoordinator coordinator =
-              (V2ICoordinator) autoDriver.getCurrentCoordinator();
-          if (coordinator.isAwaitingResponse()) {
-            buffer.setPaint(VEHICLE_WAITING_FOR_RESPONSE_COLOR);
-          } else if (coordinator.getReservationParameter() != null) {
-            buffer.setPaint(VEHICLE_HAS_RESERVATION_COLOR);
-          } else {
-            buffer.setPaint(VEHICLE_COLOR);  // the default color
-          }
-        } else {
-          buffer.setPaint(VEHICLE_COLOR);  // the default color
-        }
-      } else {
-        buffer.setPaint(VEHICLE_COLOR);  // the default color
-      }
-    } else {
-      buffer.setPaint(VEHICLE_COLOR);  // the default color
-    }*/
+	  	else if (selectedVehicle) {
+	      buffer.setPaint(VEHICLE_SELECTED_COLOR);
+	    } else if (vehicle.getVIN() == MARVIN_VEHICLE_VIN) {
+	      buffer.setPaint(MARVIN_VEHICLE_COLOR);
+	    } else if (Debug.getVehicleColor(vehicle.getVIN()) != null) {
+	      buffer.setPaint(Debug.getVehicleColor(vehicle.getVIN()));
+	    } else if (Debug.SHOW_VEHICLE_COLOR_BY_MSG_STATE) {
+	      if (vehicle.getDriver() instanceof AutoDriver) {
+	        AutoDriver autoDriver = (AutoDriver) vehicle.getDriver();
+	        if (autoDriver.getCurrentCoordinator() instanceof V2ICoordinator) {
+	          V2ICoordinator coordinator =
+	              (V2ICoordinator) autoDriver.getCurrentCoordinator();
+	          if (coordinator.isAwaitingResponse()) {
+	            buffer.setPaint(VEHICLE_WAITING_FOR_RESPONSE_COLOR);
+	          } else if (coordinator.getReservationParameter() != null) {
+	            buffer.setPaint(VEHICLE_HAS_RESERVATION_COLOR);
+	          } else {
+	            buffer.setPaint(VEHICLE_COLOR);  // the default color
+	          }
+	        } else {
+	          buffer.setPaint(VEHICLE_COLOR);  // the default color
+	        }
+	      } else {
+	        buffer.setPaint(VEHICLE_COLOR);  // the default color
+	      }
+	    } else {
+	      buffer.setPaint(VEHICLE_COLOR);  // the default color
+	    }
 
   	buffer.setStroke(VEHICLE_STROKE);
   	
