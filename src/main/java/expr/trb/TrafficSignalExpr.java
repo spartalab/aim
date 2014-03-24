@@ -21,22 +21,24 @@ import aim4.util.Util;
 
 public class TrafficSignalExpr {
 
-  private enum SIM_TYPE {
+  protected enum SIM_TYPE {
     FCFS,
     APPROX_TRAFFIC_SIGNAL,
     APPROX_STOP_SIGN
   }
   
-  private static boolean GENERATE_BASELINE = false;
-  private static boolean SHOW_GUI = true;
+  protected static boolean GENERATE_BASELINE = false;
+  protected static boolean SHOW_GUI = true;
+  
+  protected static BasicSimSetup basicSimSetup2 = null;
+  protected static double trafficLevel;
 
   /**
    * The main function of this experiment
    * 
    * See the output for the arguments setting. MAKE SURE YOU UPDATE THEM EACH TIME AFTER MODIFICATION.
    */
-  public static void main(String[] args) {
-    
+  protected static void setup(String[] args) {
     /////////////////////////////////
     // Settings
     /////////////////////////////////
@@ -63,87 +65,87 @@ public class TrafficSignalExpr {
   	SimConfig.signalType = SIGNAL_TYPE.TRADITIONAL;
   	
   	// read parameters
-    Double trafficLevel = Double.parseDouble(args[args.length - 5]);
-		SimConfig.HUMAN_PERCENTAGE = Double.parseDouble(args[args.length - 4]);
-		SimConfig.INFORMED_HUMAN_PERCENTAGE = Double.parseDouble(args[args.length - 3]);
-		SimConfig.SIMPLE_CRUISE_PERCENTAGE = Double.parseDouble(args[args.length - 2]);
-		SimConfig.ADAPTIVE_CRUISE_PERCENTAGE = Double.parseDouble(args[args.length - 1]);
+  	trafficLevel = Double.parseDouble(args[args.length - 5]);
+	SimConfig.HUMAN_PERCENTAGE = Double.parseDouble(args[args.length - 4]);
+	SimConfig.INFORMED_HUMAN_PERCENTAGE = Double.parseDouble(args[args.length - 3]);
+	SimConfig.SIMPLE_CRUISE_PERCENTAGE = Double.parseDouble(args[args.length - 2]);
+	SimConfig.ADAPTIVE_CRUISE_PERCENTAGE = Double.parseDouble(args[args.length - 1]);
+	
+	if (SimConfig.HUMAN_PERCENTAGE
+			+ SimConfig.INFORMED_HUMAN_PERCENTAGE
+			+ SimConfig.SIMPLE_CRUISE_PERCENTAGE
+			+ SimConfig.ADAPTIVE_CRUISE_PERCENTAGE > 1) {
+		throw new RuntimeException("The sum of percentages of vehicles exceeds 1.");
+	}
 		
-		if (SimConfig.HUMAN_PERCENTAGE
-				+ SimConfig.INFORMED_HUMAN_PERCENTAGE
-				+ SimConfig.SIMPLE_CRUISE_PERCENTAGE
-				+ SimConfig.ADAPTIVE_CRUISE_PERCENTAGE > 1) {
-			throw new RuntimeException("The sum of percentages of vehicles exceeds 1.");
+	// read options
+	boolean readRedPhase = false, readDedicatedLanes = false, readSimulationTime = false;
+	
+	for (int i = 0; i < args.length - 5; i++) {
+	String flag = args[i];
+	
+	if (readRedPhase) {
+		SimConfig.RED_PHASE_LENGTH = Double.parseDouble(flag);
+		readRedPhase = false;
+	}
+	else if (readDedicatedLanes) {
+		SimConfig.signalType = SIGNAL_TYPE.DEDICATED_LANES;
+		
+		SimConfig.DEDICATED_LANES = Integer.parseInt(flag);
+		if (SimConfig.DEDICATED_LANES > 2) {
+			throw new RuntimeException("The number of dedicated lanes should be smaller than the number of total lanes!");
 		}
-		
-		// read options
-		boolean readRedPhase = false, readDedicatedLanes = false, readSimulationTime = false;
-		
-		for (int i = 0; i < args.length - 5; i++) {
-  		String flag = args[i];
-  		
-  		if (readRedPhase) {
-  			SimConfig.RED_PHASE_LENGTH = Double.parseDouble(flag);
-  			readRedPhase = false;
-  		}
-  		else if (readDedicatedLanes) {
-  			SimConfig.signalType = SIGNAL_TYPE.DEDICATED_LANES;
-  			
-  			SimConfig.DEDICATED_LANES = Integer.parseInt(flag);
-  			if (SimConfig.DEDICATED_LANES > 2) {
-  				throw new RuntimeException("The number of dedicated lanes should be smaller than the number of total lanes!");
-  			}
-  			else if (SimConfig.DEDICATED_LANES < 0) {
-  				throw new RuntimeException("The number of dedicated lanes should be positive!");
-  			}
-  			readDedicatedLanes = false;
-  		}
-  		else if (readSimulationTime) {
-  			SimConfig.TOTAL_SIMULATION_TIME = Double.parseDouble(flag);
-  			readSimulationTime = false;
-  		}
-  		else if (flag.equals("-ng")) {
-  			SHOW_GUI = false;
-  		}
-  		else if (flag.equals("-o")) {
-  			SimConfig.signalType = SIGNAL_TYPE.ONE_LANE_VERSION;
-  		}
-  		else if (flag.equals("-h")) {
-  			SimConfig.signalType = SIGNAL_TYPE.HUMAN_ADAPTIVE;
-  		}
-  		else if (flag.equals("-f")) {
-  			SimConfig.FULLY_OBSERVING = true;
-  		}
-  		else if (flag.equals("-p")) {
-  			Platoon.platooning = true;
-  		}
-  		else if (flag.equals("-r")) {
-  			readRedPhase = true;
-  		}
-  		else if (flag.equals("-d")) {
-  			readDedicatedLanes = true;
-  		}
-  		else if (flag.equals("-t")) {
-  			readSimulationTime = true;
-  		}
-  		else if (flag.equals("-s")) {
-  			SimConfig.signalType = SIGNAL_TYPE.SEMI_AUTO_EXPR;
-  		}
-  		else {
-  			throw new RuntimeException("Unknown flag!");
-  		}
-  	}
+		else if (SimConfig.DEDICATED_LANES < 0) {
+			throw new RuntimeException("The number of dedicated lanes should be positive!");
+		}
+		readDedicatedLanes = false;
+	}
+	else if (readSimulationTime) {
+		SimConfig.TOTAL_SIMULATION_TIME = Double.parseDouble(flag);
+		readSimulationTime = false;
+	}
+	else if (flag.equals("-ng")) {
+		SHOW_GUI = false;
+	}
+	else if (flag.equals("-o")) {
+		SimConfig.signalType = SIGNAL_TYPE.ONE_LANE_VERSION;
+	}
+	else if (flag.equals("-h")) {
+		SimConfig.signalType = SIGNAL_TYPE.HUMAN_ADAPTIVE;
+	}
+	else if (flag.equals("-f")) {
+		SimConfig.FULLY_OBSERVING = true;
+	}
+	else if (flag.equals("-p")) {
+		Platoon.platooning = true;
+	}
+	else if (flag.equals("-r")) {
+		readRedPhase = true;
+	}
+	else if (flag.equals("-d")) {
+		readDedicatedLanes = true;
+	}
+	else if (flag.equals("-t")) {
+		readSimulationTime = true;
+	}
+	else if (flag.equals("-s")) {
+		SimConfig.signalType = SIGNAL_TYPE.SEMI_AUTO_EXPR;
+	}
+	else {
+		throw new RuntimeException("Unknown flag!");
+	}
+  }
     
-		if (SHOW_GUI) {
-	  	System.out.println("YELLOW : fully autonomous vehicles.\n" +
-	  			"GREEN  : simple cruise control vehicles.\n" +
-	  			"BLUE   : adaptive cruise control vehicles.\n" +
-	  			"WHITE  : human-driven vehicles with communication devices.\n" +
-	  			"MAGENTA: human-driven vehicles.\n");
-		}
-		else {
-			System.out.println("Start running..");
-		}
+	if (SHOW_GUI) {
+		System.out.println("YELLOW : fully autonomous vehicles.\n" +
+				"GREEN  : simple cruise control vehicles.\n" +
+				"BLUE   : adaptive cruise control vehicles.\n" +
+				"WHITE  : human-driven vehicles with communication devices.\n" +
+				"MAGENTA: human-driven vehicles.\n");
+	}
+	else {
+		System.out.println("Start running..");
+	}
 		
     SIM_TYPE simType = SIM_TYPE.FCFS;
 
@@ -181,9 +183,6 @@ public class TrafficSignalExpr {
                                 // (for now, it can be any number)
                           1.0 // stop distance before intersection
         );
-
-    BasicSimSetup basicSimSetup2 = null;
-    // ReservationGridManager.Config fcfsPolicyConfig = null;
     
     switch(simType) {
     case FCFS:
@@ -237,7 +236,12 @@ public class TrafficSignalExpr {
     /////////////////////////////////
     // Run the simulator
     /////////////////////////////////
+  }
+  
 
+  public static void main(String[] args) {
+	setup(args);
+	
     if (SHOW_GUI) {
       new Viewer(basicSimSetup2, true);
     }

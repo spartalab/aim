@@ -26,6 +26,11 @@ To clean up, type
   mvn clean
 
 =============================
+Current goals:
+
+Consider reordering of vehicles, try to find optimal in this way.
+
+
 Places need to look at:
 
 aim4.sim.AutoDriverOnlySimulator
