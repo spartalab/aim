@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import aim4.config.Condor;
 import aim4.config.Debug;
 import aim4.config.SimConfig;
-import aim4.gui.Viewer;
 import aim4.map.BasicMap;
 import aim4.sim.Simulator;
 import aim4.util.Util;
@@ -13,6 +12,9 @@ import aim4.util.Util;
 public class OptimalSolutionExpr extends TrafficSignalExpr {
   public static void main(String[] args) {
   	setup(args);
+  	
+  	// enable batch mode
+  	basicSimSetup2.setBatchMode(true);
 	
 	  // get the simulator
 	  //System.out.println(System.getProperty("user.dir"));
@@ -24,15 +26,6 @@ public class OptimalSolutionExpr extends TrafficSignalExpr {
 	    sim.step(SimConfig.TIME_STEP);
 	    currentTime += SimConfig.TIME_STEP;
 	  }
-	  
-	  /*
-	  // Print how many vehicles are inhibited
-	  System.out.println("Prohibited: " + sim.getProhibitedVehiclesNum());
-	  System.out.println("Generated: " + sim.getGeneratedVehiclesNum());
-	  System.out.println("ETL: " + 1.0 * sim.getGeneratedVehiclesNum() / 12 / SimConfig.TOTAL_SIMULATION_TIME);
-	  System.out.println("TTL: " 
-			  			+ 1.0 * (sim.getGeneratedVehiclesNum() + sim.getProhibitedVehiclesNum()) / 12 / SimConfig.TOTAL_SIMULATION_TIME);
-	  */
 	  
 	  /////////////////////////////////
 	  // Generate data files

@@ -250,6 +250,7 @@ public class BasicSimSetup implements SimSetup {
     this.lanesPerRoad = lanesPerRoad;
   }
 
-
-
+  public void setBatchMode(boolean mode) {
+  	System.err.println("Should not make BasicSimSetup in batch mode!");
+  }
 }

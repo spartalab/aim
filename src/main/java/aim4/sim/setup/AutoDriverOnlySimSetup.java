@@ -67,7 +67,7 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
   /** Whether the base line mode is on */
   private boolean isBaseLineMode = false;
   /** Whether the batch mode is on */
-  private boolean isBatchMode = SimConfig.BATCH_MODE;
+  private boolean isBatchMode = false;
   /** The traffic type */
   private TrafficType trafficType = TrafficType.UNIFORM_RANDOM;
   /** The traffic level in the horizontal direction */
@@ -203,6 +203,15 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
   public void setTrafficVolume(String trafficVolumeFileName) {
     this.trafficType = TrafficType.FILE;
     this.trafficVolumeFileName = trafficVolumeFileName;
+  }
+  
+  /**
+   * Set the batch mode to be true or false
+   * 
+   * @param mode
+   */
+  public void setBatchMode(boolean mode) {
+  	this.isBatchMode = mode;
   }
 
   /**

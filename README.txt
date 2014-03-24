@@ -41,7 +41,7 @@ aim4.im.v2i.processV2IMessage
 	process request messages
 
 AutoDriverOnlySimSetup
-	batch mode on/off (interface in SimConfig)
+	batch mode on/off
 GridMapUtil.setBatchManagers
 GridMapUtil.setFCFSManagers
 aim4.im.v2i.RequestHandler.BatchModeRequestHandler
