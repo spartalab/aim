@@ -42,12 +42,14 @@ aim4.im.v2i.processV2IMessage
 
 AutoDriverOnlySimSetup
 	batch mode on/off
+
 GridMapUtil.setBatchManagers
 GridMapUtil.setFCFSManagers
+aim4.im.v2i.RequestHandler.FCFSRequestHandler
 aim4.im.v2i.RequestHandler.BatchModeRequestHandler
 	batch mode, etc.
 	control highlight of vehicles in batch mode
-aim4.im.v2i.RequestHandler.FCFSRequestHandler
+aim4.im.v2i.batch.RoadBasedReordering
 
 aim4.map.GridMapUtil.setBatchManagers
 	set batch managers to each intersection

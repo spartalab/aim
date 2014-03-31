@@ -240,7 +240,7 @@ public class TrafficSignalExpr {
   
 
   public static void main(String[] args) {
-	setup(args);
+  	setup(args);
 	
     if (SHOW_GUI) {
       new Viewer(basicSimSetup2, true);
