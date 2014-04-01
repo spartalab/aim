@@ -1,0 +1,12 @@
+Universe = vanilla
+Executable = /bin/sh
++ProjectDescription = "AIM4"
++Project = "AI_ROBOTICS"
+Output = out.$(Process)
+Error = err.$(Process)
+Log = condor.log
+
+num_of_processes=1000
+
+Arguments = runnable.sh
+Queue $(num_of_processes)

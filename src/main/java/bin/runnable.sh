@@ -1,2 +1,2 @@
 #!/bin/bash
-python delay_for_adaptive_fcfs_signal.py $1
+java expr.trb.TrafficSignalExpr -f -rb 0.2 0 0 0 0
