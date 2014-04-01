@@ -55,3 +55,5 @@ aim4.map.GridMapUtil.setBatchManagers
 	set batch managers to each intersection
 aim4.im.v2i.batch.RoadBasedReordering
 	used by batch manager
+
+letIntersectionManagerAct -> im.act -> V2IManager.act -> basePolicy.act -> BatchModelRequestHandler.act

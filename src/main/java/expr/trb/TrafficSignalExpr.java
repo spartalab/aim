@@ -199,6 +199,9 @@ public class TrafficSignalExpr {
                                         granularity);
       autoDriverOnlySimSetup.setTrafficVolume(trafficVolumeFileName);
       autoDriverOnlySimSetup.setTrafficLevel(trafficLevel);
+      
+      autoDriverOnlySimSetup.setBatchMode(SimConfig.BATCH_MODE);
+      
       basicSimSetup2 = autoDriverOnlySimSetup;
       break;
     case APPROX_TRAFFIC_SIGNAL:

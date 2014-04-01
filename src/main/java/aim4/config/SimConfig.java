@@ -163,4 +163,9 @@ public class SimConfig {
    * enter the intersection.
    */
   public static final int HUMAN_TARDINESS = 10;
+  
+  /**
+   * whether enable batch mode
+   */
+  public static final boolean BATCH_MODE = true;
 }

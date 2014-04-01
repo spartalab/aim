@@ -129,6 +129,8 @@ public class RoadBasedReordering implements ReorderingStrategy {
 
   /**
    * {@inheritDoc}
+   * 
+   * 
    */
   @Override
   public List<IndexedProposal> getBatch(double currentTime,
@@ -194,6 +196,9 @@ public class RoadBasedReordering implements ReorderingStrategy {
 
   /**
    * Reorder a list of indexed proposals.
+   * 
+   * The reordered proposals are ordered according to their arrival lanes.
+   * Vehicles with the same arrival lanes are put together.
    *
    * @param iProposals a list of indexed proposals
    * @return a reordered list of indexed proposals

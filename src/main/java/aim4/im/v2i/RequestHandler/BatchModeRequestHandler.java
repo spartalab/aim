@@ -401,6 +401,8 @@ public class BatchModeRequestHandler implements RequestHandler {
 
   /**
    * Let the request handler to act for a given time period.
+   * 
+   * This is called by letIntersectionManagerAct.
    *
    * @param timeStep  the time period
    */
@@ -408,7 +410,9 @@ public class BatchModeRequestHandler implements RequestHandler {
   public void act(double timeStep) {
     if (Util.isDoubleEqualOrGreater(basePolicy.getCurrentTime(),
                                     nextProcessingTime)) {
-      Set<Integer> vinInBatch = processBatch();
+    	// processBatch is not transparent! Even though vinInBatch may not be used. 
+    	Set<Integer> vinInBatch = processBatch();
+    	
       if (IS_HIGHLIGHT_VEHICLE_IN_BATCH) {
         for(int vin : lastVinInBatch) {
           Debug.removeVehicleColor(vin);
@@ -431,8 +435,12 @@ public class BatchModeRequestHandler implements RequestHandler {
 
   /**
    * Process the request message.
+   * 
+   * Functioned as a general request handler.
+   * It only reject late ones, and add possible requests to the queue.
    *
-   * @param msg the request message
+   * @param msg the request message of one vehicle
+   * It could have multiple requests of one vehicle. Didn't understand.
    */
   @Override
   public void processRequestMsg(Request msg) {
@@ -442,6 +450,7 @@ public class BatchModeRequestHandler implements RequestHandler {
 
     // If the vehicle has got a reservation already, reject it.
     // TODO: think about multiple reservation of the same vehicle.
+    // Shun: Why?
     if (basePolicy.hasReservation(vin)) {
       basePolicy.sendRejectMsg(vin,
                                msg.getRequestId(),
@@ -471,7 +480,7 @@ public class BatchModeRequestHandler implements RequestHandler {
 
     // If all proposals are late (i.e., their arrival times are less than the
     // last processing time.)
-    if (isAllProposalsLate(msg)) {
+    if (areAllProposalsLate(msg)) {
       // Immediately confirm/reject the remaining proposals.
       ReserveParam reserveParam =
         basePolicy.findReserveParam(msg, filterResult.getProposals(), false);
@@ -635,7 +644,7 @@ public class BatchModeRequestHandler implements RequestHandler {
    * @return Whether or not the arrival times of all proposals are larger than
    *         or equal to the last processing time.
    */
-  private boolean isAllProposalsLate(Request msg) {
+  private boolean areAllProposalsLate(Request msg) {
     for(Proposal proposal: msg.getProposals()) {
       if (proposal.getArrivalTime() >= nextProposalDeadline) {
         return false;
