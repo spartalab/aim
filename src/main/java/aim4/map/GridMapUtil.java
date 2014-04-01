@@ -69,6 +69,8 @@ import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.Cycli
 import aim4.im.v2i.RequestHandler.BatchModeRequestHandler;
 import aim4.im.v2i.RequestHandler.FCFSRequestHandler;
 import aim4.im.v2i.RequestHandler.RequestHandler;
+import aim4.im.v2i.batch.RandomReordering;
+import aim4.im.v2i.batch.ReorderingStrategy;
 import aim4.im.v2i.batch.RoadBasedReordering;
 import aim4.im.v2i.policy.BasePolicy;
 import aim4.im.v2i.reservation.ReservationGridManager;
@@ -590,9 +592,19 @@ public class GridMapUtil {
         V2IManager im =
           new V2IManager(intersection, trajectoryModel, currentTime,
                          config, layout.getImRegistry());
+        
+        // determine how the reordering strategy works
+        ReorderingStrategy strategy;
+        if (! SimConfig.RANDOM_BATCH) {
+        	strategy = new RoadBasedReordering(processingInterval);
+        }
+        else {
+        	strategy = new RandomReordering(processingInterval);
+        }
+        
         RequestHandler rh =
           new BatchModeRequestHandler(
-            new RoadBasedReordering(processingInterval),
+            strategy,
             new BatchModeRequestHandler.RequestStatCollector());
         im.setPolicy(new BasePolicy(im, rh));
         layout.setManager(column, row, im);

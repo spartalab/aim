@@ -28,7 +28,7 @@ public class TrafficSignalExpr {
   }
   
   protected static boolean GENERATE_BASELINE = false;
-  protected static boolean SHOW_GUI = true;
+  protected static boolean SHOW_GUI = false;
   
   protected static BasicSimSetup basicSimSetup2 = null;
   protected static double trafficLevel;
@@ -82,58 +82,61 @@ public class TrafficSignalExpr {
 	boolean readRedPhase = false, readDedicatedLanes = false, readSimulationTime = false;
 	
 	for (int i = 0; i < args.length - 5; i++) {
-	String flag = args[i];
-	
-	if (readRedPhase) {
-		SimConfig.RED_PHASE_LENGTH = Double.parseDouble(flag);
-		readRedPhase = false;
-	}
-	else if (readDedicatedLanes) {
-		SimConfig.signalType = SIGNAL_TYPE.DEDICATED_LANES;
+		String flag = args[i];
 		
-		SimConfig.DEDICATED_LANES = Integer.parseInt(flag);
-		if (SimConfig.DEDICATED_LANES > 2) {
-			throw new RuntimeException("The number of dedicated lanes should be smaller than the number of total lanes!");
+		if (readRedPhase) {
+			SimConfig.RED_PHASE_LENGTH = Double.parseDouble(flag);
+			readRedPhase = false;
 		}
-		else if (SimConfig.DEDICATED_LANES < 0) {
-			throw new RuntimeException("The number of dedicated lanes should be positive!");
+		else if (readDedicatedLanes) {
+			SimConfig.signalType = SIGNAL_TYPE.DEDICATED_LANES;
+			
+			SimConfig.DEDICATED_LANES = Integer.parseInt(flag);
+			if (SimConfig.DEDICATED_LANES > 2) {
+				throw new RuntimeException("The number of dedicated lanes should be smaller than the number of total lanes!");
+			}
+			else if (SimConfig.DEDICATED_LANES < 0) {
+				throw new RuntimeException("The number of dedicated lanes should be positive!");
+			}
+			readDedicatedLanes = false;
 		}
-		readDedicatedLanes = false;
-	}
-	else if (readSimulationTime) {
-		SimConfig.TOTAL_SIMULATION_TIME = Double.parseDouble(flag);
-		readSimulationTime = false;
-	}
-	else if (flag.equals("-ng")) {
-		SHOW_GUI = false;
-	}
-	else if (flag.equals("-o")) {
-		SimConfig.signalType = SIGNAL_TYPE.ONE_LANE_VERSION;
-	}
-	else if (flag.equals("-h")) {
-		SimConfig.signalType = SIGNAL_TYPE.HUMAN_ADAPTIVE;
-	}
-	else if (flag.equals("-f")) {
-		SimConfig.FULLY_OBSERVING = true;
-	}
-	else if (flag.equals("-p")) {
-		Platoon.platooning = true;
-	}
-	else if (flag.equals("-r")) {
-		readRedPhase = true;
-	}
-	else if (flag.equals("-d")) {
-		readDedicatedLanes = true;
-	}
-	else if (flag.equals("-t")) {
-		readSimulationTime = true;
-	}
-	else if (flag.equals("-s")) {
-		SimConfig.signalType = SIGNAL_TYPE.SEMI_AUTO_EXPR;
-	}
-	else {
-		throw new RuntimeException("Unknown flag!");
-	}
+		else if (readSimulationTime) {
+			SimConfig.TOTAL_SIMULATION_TIME = Double.parseDouble(flag);
+			readSimulationTime = false;
+		}
+		else if (flag.equals("-ng")) {
+			SHOW_GUI = false;
+		}
+		else if (flag.equals("-rb")) {
+			SimConfig.RANDOM_BATCH = true;
+		}
+		else if (flag.equals("-o")) {
+			SimConfig.signalType = SIGNAL_TYPE.ONE_LANE_VERSION;
+		}
+		else if (flag.equals("-h")) {
+			SimConfig.signalType = SIGNAL_TYPE.HUMAN_ADAPTIVE;
+		}
+		else if (flag.equals("-f")) {
+			SimConfig.FULLY_OBSERVING = true;
+		}
+		else if (flag.equals("-p")) {
+			Platoon.platooning = true;
+		}
+		else if (flag.equals("-r")) {
+			readRedPhase = true;
+		}
+		else if (flag.equals("-d")) {
+			readDedicatedLanes = true;
+		}
+		else if (flag.equals("-t")) {
+			readSimulationTime = true;
+		}
+		else if (flag.equals("-s")) {
+			SimConfig.signalType = SIGNAL_TYPE.SEMI_AUTO_EXPR;
+		}
+		else {
+			throw new RuntimeException("Unknown flag!");
+		}
   }
     
 	if (SHOW_GUI) {
@@ -142,9 +145,6 @@ public class TrafficSignalExpr {
 				"BLUE   : adaptive cruise control vehicles.\n" +
 				"WHITE  : human-driven vehicles with communication devices.\n" +
 				"MAGENTA: human-driven vehicles.\n");
-	}
-	else {
-		System.out.println("Start running..");
 	}
 		
     SIM_TYPE simType = SIM_TYPE.FCFS;
@@ -276,7 +276,8 @@ public class TrafficSignalExpr {
       BasicMap map = sim.getMap();
 
       // output the collected data of DCL
-      
+
+      /*
       // keep the formats of #.## to keep consistency with python, octave, etc..
       DecimalFormat df = new DecimalFormat("0.00");
       String[] arguments = {df.format(trafficLevel).toString(),
@@ -289,9 +290,9 @@ public class TrafficSignalExpr {
       String dclOutFileName =
         "ts_dcl_" + Util.concatenate(arguments, "_").replace('/', '_')
         + Condor.CONDOR_FILE_SUFFIX + ".csv";
-      map.printDataCollectionLinesData(dclOutFileName);
+      */
       
-      System.out.printf("%s: done.\n", TrafficSignalExpr.class);
+      map.printDataCollectionLinesData();
     }
   }
 }

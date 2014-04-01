@@ -55,7 +55,7 @@ public class SimConfig {
    * The time the simulation should run.
    * If it is less than or equal to zero, the simulation will run forever.
    */
-  public static double TOTAL_SIMULATION_TIME = 1800;
+  public static double TOTAL_SIMULATION_TIME = 60;
 
   /**
    * The number of cycles per second ({@value}) at which the simulator runs.
@@ -168,4 +168,9 @@ public class SimConfig {
    * whether enable batch mode
    */
   public static final boolean BATCH_MODE = true;
+  
+  /**
+   * whether the batch mode functions randomly
+   */
+  public static boolean RANDOM_BATCH = false;
 }

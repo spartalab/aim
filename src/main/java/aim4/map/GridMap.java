@@ -648,4 +648,28 @@ public class GridMap implements BasicMap {
     outfile.close();
   }
 
+	@Override
+	public void printDataCollectionLinesData() {
+    for (DataCollectionLine line : dataCollectionLines) {
+      for (int vin : line.getAllVIN()) {
+        for(int id = 0; id < line.getTimes(vin).size(); id++) {
+        	double time = line.getTimes(vin).get(id);
+        	boolean isHuman = line.getIfHumans(vin).get(id);
+        	
+        	int realVin = vin;
+        	if (isHuman) {
+        		// for identification, add 1 at the begining
+        		// FIXME when simulation time is very long
+        		realVin += 10000;
+        	}
+        	
+          System.out.printf("%d,%.4f,%s,%s,%d,%s\n",
+                         realVin, time, line.getName(),
+                         VinRegistry.getVehicleSpecFromVIN(vin).getName(),
+                         VinRegistry.getSpawnPointFromVIN(vin).getLane().getId(),
+                         VinRegistry.getDestRoadFromVIN(vin).getName());
+        }
+      }
+    }
+	}
 }

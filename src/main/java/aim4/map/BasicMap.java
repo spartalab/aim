@@ -139,4 +139,9 @@ public interface BasicMap {
    * @param outFileName  the name of the file to which the data are outputted.
    */
   void printDataCollectionLinesData(String outFileName);
+  
+  /**
+   * Print the data directly to standard output. 
+   */
+  void printDataCollectionLinesData();
 }
