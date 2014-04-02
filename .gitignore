@@ -4,3 +4,7 @@
 *.jar
 *.war
 *.ear
+
+# Experiments results
+out.*
+err.*

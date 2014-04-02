@@ -12,8 +12,7 @@ import math
 # Variables
 #===============================================================================
 
-runningTime = 1800
-runningForOneData = 30
+sampleSize = 30
 
 baseline_filename = 'baseline.csv'
 infilename = ''
@@ -97,45 +96,32 @@ def avg_delay(delay_time, delayFunc):
 # Main
 #===============================================================================
 
-def usage():
-    print "python delay_batch_human.py human_portion traffic_level"
-
 def main():
     global baseline_filename
     global base_time
     global runningTime
-    global runningForOneData
+    global sampleSize
 
 	# delay functions
-	linearDelay = lambda x: x
-	squaredDelay = lambda x: x ** 2
-	cubeDelay = lambda x: x ** 3
-
-    if len(sys.argv) < 3:
-      usage()
+    linearDelay = lambda x: x
+    squaredDelay = lambda x: x ** 2
+    cubeDelay = lambda x: x ** 3
 
     base_time = read_baseline(baseline_filename)
 
-    human_portion = float(sys.argv[1])
-    level = float(sys.argv[2])
-    writer = csv.writer(open(type + "_delay_result_for_human_" + str(level) + ".csv", "w"))
+    #writer = csv.writer(open("result.csv", "w"))
 
     data = []
 
-    for timeForData in range(runningForOneData):
-      print "Now working on " + type + " " + str(level) + " for the " + str(timeForData) + " time"
-      os.system("java expr.trb.TrafficSignalExpr FCFS-SIGNAL 6phases .25 0.10 0.25 " + format(level, ".2f") + " " + str(human_portion) + " " + str(runningTime))
+    for sampleId in range(sampleSize):
       # get the file name of the csv
-      filename = "ts_dcl_FCFS-SIGNAL_6phases_.25_0.10_0.25_" + format(level, ".2f") + "_" + str(human_portion) + "_" + str(runningTime) + ".csv"
+      filename = "out." + str(sampleId)
       delay_time = read_delay(filename)
       avg_delay_time = avg_delay(delay_time, linearDelay)
       print "delay time is " + str(avg_delay_time)
       data.append(avg_delay_time)
     
-    row = [level] + data
-    print row
-    print "================="
-    writer.writerow(row)
+    print min(row)
 
 if __name__ == "__main__":
   main()
