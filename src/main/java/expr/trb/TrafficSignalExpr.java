@@ -28,7 +28,7 @@ public class TrafficSignalExpr {
   }
   
   protected static boolean GENERATE_BASELINE = false;
-  protected static boolean SHOW_GUI = false;
+  protected static boolean SHOW_GUI = true;
   
   protected static BasicSimSetup basicSimSetup2 = null;
   protected static double trafficLevel;
@@ -77,9 +77,12 @@ public class TrafficSignalExpr {
 			+ SimConfig.ADAPTIVE_CRUISE_PERCENTAGE > 1) {
 		throw new RuntimeException("The sum of percentages of vehicles exceeds 1.");
 	}
+	
+	// Volume file to read
+  String trafficVolumeFileName = SimConfig.phaseDir + "/AIM4Volumes.csv";
 		
 	// read options
-	boolean readRedPhase = false, readDedicatedLanes = false, readSimulationTime = false;
+	boolean readRedPhase = false, readDedicatedLanes = false, readSimulationTime = false, readVolumeFile = false;
 	
 	for (int i = 0; i < args.length - 5; i++) {
 		String flag = args[i];
@@ -104,8 +107,9 @@ public class TrafficSignalExpr {
 			SimConfig.TOTAL_SIMULATION_TIME = Double.parseDouble(flag);
 			readSimulationTime = false;
 		}
-		else if (flag.equals("-ng")) {
-			SHOW_GUI = false;
+		else if (readVolumeFile) {
+			trafficVolumeFileName = SimConfig.phaseDir + "/" + flag;
+			readVolumeFile = false;
 		}
 		else if (flag.equals("-fb")) {
 			SimConfig.BATCH_MODE = true;
@@ -115,8 +119,14 @@ public class TrafficSignalExpr {
 			SimConfig.BATCH_MODE = true;
 			SimConfig.RANDOM_BATCH = true;
 		}
+		else if (flag.equals("-v")) {
+			readVolumeFile = true;
+		}
 		// some implemented features for semi-auto
-		/*
+		/* 
+		else if (flag.equals("-ng")) {
+			SHOW_GUI = false;
+		}
 		else if (flag.equals("-o")) {
 			SimConfig.signalType = SIGNAL_TYPE.ONE_LANE_VERSION;
 		}
@@ -164,14 +174,6 @@ public class TrafficSignalExpr {
      * for source files to read
      */
     String trafficSignalPhaseFileName = SimConfig.phaseDir + "/AIM4Phases.csv";
-    
-    String trafficVolumeFileName = "";
-    if (SimConfig.signalType == SIGNAL_TYPE.DEDICATED_LANES) {
-    	trafficVolumeFileName = SimConfig.phaseDir + "/AIM4BalancedVolumes.csv";
-    }
-    else {
-    	trafficVolumeFileName = SimConfig.phaseDir + "/AIM4Volumes.csv";
-    }
     
     if (SimConfig.signalType == SIGNAL_TYPE.SEMI_AUTO_EXPR) {
     	// for the purpose of this experiment

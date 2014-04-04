@@ -107,7 +107,7 @@ public class SimConfig {
    * Allowing the assumption that the IM can also have the information of the positions of the 
    * human-driven vehicles.
    */
-  public static boolean FULLY_OBSERVING = false;
+  public static boolean FULLY_OBSERVING = true;
   
   /**
    * This deals with a specific situation in FCFS-SIGNAL.
