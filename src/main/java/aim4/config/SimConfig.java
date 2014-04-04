@@ -166,8 +166,10 @@ public class SimConfig {
   
   /**
    * whether enable batch mode
+   * 
+   * Didn't enable by default. 
    */
-  public static final boolean BATCH_MODE = true;
+  public static boolean BATCH_MODE = false;
   
   /**
    * whether the batch mode functions randomly

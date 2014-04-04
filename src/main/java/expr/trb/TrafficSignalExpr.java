@@ -107,9 +107,16 @@ public class TrafficSignalExpr {
 		else if (flag.equals("-ng")) {
 			SHOW_GUI = false;
 		}
+		else if (flag.equals("-fb")) {
+			SimConfig.BATCH_MODE = true;
+			SimConfig.RANDOM_BATCH = false;
+		}
 		else if (flag.equals("-rb")) {
+			SimConfig.BATCH_MODE = true;
 			SimConfig.RANDOM_BATCH = true;
 		}
+		// some implemented features for semi-auto
+		/*
 		else if (flag.equals("-o")) {
 			SimConfig.signalType = SIGNAL_TYPE.ONE_LANE_VERSION;
 		}
@@ -133,7 +140,7 @@ public class TrafficSignalExpr {
 		}
 		else if (flag.equals("-s")) {
 			SimConfig.signalType = SIGNAL_TYPE.SEMI_AUTO_EXPR;
-		}
+		}*/
 		else {
 			throw new RuntimeException("Unknown flag!");
 		}

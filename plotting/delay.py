@@ -114,7 +114,7 @@ def delay(filename):
 	cubeDelay = lambda x: x ** 3
 
 	delay_time = read_delay(filename)
-	avg_delay_time = avg_delay(delay_time, linearDelay)
+	avg_delay_time = avg_delay(delay_time, squaredDelay)
 	print "delay time is " + str(avg_delay_time)
 	return avg_delay_time
 
