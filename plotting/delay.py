@@ -96,32 +96,34 @@ def avg_delay(delay_time, delayFunc):
 # Main
 #===============================================================================
 
-def main():
-    global baseline_filename
-    global base_time
-    global runningTime
+def delay_batch():
     global sampleSize
-
-	# delay functions
-    linearDelay = lambda x: x
-    squaredDelay = lambda x: x ** 2
-    cubeDelay = lambda x: x ** 3
-
-    base_time = read_baseline(baseline_filename)
-
-    #writer = csv.writer(open("result.csv", "w"))
 
     data = []
 
     for sampleId in range(sampleSize):
       # get the file name of the csv
       filename = "out." + str(sampleId)
-      delay_time = read_delay(filename)
-      avg_delay_time = avg_delay(delay_time, linearDelay)
-      print "delay time is " + str(avg_delay_time)
-      data.append(avg_delay_time)
+      data.append(delay(filename))
     
-    print min(row)
+    print min(data)
+
+def delay(filename):
+	linearDelay = lambda x: x
+	squaredDelay = lambda x: x ** 2
+	cubeDelay = lambda x: x ** 3
+
+	delay_time = read_delay(filename)
+	avg_delay_time = avg_delay(delay_time, linearDelay)
+	print "delay time is " + str(avg_delay_time)
+	return avg_delay_time
 
 if __name__ == "__main__":
-  main()
+	base_time = read_baseline(baseline_filename)
+
+	#writer = csv.writer(open("result.csv", "w"))
+
+	if len(sys.argv) < 2:
+		delay_batch()
+	else:
+		delay(sys.argv[1])
