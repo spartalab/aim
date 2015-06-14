@@ -61,18 +61,18 @@ public class RoadBasedReordering implements ReorderingStrategy {
    * reordering plus the time the intersection manager takes to send
    * the confirm and reject messages.
    */
-  protected static final double COMP_COMM_DELAY = 0.05; // seconds
+  private static final double COMP_COMM_DELAY = 0.05; // seconds
 
   /**
    * The amount of lookahead (the period of time between the end time of the
    * last processed batch and the target batch).
    */
-  protected static final double LOOKAHEAD_TIME = 3.0;  // seconds
+  private static final double LOOKAHEAD_TIME = 3.0;  // seconds
 
   /**
    * The amount of time of a batch.
    */
-  protected static final double BATCH_INTERVAL = DEFAULT_PROCESSING_INTERVAL;
+  private static final double BATCH_INTERVAL = DEFAULT_PROCESSING_INTERVAL;
 
 
   /////////////////////////////////
@@ -82,18 +82,18 @@ public class RoadBasedReordering implements ReorderingStrategy {
   /**
    * The next processing time for the next batch.
    */
-  protected double nextProcessingTime;
+  private double nextProcessingTime;
 
   /**
    * The next proposal deadline for the next batch.
    */
-  protected double nextProposalDeadline;
+  private double nextProposalDeadline;
 
 
   /**
    * The time period between the processing times.
    */
-  protected double processingInterval = DEFAULT_PROCESSING_INTERVAL;
+  private double processingInterval = DEFAULT_PROCESSING_INTERVAL;
 
 
   /////////////////////////////////
@@ -129,8 +129,6 @@ public class RoadBasedReordering implements ReorderingStrategy {
 
   /**
    * {@inheritDoc}
-   * 
-   * 
    */
   @Override
   public List<IndexedProposal> getBatch(double currentTime,
@@ -172,7 +170,7 @@ public class RoadBasedReordering implements ReorderingStrategy {
    * @param queue        the message queue
    * @return the set of proposals in a batch
    */
-  protected List<IndexedProposal> selectProposals(
+  private List<IndexedProposal> selectProposals(
                                   double currentTime,
                                   NavigableSet<IndexedProposal> queue) {
     List<IndexedProposal> result = new LinkedList<IndexedProposal>();
@@ -196,14 +194,11 @@ public class RoadBasedReordering implements ReorderingStrategy {
 
   /**
    * Reorder a list of indexed proposals.
-   * 
-   * The reordered proposals are ordered according to their arrival lanes.
-   * Vehicles with the same arrival lanes are put together.
    *
    * @param iProposals a list of indexed proposals
    * @return a reordered list of indexed proposals
    */
-  protected List<IndexedProposal> reorderProposals(
+  private List<IndexedProposal> reorderProposals(
                                              List<IndexedProposal> iProposals) {
     // a partition of the proposals according to the road of the arrival lane.
     Map<Road,List<IndexedProposal>> partition =

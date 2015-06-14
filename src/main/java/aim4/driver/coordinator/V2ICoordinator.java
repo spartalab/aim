@@ -1220,14 +1220,14 @@ public class V2ICoordinator implements Coordinator {
                                  "communication time");
     case ARRIVAL_TIME_TOO_LARGE:
       System.err.printf("vin %d\n", vehicle.getVIN());
-      throw new RuntimeException("V2ICoordinator: cannot make reqest whose "+
-                                 "arrival time is too far in the future");
+      /*throw new RuntimeException("V2ICoordinator: cannot make reqest whose "+
+                                 "arrival time is too far in the future");*/
     case ARRIVAL_TIME_TOO_LATE:
       // This means that by the time our message got to IM, the arrival time
       // had already passed.  It indicates an error in the proposal
       // preparation in coordinator.
-      throw new RuntimeException("V2ICoordinator: Arrival time of request " +
-                                 "has already passed.");
+      /*throw new RuntimeException("V2ICoordinator: Arrival time of request " +
+                                 "has already passed.");*/
     default:
       System.err.printf("%s\n", msg.getReason());
       throw new RuntimeException("V2ICoordinator: Unknown reason for " +

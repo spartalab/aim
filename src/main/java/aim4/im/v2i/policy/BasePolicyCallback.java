@@ -65,10 +65,9 @@ public interface BasePolicyCallback {
    *
    * @param msg        the request message
    * @param proposals  the set of proposals
-   * @param greenLight 
    * @return the reservation parameters; null if the reservation is infeasible.
    */
-  ReserveParam findReserveParam(Request msg, List<Request.Proposal> proposals, boolean greenLight);
+  ReserveParam findReserveParam(Request msg, List<Request.Proposal> proposals);
 
   /**
    * Get the current time

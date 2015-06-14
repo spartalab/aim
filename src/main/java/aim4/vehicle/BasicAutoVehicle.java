@@ -517,19 +517,8 @@ public class BasicAutoVehicle extends BasicVehicle
   }
 
   @Override
-	public boolean isInformendHuman() {
-		// TODO Auto-generated method stub
-		return (this.vehicleType == VEHICLE_TYPE.INFORMED_HUMAN);
-	}
-
-	@Override
 	public boolean withCruiseControll() {
   	return (this.vehicleType == VEHICLE_TYPE.CRUISE);
-	}
-
-	@Override
-	public boolean withAdaptiveCruiseControll() {
-		return this.getVehicleType() == VEHICLE_TYPE.ADAPTIVE_CRUISE;
 	}
 
 
@@ -613,6 +602,12 @@ public class BasicAutoVehicle extends BasicVehicle
 		return this.frontVehicle;
 	}
 
+
+	@Override
+	public boolean withAdaptiveCruiseControll() {
+		// TODO Auto-generated method stub
+		return this.getVehicleType() == VEHICLE_TYPE.ADAPTIVE_CRUISE;
+	}
 
 	@Override
 	public void askedToStop() {

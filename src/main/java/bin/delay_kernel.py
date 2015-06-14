@@ -12,9 +12,6 @@ import math
 # Variables
 #===============================================================================
 
-runningTime = 1800
-runningForOneData = 30
-
 baseline_filename = 'baseline.csv'
 infilename = ''
 base_time = dict()
@@ -80,64 +77,60 @@ def print_traversal_time(traversal_time):
         print("[", type, ",", laneId, ",", destRoad, "] = ", t);
 
 def avg_delay(delay_time):
-    count = 0
-    total_delay = 0
-    for vin,delay in delay_time.items():
-        total_delay += delay
-        count += 1
+	count_for_human = 0
+	count_for_auto = 0
+	delay_for_human = 0
+	delay_for_auto = 0
+	
+	for vin,delay in delay_time.items():
+		if (int(vin) >= 10000):
+			count_for_human += 1
+			delay_for_human += delay
+		else:
+			count_for_auto += 1
+			delay_for_auto += delay
 
-    if count == 0:
-      # no data
-      return 0
-    else:
-      return total_delay / count
+	if (count_for_human != 0):
+	  avg_delay_human = delay_for_human / count_for_human
+	else:
+	  avg_delay_human = 0
+	  
+	if (count_for_auto != 0):
+	  avg_delay_auto = delay_for_auto / count_for_auto
+	else:
+	  avg_delay_auto = 0
+
+	if (count_for_human != 0 or count_for_auto != 0):
+	  avg_delay = (delay_for_human + delay_for_auto) / (count_for_human + count_for_auto)
+	else:
+	  avg_delay = 0
+	return [avg_delay, avg_delay_human, avg_delay_auto]
 
 #===============================================================================
 # Main
 #===============================================================================
 
-def usage():
-    print "python delay_batch_human.py human_portion traffic_level"
-
-def main():
+def operate(array, runningForOneData):
     global baseline_filename
     global base_time
-    global runningTime
-    global runningForOneData
-
-    if len(sys.argv) < 3:
-      usage()
 
     base_time = read_baseline(baseline_filename)
 
-    human_portion = float(sys.argv[1])
-    level = float(sys.argv[2])
-    writer = csv.writer(open(type + "_delay_result_for_human_" + str(level) + ".csv", "w"))
+    writer = csv.writer(open("delay_result_for_human_" + '_'.join([str(n) for n in array]) + ".csv", "w"))
+    command = 'java expr.trb.TrafficSignalExpr -d ' + ' '.join([str(n) for n in array])
+    fileName = 'ts_dcl_' + '_'.join([str(n) for n in array]) + '.csv'
 
     data = []
 
     for timeForData in range(runningForOneData):
-      print "Now working on " + type + " " + str(level) + " for the " + str(timeForData) + " time"
-      os.system("java expr.trb.TrafficSignalExpr FCFS-SIGNAL 6phases .25 0.10 0.25 " + format(level, ".2f") + " " + str(human_portion) + " " + str(runningTime))
-      # get the file name of the csv
-      filename = "ts_dcl_FCFS-SIGNAL_6phases_.25_0.10_0.25_" + format(level, ".2f") + "_" + str(human_portion) + "_" + str(runningTime) + ".csv"
-      delay_time = read_delay(filename)
+      # informative
+      print command
+      print 'for the ' + str(timeForData) + " time"
+	  
+      os.system(command)
+      delay_time = read_delay(fileName)
       avg_delay_time = avg_delay(delay_time)
       print "delay time is " + str(avg_delay_time)
-      data.append(avg_delay_time)
-    
-    row = [level] + data
-    print row
-    print "================="
-    writer.writerow(row)
 
-    # for vin,delay in delay_time.items():
-    #     print(vin, ' => ', format(delay, '.8f'))
-
-    # print(format(avg_delay(delay_time), '.4f'))
-
-    # for vin,delay in delay_time.items():
-    #     print(vin, ' => ', format(delay, '.8f'))
-
-if __name__ == "__main__":
-  main()
+      writer.writerow(avg_delay_time)
+    os.system("rm " + fileName)

@@ -235,10 +235,4 @@ public interface VehicleSimView extends VehicleDriverView {
 	 * @return
 	 */
 	boolean hasStopped();
-
-	/**
-	 * Whether it's a human-driven vehicle with communication device.
-	 * @return
-	 */
-	boolean isInformendHuman();
 }

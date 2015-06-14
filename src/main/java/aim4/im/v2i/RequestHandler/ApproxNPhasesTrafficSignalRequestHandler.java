@@ -48,7 +48,6 @@ import aim4.map.Road;
 import aim4.map.lane.Lane;
 import aim4.msg.i2v.Reject;
 import aim4.msg.v2i.Request;
-import aim4.msg.v2i.Request.Proposal;
 import aim4.sim.StatCollector;
 import aim4.util.Registry;
 import aim4.vehicle.VehicleSimView;
@@ -295,7 +294,7 @@ public class ApproxNPhasesTrafficSignalRequestHandler implements
   public static class DedicatedLanesSignalController implements SignalController {
   	private double greenTime = 15;
   	private double redIntervalTime = 2;
-  	private double redTime = SimConfig.RED_PHASE_LENGTH;
+  	private double redTime = 15;
   	private double totalTime;
   	private int rank; // No. ? to turn on green light
   	private boolean forHuman;
@@ -311,6 +310,16 @@ public class ApproxNPhasesTrafficSignalRequestHandler implements
 		@Override
 		public TrafficSignal getSignal(double time) {
 			double timeInPeriod = time % totalTime;
+			
+			if (SimConfig.DEDICATED_LANES > 0) {
+				// check whether need to change signal time
+				if (timeInPeriod < greenTime * 8 + redIntervalTime * 3) {
+					SimConfig.signalType = SIGNAL_TYPE.DEFAULT;
+				}
+				else {
+					SimConfig.signalType = SIGNAL_TYPE.TRADITIONAL;
+				}
+			}
 			
 			// after 4 green phases, or it's not a human lane, return red phase
 			if (timeInPeriod > greenTime * 8 + redIntervalTime * 3) {
@@ -430,10 +439,7 @@ public class ApproxNPhasesTrafficSignalRequestHandler implements
     if (proposals == null) {
        return;
     }
-    
-    VehicleSimView vehicle = Resources.vinToVehicles.get(vin);
-    
-    if (SimConfig.signalType == SimConfig.SIGNAL_TYPE.DEFAULT) {
+    else if (SimConfig.signalType == SimConfig.SIGNAL_TYPE.DEFAULT) {
       // if this is SIGNAL and FCFS is not applied, check whether the light allows it to go across
     	if (!canEnterFromLane(proposals.get(0).getArrivalLaneID(),
 	                          proposals.get(0).getDepartureLaneID())) {
@@ -452,131 +458,88 @@ public class ApproxNPhasesTrafficSignalRequestHandler implements
 	    				proposals.get(0).getArrivalTime())) {
     		
     		// it's now red light. it's human => wait here!
-    		if (vehicle.isHuman()){
+    		if (Resources.vinToVehicles.get(vin).isHuman()){
 		    	basePolicy.sendRejectMsg(vin, msg.getRequestId(),
 		          Reject.Reason.NO_CLEAR_PATH);
 		    	return;
     		}
 	    	
-    		// based on the assumption of whether the environment is fully observable.
-    		if (SimConfig.FULLY_OBSERVING) {
-  				// in this case, just check whether human drivers appear
-  				if (!notHinderingHumanVehicles(proposals.get(0).getArrivalLaneID(),
-	    				proposals.get(0).getDepartureLaneID(),
-	    				proposals.get(0).getArrivalTime())) {
-    				basePolicy.sendRejectMsg(vin, msg.getRequestId(),
-  		          Reject.Reason.NO_CLEAR_PATH);
-  		    	return;
-    			}
-  			}
-  			else {
-  				// in this case, the intersection is not fully observable
-  				// we need to assume there's always a human driven vehicle would appear.
-  				if (!notHinderingPotentialHumanDrivers(proposals.get(0).getArrivalLaneID(),
-	    				proposals.get(0).getDepartureLaneID(),
-	    				proposals.get(0).getArrivalTime())) {
-    				basePolicy.sendRejectMsg(vin, msg.getRequestId(),
-  		          Reject.Reason.NO_CLEAR_PATH);
-  		    	return;
-  				}
-  			}
-    		
-    		// Not going to implement it here.
-    		/*
-    		// The vehicles going straight are performing FCFS
-    		// The vehicles turning left should follow traffic signal
-    		// The vehicles turning right don't matter.
-    		if (SimConfig.signalType == SIGNAL_TYPE.SEMI_AUTO_EXPR) {
-    			if (makingLeftTurn(proposals.get(0).getArrivalLaneID(),
-    								proposals.get(0).getDepartureLaneID())) {
-    				// follow the traffic lights!
-    				if (!canEnterFromLaneAtTimepoint(proposals.get(0).getArrivalLaneID(),
+    		if (SimConfig.signalType == SimConfig.SIGNAL_TYPE.TRADITIONAL ||
+    				SimConfig.signalType == SimConfig.SIGNAL_TYPE.ONE_LANE_VERSION ||
+    				SimConfig.signalType == SimConfig.SIGNAL_TYPE.REVISED_PHASE ||
+    				SimConfig.signalType == SimConfig.SIGNAL_TYPE.RED_PHASE_ADAPTIVE) {
+    			
+    			if (SimConfig.FULLY_OBSERVING) {
+    				// in this case, just check whether human drivers appear
+    				if (!notHinderingHumanVehicles(proposals.get(0).getArrivalLaneID(),
   	    				proposals.get(0).getDepartureLaneID(),
   	    				proposals.get(0).getArrivalTime())) {
-							// If cannot enter from lane according to canEnterFromLane(), reject it.
-							basePolicy.sendRejectMsg(vin, msg.getRequestId(),
-							                 Reject.Reason.NO_CLEAR_PATH);
-							return;
+      				basePolicy.sendRejectMsg(vin, msg.getRequestId(),
+    		          Reject.Reason.NO_CLEAR_PATH);
+    		    	return;
+      			}
+    			}
+    			else {
+    				// in this case, the intersection is not fully observable
+    				// we need to assume there's always a human driven vehicle would appear.
+    				if (!notHinderingPotentialHumanDrivers(proposals.get(0).getArrivalLaneID(),
+		    				proposals.get(0).getDepartureLaneID(),
+		    				proposals.get(0).getArrivalTime())) {
+	    				basePolicy.sendRejectMsg(vin, msg.getRequestId(),
+	  		          Reject.Reason.NO_CLEAR_PATH);
+	  		    	return;
     				}
     			}
     		}
-    		*/
-    		
-    		if (SimConfig.signalType == SIGNAL_TYPE.TRADITIONAL ||
-    				SimConfig.signalType == SIGNAL_TYPE.ONE_LANE_VERSION ||
-    				SimConfig.signalType == SIGNAL_TYPE.HUMAN_ADAPTIVE ||
-    				SimConfig.signalType == SIGNAL_TYPE.RED_PHASE_ADAPTIVE ||
-    				SimConfig.signalType == SIGNAL_TYPE.DEDICATED_LANES) {
-    			
-      		// for informed human vehicles in fully observing policy
-      		if (vehicle.withCruiseControll()) {
-      			
-    				if (
-    						// if he's turning left.. Don't do it!
-    						makingLeftTurn(proposals.get(0).getArrivalLaneID(),
-    								proposals.get(0).getDepartureLaneID()) ||
-    						
-    						// if he has been told to stop,
-    	      		// he can no longer enter the intersection in the same red phase.
-    						vehicle.hasStopped()) {
-  	    					
-    					// reject
-    					basePolicy.sendRejectMsg(vin, msg.getRequestId(),
-    							Reject.Reason.NO_CLEAR_PATH);
-  	    			return;
-    				}
-      		}
-      		
-      		else if (Resources.vinToVehicles.get(vin).withAdaptiveCruiseControll()) {
-      			
-      			if (
-      					// when it cannot satisfy simple cruise control's passing condition
-      					(
-      					// if he's turning left.. Don't do it!
-    						makingLeftTurn(proposals.get(0).getArrivalLaneID(),
-    								proposals.get(0).getDepartureLaneID()) ||
-    						
-    						// if he has been told to stop,
-    	      		// he can no longer enter the intersection in the same red phase.
-    						vehicle.hasStopped()
-    						)
-    						
-    						&&
-    						// it also cannot follow the vehicle in front of it
-    						(
-      					// Make sure there is some vehicle in front of it for it to follow
-    						!canFollowFrontVehicle(Resources.vinToVehicles.get(vin))
-      				
-      					||
-      					
-    						// He cannot simply follow the vehicle in front of it in right lane,
-      					// when the vehicle in front of it is a human-driven vehicle.
-      					vehicle.getFrontVehicle() != null &&
-    						vehicle.getDriver().getDestination() !=
-    						vehicle.getFrontVehicle().getDriver().getDestination()
-      					))
-    					{
-  	  					// reject
-  	  					basePolicy.sendRejectMsg(vin, msg.getRequestId(),
-  	  							Reject.Reason.NO_CLEAR_PATH);
-  		    			return;
-    					}
-      		}    			
-    		}
 
+    		// for informed human vehicles in fully observing policy
+    		if (Resources.vinToVehicles.get(vin).withCruiseControll()) {
+    			
+  				if (
+  						// if he's turning left.. Don't do it!
+  						makingLeftTurn(proposals.get(0).getArrivalLaneID(),
+  								proposals.get(0).getDepartureLaneID()) ||
+  						
+  						// if he has been told to stop,
+  	      		// he can no longer enter the intersection in the same red phase.
+  								Resources.vinToVehicles.get(vin).hasStopped()) {
+	    					
+  					// reject
+  					basePolicy.sendRejectMsg(vin, msg.getRequestId(),
+  							Reject.Reason.NO_CLEAR_PATH);
+	    			return;
+  				}
+    		}
+    		
+    		else if (Resources.vinToVehicles.get(vin).withAdaptiveCruiseControll()) {
+    			
+    			if (
+    					// Make sure there is some vehicle in front of it for it to follow
+  						!canFollowFrontVehicle(Resources.vinToVehicles.get(vin))
+    				
+    					||
+    					
+  						// He cannot simply follow the vehicle in front of it in right lane,
+    					// when the vehicle in front of it is a human-driven vehicle.
+  						inRightLane(proposals.get(0).getArrivalLaneID(),
+  								proposals.get(0).getDepartureLaneID()) &&
+  						Resources.vinToVehicles.get(vin).getFrontVehicle().isHuman())
+  					{
+	  					// reject
+	  					basePolicy.sendRejectMsg(vin, msg.getRequestId(),
+	  							Reject.Reason.NO_CLEAR_PATH);
+		    			return;
+  					}
+    		}
+    		
     		// wow, a brave action! it's going into the intersection in red light!
     		// mark this, and we need to check if it's also safe when it exit
     		insertingTraffic = true;
     	}
     }
     
-    // whether it's green light now
-    boolean greenLight = canEnterFromLaneAtTimepoint(proposals.get(0).getArrivalLaneID(),
-				proposals.get(0).getDepartureLaneID(),
-				basePolicy.getCurrentTime());
-    
     // try to see if reservation is possible for the remaining proposals.
-    ReserveParam reserveParam = basePolicy.findReserveParam(msg, proposals, greenLight);
+    ReserveParam reserveParam = basePolicy.findReserveParam(msg, proposals);
     
     // now, check whether everything is fine when it exit
     // it would be sorry if this vehicle enters the intersection, and in the middle of his road,
@@ -798,7 +761,7 @@ public class ApproxNPhasesTrafficSignalRequestHandler implements
    */
   private boolean notHinderingHumanVehicles(int arrivalLaneID, int departureLaneID, double arrivalTime) {
 	  Map<Integer,VehicleSimView> vinToVehicles = Resources.vinToVehicles;
-		
+	  
 	  for(VehicleSimView vehicle : vinToVehicles.values()) {
 		  Driver driver = vehicle.getDriver();
 		  
@@ -821,8 +784,7 @@ public class ApproxNPhasesTrafficSignalRequestHandler implements
 		  // if it's in green light, and it's human,
 		  // then the path of this vehicle must not intersect with the human
 		  if (canGetInto) {
-			  if (vehicle.isHuman() || vehicle.isInformendHuman() 
-			  		|| vehicle.withCruiseControll() || vehicle.withAdaptiveCruiseControll()) {
+			  if (vehicle.isHuman() || vehicle.withCruiseControll() || vehicle.withAdaptiveCruiseControll()) {
 			  	Lane humanArrivalLane = driver.getCurrentLane();
 			  	
 			  	// In this simulator, we DO know where the human vehicle is going.

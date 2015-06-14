@@ -173,8 +173,6 @@ public class Canvas extends JPanel implements ComponentListener,
   private static final Color VEHICLE_SELECTED_COLOR = Color.ORANGE;
   /** The color of a human driven vehicle */
   private static final Color HUMAN_DRIVEN_COLOR = Color.MAGENTA;
-  /** The color of an informed human-driven vehicle */
-  private static final Color INFORMED_HUMAN_COLOR = Color.WHITE;
   /** The color of a human driver with cruise control on */
   private static final Color CONSTANT_HUMAN_DRIVEN_COLOR = Color.GREEN;
   /** The color of a informed human driver */
@@ -822,52 +820,46 @@ public class Canvas extends JPanel implements ComponentListener,
     // check to see if we use another color
     
   	// if it's human-driven vehicle, change color
-  	//if (SimConfig.signalType != null && SimConfig.signalType != SimConfig.SIGNAL_TYPE.DEFAULT && vehicle.getVehicleType() != VEHICLE_TYPE.AUTO) {
-		VEHICLE_TYPE type = vehicle.getVehicleType();
-		
-		if (type == VEHICLE_TYPE.AUTO) {
-			buffer.setPaint(VEHICLE_COLOR);
-		}
-		if (type == VEHICLE_TYPE.HUMAN) {
-			buffer.setPaint(HUMAN_DRIVEN_COLOR);
-		}
-		else if (type == VEHICLE_TYPE.CRUISE) {
-			buffer.setPaint(CONSTANT_HUMAN_DRIVEN_COLOR);
-		}
-		else if (type == VEHICLE_TYPE.ADAPTIVE_CRUISE) {
-			buffer.setPaint(ADAPTIVE_HUMAN_DRIVEN_COLOR);
-		}
-		else if (type == VEHICLE_TYPE.INFORMED_HUMAN) {
-			buffer.setPaint(INFORMED_HUMAN_COLOR);
-		}
-	  	else if (selectedVehicle) {
-	      buffer.setPaint(VEHICLE_SELECTED_COLOR);
-	    } else if (vehicle.getVIN() == MARVIN_VEHICLE_VIN) {
-	      buffer.setPaint(MARVIN_VEHICLE_COLOR);
-	    } else if (Debug.getVehicleColor(vehicle.getVIN()) != null) {
-	      buffer.setPaint(Debug.getVehicleColor(vehicle.getVIN()));
-	    } else if (Debug.SHOW_VEHICLE_COLOR_BY_MSG_STATE) {
-	      if (vehicle.getDriver() instanceof AutoDriver) {
-	        AutoDriver autoDriver = (AutoDriver) vehicle.getDriver();
-	        if (autoDriver.getCurrentCoordinator() instanceof V2ICoordinator) {
-	          V2ICoordinator coordinator =
-	              (V2ICoordinator) autoDriver.getCurrentCoordinator();
-	          if (coordinator.isAwaitingResponse()) {
-	            buffer.setPaint(VEHICLE_WAITING_FOR_RESPONSE_COLOR);
-	          } else if (coordinator.getReservationParameter() != null) {
-	            buffer.setPaint(VEHICLE_HAS_RESERVATION_COLOR);
-	          } else {
-	            buffer.setPaint(VEHICLE_COLOR);  // the default color
-	          }
-	        } else {
-	          buffer.setPaint(VEHICLE_COLOR);  // the default color
-	        }
-	      } else {
-	        buffer.setPaint(VEHICLE_COLOR);  // the default color
-	      }
-	    } else {
-	      buffer.setPaint(VEHICLE_COLOR);  // the default color
-	    }
+  	if (SimConfig.signalType != null && SimConfig.signalType != SimConfig.SIGNAL_TYPE.DEFAULT && vehicle.getVehicleType() != VEHICLE_TYPE.AUTO) {
+  		VEHICLE_TYPE type = vehicle.getVehicleType();
+  		
+  		if (type == VEHICLE_TYPE.HUMAN) {
+  			buffer.setPaint(HUMAN_DRIVEN_COLOR);
+  		}
+  		else if (type == VEHICLE_TYPE.CRUISE) {
+  			buffer.setPaint(CONSTANT_HUMAN_DRIVEN_COLOR);
+  		}
+  		else if (type == VEHICLE_TYPE.ADAPTIVE_CRUISE) {
+  			buffer.setPaint(ADAPTIVE_HUMAN_DRIVEN_COLOR);
+  		}
+  	} else if (selectedVehicle) {
+      buffer.setPaint(VEHICLE_SELECTED_COLOR);
+    } else if (vehicle.getVIN() == MARVIN_VEHICLE_VIN) {
+      buffer.setPaint(MARVIN_VEHICLE_COLOR);
+    } else if (Debug.getVehicleColor(vehicle.getVIN()) != null) {
+      buffer.setPaint(Debug.getVehicleColor(vehicle.getVIN()));
+    } else if (Debug.SHOW_VEHICLE_COLOR_BY_MSG_STATE) {
+      if (vehicle.getDriver() instanceof AutoDriver) {
+        AutoDriver autoDriver = (AutoDriver) vehicle.getDriver();
+        if (autoDriver.getCurrentCoordinator() instanceof V2ICoordinator) {
+          V2ICoordinator coordinator =
+              (V2ICoordinator) autoDriver.getCurrentCoordinator();
+          if (coordinator.isAwaitingResponse()) {
+            buffer.setPaint(VEHICLE_WAITING_FOR_RESPONSE_COLOR);
+          } else if (coordinator.getReservationParameter() != null) {
+            buffer.setPaint(VEHICLE_HAS_RESERVATION_COLOR);
+          } else {
+            buffer.setPaint(VEHICLE_COLOR);  // the default color
+          }
+        } else {
+          buffer.setPaint(VEHICLE_COLOR);  // the default color
+        }
+      } else {
+        buffer.setPaint(VEHICLE_COLOR);  // the default color
+      }
+    } else {
+      buffer.setPaint(VEHICLE_COLOR);  // the default color
+    }
 
   	buffer.setStroke(VEHICLE_STROKE);
   	

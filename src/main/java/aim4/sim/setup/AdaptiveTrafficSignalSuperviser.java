@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import aim4.config.Resources;
-import aim4.config.SimConfig;
 import aim4.driver.Driver;
 import aim4.driver.coordinator.V2ICoordinator.State;
 import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.SignalController;
 import aim4.map.Road;
 import aim4.map.lane.Lane;
-import aim4.util.Util;
 import aim4.vehicle.VehicleSimView;
 import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.AdaptiveSignalController;
 
@@ -24,7 +22,7 @@ import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.Adapt
  */
 public class AdaptiveTrafficSignalSuperviser {
 	private static Map<Integer, AdaptiveSignalController> signalControllers = new HashMap<Integer, AdaptiveSignalController>();
-	private static double redPhaseLength = SimConfig.RED_PHASE_LENGTH;
+	private static double redPhaseLength = 20;
 	private static double postpone = 5;
 	private static double greenPhaseLength = 15;
 	
@@ -82,22 +80,13 @@ public class AdaptiveTrafficSignalSuperviser {
 			}
 		}
 		
-		List<Lane> maxLanes;
-		
-		// no max => no human traffic => random pick one
-		if (maxEntry == null) {
-			int randKey = Util.random.nextInt(Resources.map.getLaneRegistry().getValues().size());
-			Road road = Resources.map.getRoad(Resources.map.getLaneRegistry().get(randKey));
-			maxLanes = road.getLanes();
-		}
-		else {
-			maxLanes = maxEntry.getKey().getLanes();
-		}
-		
-		for (Lane lane : maxLanes) {
-			double startTime = currentTime + postpone;
-			double endTime = currentTime + postpone + greenPhaseLength;
-			signalControllers.get(lane.getId()).prepareGreenPhase(startTime, endTime);
+		if (maxEntry != null) {
+			// only apply when there are human vehicles appearing
+			for (Lane lane : maxEntry.getKey().getLanes()) {
+				double startTime = currentTime + postpone;
+				double endTime = currentTime + postpone + greenPhaseLength;
+				signalControllers.get(lane.getId()).prepareGreenPhase(startTime, endTime);
+			}
 		}
 	}
 }

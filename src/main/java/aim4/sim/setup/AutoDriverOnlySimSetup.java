@@ -31,7 +31,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package aim4.sim.setup;
 
 import aim4.config.Debug;
-import aim4.config.Resources;
 import aim4.config.SimConfig;
 import aim4.driver.pilot.V2IPilot;
 import aim4.im.v2i.batch.RoadBasedReordering;
@@ -204,15 +203,6 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
     this.trafficType = TrafficType.FILE;
     this.trafficVolumeFileName = trafficVolumeFileName;
   }
-  
-  /**
-   * Set the batch mode to be true or false
-   * 
-   * @param mode
-   */
-  public void setBatchMode(boolean mode) {
-  	this.isBatchMode = mode;
-  }
 
   /**
    * Set the buffer sizes.
@@ -250,9 +240,6 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
                                        lanesPerRoad,
                                        medianSize,
                                        distanceBetween);
-    
-    Resources.map = layout;
-    
 /* standard */
     ReservationGridManager.Config gridConfig =
       new ReservationGridManager.Config(SimConfig.TIME_STEP,

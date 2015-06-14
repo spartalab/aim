@@ -13,9 +13,7 @@ public class SimConfig {
 		RED_PHASE_ADAPTIVE,
 		ONE_LANE_VERSION,
 		REVISED_PHASE,
-		HUMAN_ADAPTIVE,
-		DEDICATED_LANES,
-		SEMI_AUTO_EXPR
+		HUMAN_ADAPTIVE
 	}
 	
 	public static enum VOLUME_TYPE {
@@ -26,12 +24,11 @@ public class SimConfig {
 	public static enum VEHICLE_TYPE {
 		AUTO,
 		HUMAN,
-		INFORMED_HUMAN,
 		CRUISE,
 		ADAPTIVE_CRUISE
 	}
 	
-	public static double RED_PHASE_LENGTH = 5;
+	public static double RED_PHASE_LENGTH = 0;
 	
 	/**
 	 * The specific type of fcfs_signal, if it's applied
@@ -55,7 +52,7 @@ public class SimConfig {
    * The time the simulation should run.
    * If it is less than or equal to zero, the simulation will run forever.
    */
-  public static double TOTAL_SIMULATION_TIME = 60;
+  public static double TOTAL_SIMULATION_TIME = -1.0;
 
   /**
    * The number of cycles per second ({@value}) at which the simulator runs.
@@ -83,31 +80,30 @@ public class SimConfig {
    * The portion of human drivers
    * This data shoule be passed through command line for experiment.
    */
-  public static Double HUMAN_PERCENTAGE = 0.0; 
-  
-  /**
-   * THe portion of informed human drivers.
-   * They don't have cruise controls, but they have communication devices, which can be used to
-   * communicate with IM.
-   */
-  public static Double INFORMED_HUMAN_PERCENTAGE = 0.0;
+  public static double HUMAN_PERCENTAGE = 0; 
   
   /**
    * These percentage of drivers are told by the IM whether they should slow down or speed up.
    * Sure, this info is inquired only when human_percentage > 0.
    */
-  public static Double SIMPLE_CRUISE_PERCENTAGE = 0.0;
+  public static double CONSTANT_HUMAN_PERCENTAGE = 0;
   
   /**
    * The percentage of drivers who can strictly follow the vehicles in front of it.
    */
-  public static Double ADAPTIVE_CRUISE_PERCENTAGE = 0.0;
+  public static double ADAPTIVE_HUMAN_PERCENTAGE = 0;
   
   /**
    * Allowing the assumption that the IM can also have the information of the positions of the 
    * human-driven vehicles.
    */
   public static boolean FULLY_OBSERVING = true;
+  
+  /**
+   * times for human of time buffer
+   * NOT IN USE.
+   */
+  public static final double HUMAN_TARDINESS = 2;
   
   /**
    * This deals with a specific situation in FCFS-SIGNAL.
@@ -141,12 +137,6 @@ public class SimConfig {
   public static boolean MUST_STOP_BEFORE_INTERSECTION = false;
 
   /**
-   * The phase plan that is currently applied.
-   * By default, it's 6phases.
-   */
-  public static String phaseDir = "6phases";
-
-  /**
    * The distance before the stopping distance before an intersection
    * such that a vehicle can consider moving again when
    * MUST_STOP_BEFORE_INTERSECTION is true.
@@ -156,23 +146,5 @@ public class SimConfig {
   /**
    * If an adaptive vehicle find a vehicle in front of it within such distance, it can follow
    */
-  public static final double FOLLOW_DISTANTCE = 15;
-
-  /**
-   * Simulation time + HUMAN_TARDINESS is the maximum possible time for human driver to
-   * enter the intersection.
-   */
-  public static final int HUMAN_TARDINESS = 10;
-  
-  /**
-   * whether enable batch mode
-   * 
-   * Didn't enable by default. 
-   */
-  public static boolean BATCH_MODE = false;
-  
-  /**
-   * whether the batch mode functions randomly
-   */
-  public static boolean RANDOM_BATCH = false;
+	public static final double FOLLOW_DISTANTCE = 15;
 }

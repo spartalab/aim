@@ -69,8 +69,6 @@ import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.Cycli
 import aim4.im.v2i.RequestHandler.BatchModeRequestHandler;
 import aim4.im.v2i.RequestHandler.FCFSRequestHandler;
 import aim4.im.v2i.RequestHandler.RequestHandler;
-import aim4.im.v2i.batch.RandomReordering;
-import aim4.im.v2i.batch.ReorderingStrategy;
 import aim4.im.v2i.batch.RoadBasedReordering;
 import aim4.im.v2i.policy.BasePolicy;
 import aim4.im.v2i.reservation.ReservationGridManager;
@@ -236,13 +234,10 @@ public class GridMapUtil {
                                      DestinationSelector destinationSelector) {
       int n = VehicleSpecDatabase.getNumOfSpec();
       proportion = new ArrayList<Double>(n);
-      
-      // FIXME assumes balanced traffic
       double p = 1.0 / n;
       for(int i=0; i<n; i++) {
         proportion.add(p);
       }
-      
       this.destinationSelector = destinationSelector;
       Resources.destinationSelector = destinationSelector;
 
@@ -592,19 +587,9 @@ public class GridMapUtil {
         V2IManager im =
           new V2IManager(intersection, trajectoryModel, currentTime,
                          config, layout.getImRegistry());
-        
-        // determine how the reordering strategy works
-        ReorderingStrategy strategy;
-        if (! SimConfig.RANDOM_BATCH) {
-        	strategy = new RoadBasedReordering(processingInterval);
-        }
-        else {
-        	strategy = new RandomReordering(processingInterval);
-        }
-        
         RequestHandler rh =
           new BatchModeRequestHandler(
-            strategy,
+            new RoadBasedReordering(processingInterval),
             new BatchModeRequestHandler.RequestStatCollector());
         im.setPolicy(new BasePolicy(im, rh));
         layout.setManager(column, row, im);
@@ -732,16 +717,6 @@ public class GridMapUtil {
           				new OneLaneSignalController(lane.getId(), OneLaneTimeConfig.greenTime, OneLaneTimeConfig.redTime);
           		requestHandler.setSignalControllers(lane.getId(), controller);
           	}
-          	else if (SimConfig.signalType == SIGNAL_TYPE.HUMAN_ADAPTIVE) {
-          		SignalController controller = AdaptiveTrafficSignalSuperviser.addTrafficSignalController(lane);
-          		requestHandler.setSignalControllers(lane.getId(), controller);
-          	}
-          	else if (SimConfig.signalType == SIGNAL_TYPE.DEDICATED_LANES) {
-          		// the semi auto experiments require lanes to be saperated.. 
-          		DedicatedLanesSignalController controller =
-          				new DedicatedLanesSignalController(lane.getId());
-          		requestHandler.setSignalControllers(lane.getId(), controller);
-          	}
           	else if (SimConfig.signalType == SimConfig.SIGNAL_TYPE.REVISED_PHASE) {
           		RevisedPhaseSignalController controller =
           				RevisedPhaseConfig.getController(lane.getId());
@@ -752,6 +727,15 @@ public class GridMapUtil {
 	            CyclicSignalController controller =
 	                phase.calcCyclicSignalController(road);
 	            requestHandler.setSignalControllers(lane.getId(), controller);
+          	}
+          	else if (SimConfig.signalType == SIGNAL_TYPE.HUMAN_ADAPTIVE) {
+          		SignalController controller = AdaptiveTrafficSignalSuperviser.addTrafficSignalController(lane);
+          		requestHandler.setSignalControllers(lane.getId(), controller);
+          	}
+          	else if (SimConfig.DEDICATED_LANES > 0) {
+          		DedicatedLanesSignalController controller =
+          				new DedicatedLanesSignalController(lane.getId());
+          		requestHandler.setSignalControllers(lane.getId(), controller);
           	}
           	else {
 	            CyclicSignalController controller =
@@ -853,19 +837,14 @@ public class GridMapUtil {
     // check the lane spawning setting - dedicated lanes or not
     if (SimConfig.DEDICATED_LANES > 0) {
     	trafficController = new DedicatedTrafficController(
-      		trafficLevel,
-      		SimConfig.HUMAN_PERCENTAGE,
-      		SimConfig.INFORMED_HUMAN_PERCENTAGE,
-      		SimConfig.SIMPLE_CRUISE_PERCENTAGE,
-      		SimConfig.ADAPTIVE_CRUISE_PERCENTAGE);
+      		trafficLevel, SimConfig.HUMAN_PERCENTAGE, SimConfig.CONSTANT_HUMAN_PERCENTAGE);
     }
     else {
     	trafficController = new NormalTrafficController(
     			trafficLevel,
     			SimConfig.HUMAN_PERCENTAGE,
-    			SimConfig.INFORMED_HUMAN_PERCENTAGE,
-    			SimConfig.SIMPLE_CRUISE_PERCENTAGE,
-    			SimConfig.ADAPTIVE_CRUISE_PERCENTAGE,
+    			SimConfig.CONSTANT_HUMAN_PERCENTAGE,
+    			SimConfig.ADAPTIVE_HUMAN_PERCENTAGE,
     			trafficVolume);
     }
     

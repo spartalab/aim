@@ -20,30 +20,24 @@ import aim4.util.Util;
  */
 public class DedicatedTrafficController extends LaneTrafficController {
 	
+	// FIXME the percentage would be incorrect
 	public DedicatedTrafficController(double trafficLevel,
-			double human, double ih, double simple, double adaptive) {
+			double humanPercentage, double ihdPercentage) {
 		super();
 		
 		int humanOccupation = SimConfig.DEDICATED_LANES;
 		
-		double humanLaneLevel = trafficLevel * human
+		double humanLaneLevel = trafficLevel * humanPercentage * (1 - ihdPercentage)
 				* 12 / (4 * humanOccupation);
-		double nonHumanLaneLevel = trafficLevel * (1 - human)
+		double nonHumanLaneLevel = trafficLevel * (1 - humanPercentage * (1 - ihdPercentage))
 				* 12 / (4 * (laneNum / 4 - humanOccupation));
 		
 		for (int laneId = 0; laneId < laneNum; laneId++) {
 			if (laneId % 3 < SimConfig.DEDICATED_LANES) {
-				trafficSpawnInfoList.put(laneId, new LaneInfo(humanLaneLevel, 1, 0, 0, 0));
+				trafficSpawnInfoList.put(laneId, new LaneInfo(humanLaneLevel, 1, 0, 0));
 			}
 			else {
-				double nonHumanSum = 1 - human;
-				if (nonHumanSum < 0.001) {
-					// no non-human vehicles
-					trafficSpawnInfoList.put(laneId, new LaneInfo(nonHumanLaneLevel, 0, 0, 0, 0));
-				}
-				else {
-					trafficSpawnInfoList.put(laneId, new LaneInfo(nonHumanLaneLevel, 0, ih / nonHumanSum, simple / nonHumanSum, adaptive / nonHumanSum));
-				}
+				trafficSpawnInfoList.put(laneId, new LaneInfo(nonHumanLaneLevel, humanPercentage * ihdPercentage, 1, 0));
 			}
 		}
 	}

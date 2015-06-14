@@ -556,7 +556,7 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
    */
   @Override
   public ReserveParam findReserveParam(Request msg,
-                                       List<Request.Proposal> proposals, boolean green) {
+                                       List<Request.Proposal> proposals) {
     int vin = msg.getVin();
     VehicleSimView vehicle = Resources.vinToVehicles.get(vin);
     double exitTime = -1; // find a initial value; the time it would exit
@@ -566,7 +566,6 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
     ReservationGridManager.Plan gridPlan = null;
     AczManager aczManager = null;
     AczManager.Plan aczPlan = null;
-    boolean accelerating = true;
 
     for(Request.Proposal proposal : proposals) {
       ReservationGridManager.Query gridQuery =
@@ -577,11 +576,11 @@ public final class BasePolicy implements Policy, ExtendedBasePolicyCallback {
                                          proposal.getDepartureLaneID(),
                                          msg.getSpec(),
                                          proposal.getMaximumTurnVelocity(),
-                                         accelerating);
+                                         true);
       VEHICLE_TYPE vehicleType = vehicle.getVehicleType();
-      gridPlan = im.getReservationGridManager().query(gridQuery, vehicleType, green);
+      gridPlan = im.getReservationGridManager().query(gridQuery, vehicleType);
       if (gridPlan != null) {
-      	exitTime = gridPlan.getExitTime();
+    	exitTime = gridPlan.getExitTime();
         double stopDist =
           VehicleUtil.calcDistanceToStop(gridPlan.getExitVelocity(),
                                          msg.getSpec().getMaxDeceleration());

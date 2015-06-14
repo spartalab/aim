@@ -1,0 +1,11 @@
+Universe = vanilla
+Executable = /bin/sh
++ProjectDescription = "AIM4"
++Project = "AI_ROBOTICS"
+Error      = fcfs-sig.err
+Log        = fcfs-sig.log
+
+num_of_processes=30
+
+Arguments = runnable.sh $(Process)
+Queue $(num_of_processes)
