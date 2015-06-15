@@ -12,7 +12,6 @@ public class RandomReordering extends RoadBasedReordering implements ReorderingS
 		super(processingInterval);
 	}
 
-	@Override
 	protected List<IndexedProposal> reorderProposals(
       List<IndexedProposal> iProposals) {
 		List<IndexedProposal> result = new LinkedList<IndexedProposal>(iProposals);

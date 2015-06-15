@@ -67,7 +67,7 @@ public class TrafficSignalExpr {
 		String humanPercentage = args[args.length - 3];
 		String simpleCruiseControl = args[args.length - 2];
 		String adaptiveCruiseControl = args[args.length - 1];
-		String simulationTime = "100"; // default simulation time
+		String simulationTime = "1800"; // default simulation time
 		
 		boolean readRedPhase = false;
 		
