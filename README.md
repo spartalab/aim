@@ -4,9 +4,6 @@ SemiAIM Codebase
 This is revised from the AIM codebase authored by Tsz-Chiu Au, available here:
 http://www.cs.utexas.edu/~aim/
 
-Make sure you have Java and Maven installed. To install Maven in Ubuntu, run
-`sudo apt-get install maven`.
-
 Run the following commands at the first level.
 
 ```
