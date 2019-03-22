@@ -235,4 +235,6 @@ public interface VehicleSimView extends VehicleDriverView {
 	 * @return
 	 */
 	boolean hasStopped();
+
+    public double getSpawnTime();
 }

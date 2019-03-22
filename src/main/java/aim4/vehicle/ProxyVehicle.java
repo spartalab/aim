@@ -414,6 +414,11 @@ public class ProxyVehicle extends BasicAutoVehicle
     return request;
   }
 
+    @Override
+    public double getSpawnTime() {
+        return 0;
+    }
+
 }
 
 

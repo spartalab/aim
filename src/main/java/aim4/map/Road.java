@@ -53,6 +53,13 @@ public class Road {
   private Road dual;
   /** The Layout of which the Road is a part. */
   private BasicMap map;
+  
+  private int index;
+  private static int roadCount = 0;
+
+    public int getIndex() {
+        return index;
+    }
 
   /////////////////////////////////
   // CLASS CONSTRUCTORS
@@ -79,6 +86,7 @@ public class Road {
     this.name = name;
     this.lanes = new ArrayList<Lane>(lanes);
     this.map = map;
+    this.index = roadCount++;
     // Now set up the proper relationships between them
     if(lanes.size() > 1) {
       for(int i = 0; i < lanes.size() - 1; i++) {

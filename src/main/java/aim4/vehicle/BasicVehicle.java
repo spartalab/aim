@@ -365,6 +365,13 @@ public abstract class BasicVehicle implements VehicleSimView {
 
   }
 
+    /**
+   * {@inheritDoc}
+   */
+  @Override
+  public double getSpawnTime() {
+    return spawnTime;
+  }
 
   /**
    * The track movement.
@@ -1106,6 +1113,9 @@ public abstract class BasicVehicle implements VehicleSimView {
 
   /** The current time */
   protected double currentTime;
+  
+   /** The current time */
+  protected double spawnTime;
 
 
   /////////////////////////////////
@@ -1194,7 +1204,7 @@ public abstract class BasicVehicle implements VehicleSimView {
 
     // Update all the gauges and memos
     updateGaugesAndMemos();
-
+    this.spawnTime = currentTime;
     this.currentTime = currentTime;
     clock.record(currentTime);
   }

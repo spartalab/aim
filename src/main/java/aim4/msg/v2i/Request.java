@@ -164,7 +164,6 @@ public class Request extends V2IMessage {
     public double getMaximumTurnVelocity() {
       return maximumTurnVelocity;
     }
-
     // ///////////////////////////////
     // FOR DEBUG
     // ///////////////////////////////

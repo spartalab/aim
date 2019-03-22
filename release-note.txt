@@ -1,9 +1,0 @@
-Version 1.0.2
-- Updated the user guide and the installation guide.
-
-Version 1.0.1
-- Added copyright statement.
-- Fixed a bug in the traffic signal mode in the standalone executable.
-
-Version 1.0.0
-- Initial release

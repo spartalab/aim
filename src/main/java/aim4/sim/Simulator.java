@@ -124,4 +124,7 @@ public interface Simulator {
    * @return number of vehicles generated
    */
   int getGeneratedVehiclesNum();
+  
+  double getAvgTravelTime();
+  double getTimeSTD();
 }

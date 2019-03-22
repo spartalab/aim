@@ -225,6 +225,11 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
     this.isEdgeTileTimeBufferEnabled = isEdgeTileTimeBufferEnabled;
     this.granularity = granularity;
   }
+  
+  
+    public void setInternalTileTimeBufferSize(double internalTileTimeBufferSize) {
+        this.internalTileTimeBufferSize = internalTileTimeBufferSize;
+    }
 
   /**
    * {@inheritDoc}

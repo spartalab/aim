@@ -32,8 +32,11 @@ public class NormalTrafficController extends LaneTrafficController {
 		}
 		
 		for (int laneId = 0; laneId < laneNum; laneId++) {
-			double thisLevel = trafficLevel * laneNum * trafficVolume.getTotalVolume(laneId)/ totalVolume;
-			trafficSpawnInfoList.put(laneId, new LaneInfo(thisLevel, humanPercentage, cstPercentage, adhPercentage));
+                    //Shun's code: less turning left
+			//double thisLevel = trafficLevel * laneNum * trafficVolume.getTotalVolume(laneId)/ totalVolume;
+                    //Guni's code: same number of vehicles in each lane
+                        double thisLevel = trafficLevel;
+ 			trafficSpawnInfoList.put(laneId, new LaneInfo(thisLevel, humanPercentage, cstPercentage, adhPercentage));
 		}
 	}
 }

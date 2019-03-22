@@ -46,6 +46,7 @@ import aim4.config.Debug;
 import aim4.map.Road;
 import aim4.map.lane.Lane;
 import aim4.util.GeomMath;
+import expr.trb.DesignatedLanesExpr;
 
 
 /**
@@ -109,6 +110,57 @@ public class RoadBasedTrackModel implements TrackModel {
         return Double.compare(entry.distance(l1Exit), entry.distance(l2Exit));
       }
   }
+
+      /////////////////////////////////
+    // NESTED CLASSES
+    /////////////////////////////////
+    /**
+     * A comparator to sort Lanes by their index in the road. Gives higher
+     * preference to staying on the current lane. For example, if the car is
+     * currently on the 2nd lane it will try to stay in this lane, if not
+     * possible it will try adjacent lanes (1 or 3).
+     */
+    private class SimilarLaneComparator implements Comparator<Lane> {
+
+        /**
+         * The index of the entering lane within the entering road.
+         */
+        private int enterIndex;
+
+        /**
+         * Class constructor that takes the lane at which a vehicle will enter
+         * the intersection and constructs a comparator to compare the
+         * difference in index from the exiting lane
+         *
+         * @param entryLane the Lane from whose index we want to compare the
+         * index difference
+         */
+        public SimilarLaneComparator(Lane entryLane) {
+            enterIndex = entryLane.getIndexInRoad();
+        }
+
+        /**
+         * Given two lanes, compare them based on their index.
+         *
+         * @param l1 the first Lane
+         * @param l2 the second Lane
+         * @return -1, 0, or 1, depending on whether the index of the entering
+         * lane <code>l1</code> is nearer, the same distance, or further from
+         * the index of the exit point of <code>l2</code>, respectively
+         */
+        @Override
+        public int compare(Lane l1, Lane l2) {
+            // if(l1.getIndexInRoad() == 24 || l2.getIndexInRoad() == 24)
+            //     System.out.print(l2);
+            if (!intersection.isExitedBy(l1) || !intersection.isExitedBy(l2)) {
+                throw new IllegalArgumentException("Both lanes being compared"
+                        + " must exit this intersection!");
+            }
+            int proxl1 = Math.abs(l1.getIndexInRoad() - enterIndex);
+            int proxl2 = Math.abs(l2.getIndexInRoad() - enterIndex);
+            return Integer.compare(proxl1, proxl2);
+        }
+    }
 
 
   /////////////////////////////////
@@ -190,7 +242,14 @@ public class RoadBasedTrackModel implements TrackModel {
         List<Lane> exitLanes = new ArrayList<Lane>(exitRoad.getLanes());
         // Now we should have all the lanes that exit in e's Road
         // Sort them by distance of exit point to entrance point of entryLane
-        Comparator<Lane> c = new ExitPointDistanceComparator(entryLane);
+        Comparator<Lane> c;
+                if (DesignatedLanesExpr.STAY_IN_SAME_LANE) {
+                    // Sort them by index similarity (prefer to stay on or near current lane)        
+                    c = new SimilarLaneComparator(entryLane);
+                } else {
+                    // Sort them by distance of exit point to entrance point of entryLane        
+                    c = new ExitPointDistanceComparator(entryLane);
+                }
         Collections.sort(exitLanes, c);
         // Now put them in the list for entryLane
         exitPriorities.put(exitRoad, exitLanes);

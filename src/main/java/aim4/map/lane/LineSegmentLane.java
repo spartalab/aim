@@ -30,13 +30,17 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package aim4.map.lane;
 
+import aim4.config.Debug;
+import aim4.map.LaneSegment;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.Shape;
 
 import aim4.map.Road;
+import aim4.map.SpawnPoint;
 import aim4.util.GeomMath;
+import java.util.List;
 
 /**
  * A lane class that can be represented by a directed line segment.
@@ -98,7 +102,6 @@ public class LineSegmentLane extends AbstractLane {
    */
   private Line2D rightBorder;
 
-
   /////////////////////////////////
   // CONSTRUCTORS
   /////////////////////////////////
@@ -110,7 +113,7 @@ public class LineSegmentLane extends AbstractLane {
    * @param width      the width of the Lane, in meters
    * @param speedLimit the speed limit of the Lane, in meters per second
    */
-  public LineSegmentLane(Line2D line, double width, double speedLimit) {
+  public LineSegmentLane(Line2D line, double width, double speedLimit, int segmentsCount) {
     super(speedLimit);
 
     this.line = line;
@@ -121,6 +124,10 @@ public class LineSegmentLane extends AbstractLane {
     length = Math.sqrt(squaredLaneLength);
     heading = GeomMath.canonicalAngle(Math.atan2(line.getY2() - line.getY1(),
                                                  line.getX2() - line.getX1()));
+    this.segments = new LaneSegment[segmentsCount];
+      for (int i = 0; i < segmentsCount; i++) {
+          this.segments[i] = new LaneSegment();
+      }
     laneShape = calculateLaneShape();
     // Figure out the lines that represent the left and right borders.
     double xDifferential = halfWidth * Math.cos(heading + Math.PI/2);
@@ -144,9 +151,9 @@ public class LineSegmentLane extends AbstractLane {
    * @param speedLimit the speed limit of the Lane, in meters per second
    */
   public LineSegmentLane(Point2D p1, Point2D p2,
-                         double width, double speedLimit) {
+                         double width, double speedLimit, int segments) {
     // Call the previous version after making a Line...
-    this(new Line2D.Double(p1, p2), width, speedLimit);
+    this(new Line2D.Double(p1, p2), width, speedLimit, segments);
   }
 
   /**
@@ -160,9 +167,9 @@ public class LineSegmentLane extends AbstractLane {
    * @param speedLimit the speed limit of the Lane, in meters per second
    */
   public LineSegmentLane(double x1, double y1, double x2, double y2,
-                         double width, double speedLimit) {
+                         double width, double speedLimit, int segments) {
     // Call the first version after making a Line...
-    this(new Line2D.Double(x1, y1, x2, y2), width, speedLimit);
+    this(new Line2D.Double(x1, y1, x2, y2), width, speedLimit, segments);
   }
 
 
@@ -462,5 +469,18 @@ public class LineSegmentLane extends AbstractLane {
                   (float) (line.getY1() - yDifferential));
     result.closePath();
     return result;
+  }
+  
+  @Override
+  public int getIndexInRoad(){
+      Road currentRoad = Debug.currentMap.getRoad(this);
+      List<Lane> allLanes = currentRoad.getLanes();
+      for (int i = 0; i < allLanes.size(); i++) {
+          if(this.getId() == allLanes.get(i).getId()){
+              return i;
+          }
+      }
+      assert false : "No such lane in road at LineSegmentLane -> getIndexInRoad()";
+      return -1;
   }
 }

@@ -1,0 +1,13 @@
+Approach,Movement,Lane 1, Lane 2, Lane 3,Lane 4,Lane 5,Lane 6
+NB,Left,0,0,0,0,0,0
+NB,Through,0,0,0,0,0,0
+NB,Right,0,0,0,0,0,0
+SB,Left,0,0,0,0,0,0
+SB,Through,0,0,0,0,0,0
+SB,Right,0,0,0,0,0,0
+EB,Left,0,0,0,0,0,0
+EB,Through,0,0,0,0,0,0
+EB,Right,0,0,0,0,0,0
+WB,Left,0,0,0,0,0,0
+WB,Through,0,0,0,0,0,0
+WB,Right,0,0,0,0,0,0

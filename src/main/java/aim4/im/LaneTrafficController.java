@@ -50,6 +50,7 @@ public abstract class LaneTrafficController {
 		protected double ihdPercent;
 		protected double humanPercent;
 		protected double adhPercent;
+                protected SpawnCase next;
 		
 		LaneInfo(double trafficLevel, double humanPercentage, double ihdPercentage, double adhPercentage) {
 			double timeStep = SimConfig.SPAWN_TIME_STEP;
@@ -57,7 +58,6 @@ public abstract class LaneTrafficController {
 			humanPercent = timeStep * trafficLevel * humanPercentage;
 			ihdPercent = timeStep * trafficLevel * ihdPercentage;
 			adhPercent = timeStep * trafficLevel * adhPercentage;
-			
 			autoPercent = timeStep * trafficLevel * (1 - humanPercentage - ihdPercentage - adhPercentage);
 		}
 		

@@ -91,6 +91,10 @@ import aim4.sim.Simulator;
 import aim4.util.Util;
 import aim4.vehicle.AutoVehicleSimView;
 import aim4.vehicle.VehicleSimView;
+import static expr.trb.TrafficSignalExpr.AVtotal;
+import static expr.trb.TrafficSignalExpr.AVtotalTime;
+import static expr.trb.TrafficSignalExpr.Htotal;
+import static expr.trb.TrafficSignalExpr.HtotalTime;
 import java.io.InputStream;
 
 /**
@@ -1035,6 +1039,12 @@ public class Canvas extends JPanel implements ComponentListener,
     buffer.drawString(String.format("%.2fs", currentTime),
         SIMULATION_TIME_LOCATION_X,
         SIMULATION_TIME_LOCATION_Y);
+    buffer.drawString(String.format("H: %.2fs", HtotalTime / Htotal),
+        SIMULATION_TIME_LOCATION_X,
+        SIMULATION_TIME_LOCATION_Y + 20);
+    buffer.drawString(String.format("AV: %.2fs", AVtotalTime / AVtotal),
+        SIMULATION_TIME_LOCATION_X,
+        SIMULATION_TIME_LOCATION_Y + 40);
     // Restore the original transform.
     buffer.setTransform(tf);
   }

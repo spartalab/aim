@@ -84,7 +84,9 @@ public class Reject extends I2VMessage {
      * wait to transmit again (i.e., the vehicle cannot send the request before
      * the next allowed communication time in the previous reject messages.)
      */
-    BEFORE_NEXT_ALLOWED_COMM
+    BEFORE_NEXT_ALLOWED_COMM,
+    
+    DROPPED_MESSAGE
   };
 
   /////////////////////////////////

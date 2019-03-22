@@ -145,7 +145,7 @@ public class SpawnPoint {
      * @return the list of spawn spec generated in this time step.
      */
     List<SpawnSpec> act(SpawnPoint spawnPoint, double timeStep);
-    
+    SpawnSpec act(SpawnPoint spawnPoint, double timeStep, VEHICLE_TYPE vehicleType, Road destinationRoad);
     /**
      * To inform the spawning point that the vehicle is successfully generated.
      */
@@ -255,9 +255,19 @@ public class SpawnPoint {
     currentTime += timeStep;
     return spawnSpecs;
   }
+  
+  public void advance(double timeStep) {
+    currentTime += timeStep;
+  }
+  
+  public SpawnSpec act(double timeStep, VEHICLE_TYPE vehicleType, Road destinationRoad) {
+    assert vehicleSpecChooser != null;
+    return vehicleSpecChooser.act(this, timeStep, vehicleType, destinationRoad);
+  }
 
   public void vehicleGenerated() {
   	vehicleSpecChooser.vehicleGenerated();
+        getLane().enter(0);
   }
   /////////////////////////////////
   // PUBLIC METHODS

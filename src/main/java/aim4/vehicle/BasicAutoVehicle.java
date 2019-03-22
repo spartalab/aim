@@ -619,4 +619,5 @@ public class BasicAutoVehicle extends BasicVehicle
 		return this.stopped;
 	}
 
+
 }

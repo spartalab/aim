@@ -32,6 +32,7 @@ package aim4;
 
 import aim4.gui.Viewer;
 import aim4.sim.setup.BasicSimSetup;
+import expr.trb.TrafficSignalExpr;
 
 /**
  * The default main class to show the GUI.
@@ -54,6 +55,7 @@ public class Main {
 
     // create the basic setup
 
+      //TrafficSignalExpr.main2(args);
     BasicSimSetup simSetup
       = new BasicSimSetup(1, // columns
                           1, // rows

@@ -34,7 +34,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.Shape;
 
-import aim4.map.Road;
+import aim4.map.SpawnPoint;
 
 /**
  * This is a base class for all lanes. Creates an ID system for lanes such
@@ -54,6 +54,16 @@ public interface Lane {
    * @return the ID number of this lane
    */
   int getId();
+  
+  int getNumberOfCarsOnLane(int segment);
+  
+  SpawnPoint getSpawnPoint();
+  
+  void enter(int segment);
+  
+  void exit(int segment);
+  
+  void setSpawnPoint(SpawnPoint spawnPoint);
 
   /**
    * Set the unique ID number of this Lane.
@@ -421,4 +431,11 @@ public interface Lane {
    *          this Lane, or <code>null</code> if it doesn't intersect
    */
   Point2D rightIntersectionPoint(Line2D l);
+  
+  /**
+   * Get the index of this lane in the given road
+   *
+   * @return The index of this lane in the road. 0 is the leftmost.
+   */
+  int getIndexInRoad();
 }

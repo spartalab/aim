@@ -39,6 +39,7 @@ import aim4.map.GridMap;
 import aim4.map.GridMapUtil;
 import aim4.sim.AutoDriverOnlySimulator;
 import aim4.sim.Simulator;
+import expr.trb.DesignatedLanesExpr;
 
 /**
  * The setup for the simulator in which the intersections are controlled
@@ -118,9 +119,9 @@ public class ApproxNPhasesTrafficSignalSimSetup extends BasicSimSetup
     ReservationGridManager.Config gridConfig =
       new ReservationGridManager.Config(SimConfig.TIME_STEP,
                                         SimConfig.GRID_TIME_STEP,
-                                        0.1,
-                                        0.15,
-                                        0.15,
+                                        DesignatedLanesExpr.SAFETY_BUFFER_METERS,
+                                        DesignatedLanesExpr.SAFETY_BUFFER_SECONDS,
+                                        DesignatedLanesExpr.SAFETY_BUFFER_SECONDS,
                                         true,
                                         1.0);
 

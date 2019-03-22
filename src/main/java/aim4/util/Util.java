@@ -59,7 +59,11 @@ public class Util {
   // public static final long randSeed = -6397397808339168785L;
 
   /** The global random number generator */
-  public static final Random random = new Random(randSeed);
+  public static Random random = new Random(randSeed);
+  
+  public static void resetRand(int seed){
+      random = new Random(seed);
+  }
 
   static {
     if (Condor.IS_CONDOR_EXIST) {

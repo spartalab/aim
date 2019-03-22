@@ -1210,6 +1210,9 @@ public class V2ICoordinator implements Coordinator {
       // normal reason for rejection, just go back to the planning state.
       goBackToPlanningStateUponRejection(msg);
       break;
+    case DROPPED_MESSAGE:
+      goBackToPlanningStateUponRejection(msg);
+      break; 
     case CONFIRMED_ANOTHER_REQUEST:
       // TODO: RETHINK WHAT WE SHOULD DO
       goBackToPlanningStateUponRejection(msg);
