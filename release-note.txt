@@ -1,3 +1,6 @@
+Version 1.0.4
+- Fixed collisions between vehicles.
+
 Version 1.0.3
 - Fixed a bug in TiledArea.java.
 

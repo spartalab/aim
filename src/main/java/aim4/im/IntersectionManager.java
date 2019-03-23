@@ -212,6 +212,21 @@ public class IntersectionManager {
     return intersection.getArea().intersects(rectangle);
   }
 
+  /**
+   * Determine whether the given point intersects the Area governed
+   * by this IntersectionManager.
+   *
+   * @param point     the Point
+   * @return          whether the point intersects the Area governed by
+   *                  this IntersectionManager
+   */
+  public boolean intersectsPoint(Point2D point) {
+    Rectangle2D intersectionBounds = intersection.getArea().getBounds2D();
+    return (intersectionBounds.getX() < point.getX() && intersectionBounds.getY() < point.getY() &&
+            intersectionBounds.getX() + intersectionBounds.getWidth() > point.getX()  &&
+            intersectionBounds.getY() + intersectionBounds.getHeight() > point.getY());
+  }
+
 
   /**
    * Given an arrival Lane and a departure Road, get an ordered List of Lanes

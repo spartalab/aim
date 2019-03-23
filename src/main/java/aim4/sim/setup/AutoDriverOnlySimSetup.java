@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package aim4.sim.setup;
 
+import aim4.config.Constants;
 import aim4.config.Debug;
 import aim4.config.SimConfig;
 import aim4.driver.pilot.V2IPilot;
@@ -39,6 +40,10 @@ import aim4.map.GridMap;
 import aim4.map.GridMapUtil;
 import aim4.sim.AutoDriverOnlySimulator;
 import aim4.sim.Simulator;
+import javafx.util.Pair;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The setup for the simulator in which all vehicles are autonomous.
@@ -78,7 +83,7 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
   /** The time buffer for internal tiles */
   private double internalTileTimeBufferSize = 0.1;
   /** The time buffer for edge tiles */
-  private double edgeTileTimeBufferSize = 0.25;
+  private double edgeTileTimeBufferSize;
   /** Whether the edge time buffer is enabled */
   private boolean isEdgeTileTimeBufferEnabled = true;
   /** The granularity of the reservation grid */
@@ -239,7 +244,21 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
                                        lanesPerRoad,
                                        medianSize,
                                        distanceBetween);
-/* standard */
+    // Set the edge tile time buffer based on the maximum speed limit
+    try {
+      edgeTileTimeBufferSize = Constants.getEdgeTileTimeBufferBasedOnVelocity(speedLimit);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    // Set the minimum following distance based on the maximum speed limit
+    try {
+      V2IPilot.MINIMUM_FOLLOWING_DISTANCE = Constants.getMinimumFollowingDistanceBasedOnVelocity(speedLimit);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    /* standard */
     ReservationGridManager.Config gridConfig =
       new ReservationGridManager.Config(SimConfig.TIME_STEP,
                                         SimConfig.GRID_TIME_STEP,

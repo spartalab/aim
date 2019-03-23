@@ -34,24 +34,14 @@ import java.awt.Color;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Queue;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 import aim4.config.Debug;
 import aim4.config.DebugPoint;
 import aim4.driver.AutoDriver;
 import aim4.driver.DriverSimView;
 import aim4.driver.ProxyDriver;
+import aim4.driver.pilot.V2IPilot;
 import aim4.im.IntersectionManager;
 import aim4.im.v2i.V2IManager;
 import aim4.map.DataCollectionLine;
@@ -62,13 +52,7 @@ import aim4.map.SpawnPoint.SpawnSpec;
 import aim4.map.lane.Lane;
 import aim4.msg.i2v.I2VMessage;
 import aim4.msg.v2i.V2IMessage;
-import aim4.vehicle.AutoVehicleSimView;
-import aim4.vehicle.BasicAutoVehicle;
-import aim4.vehicle.HumanDrivenVehicleSimView;
-import aim4.vehicle.ProxyVehicleSimView;
-import aim4.vehicle.VehicleSpec;
-import aim4.vehicle.VinRegistry;
-import aim4.vehicle.VehicleSimView;
+import aim4.vehicle.*;
 
 /**
  * The autonomous drivers only simulator.
@@ -179,6 +163,10 @@ public class AutoDriverOnlySimulator implements Simulator {
       System.err.printf("------SIM:moveVehicles---------------\n");
     }
     moveVehicles(timeStep);
+    if (Debug.CHECK_FOR_COLLISIONS) {
+      System.err.printf("------SIM:checkForCollisions---------------\n");
+      checkForCollisions();
+    }
     if (Debug.PRINT_SIMULATOR_STAGE) {
       System.err.printf("------SIM:cleanUpCompletedVehicles---------------\n");
     }
@@ -188,6 +176,25 @@ public class AutoDriverOnlySimulator implements Simulator {
     checkClocks();
 
     return new AutoDriverOnlySimStepResult(completedVINs);
+  }
+
+  /**
+   * Detects collisions by checking if any two vehicles overlap.
+   */
+  private void checkForCollisions() {
+    Integer[] keys = vinToVehicles.keySet().toArray(new Integer[]{});
+    for(int i = 0; i < keys.length - 1; i++) { //-1 because we won't compare the last element with anything.
+      Integer[] keysToCompare = Arrays.copyOfRange(keys, i + 1, keys.length);
+      VehicleSimView vehicle1 = vinToVehicles.get(keys[i]);
+      for(int j = 0; j < keysToCompare.length; j++) {
+        VehicleSimView vehicle2 = vinToVehicles.get(keysToCompare[j]);
+        if(VehicleUtil.collision(vehicle1, vehicle2)) {
+          throw new RuntimeException(String.format("There was a collision between vehicles %d and %d",
+                  vehicle1.getVIN(),
+                  vehicle2.getVIN()));
+        }
+      }
+    }
   }
 
   /////////////////////////////////
@@ -317,11 +324,36 @@ public class AutoDriverOnlySimulator implements Simulator {
       if (!spawnSpecs.isEmpty()) {
         if (canSpawnVehicle(spawnPoint)) {
           for(SpawnSpec spawnSpec : spawnSpecs) {
-            VehicleSimView vehicle = makeVehicle(spawnPoint, spawnSpec);
-            VinRegistry.registerVehicle(vehicle); // Get vehicle a VIN number
-            vinToVehicles.put(vehicle.getVIN(), vehicle);
-            break; // only handle the first spawn vehicle
-                   // TODO: need to fix this
+
+            // First check if there is enough space to spawn a new vehicle and still have time to stop before reaching it
+            Lane lane = spawnPoint.getLane();
+            Map<Lane,SortedMap<Double,VehicleSimView>> vehicleLists = computeVehicleLists();
+
+            // If there are some vehicles on this lane
+            if (!vehicleLists.isEmpty() && !vehicleLists.get(lane).isEmpty()){
+                // Determine whether there is enough distance to stop if spawned with the speed limit
+                double initVelocity = Math.min(spawnSpec.getVehicleSpec().getMaxVelocity(), lane.getSpeedLimit());
+                // The closest vehicle will be the first one on the list
+                double distanceTillNextVehicle = vehicleLists.get(lane).firstKey();
+                double stoppingDistance = VehicleUtil.calcDistanceToStop(initVelocity,
+                                            spawnSpec.getVehicleSpec().getMaxDeceleration());
+                double followingDistance = stoppingDistance + V2IPilot.MINIMUM_FOLLOWING_DISTANCE;
+                // Need to subtract the length of the noVehicleZone as the vehicle will be able to slow down
+                // after passing the noVehicleZone area
+                if (distanceTillNextVehicle - Double.max(spawnPoint.getNoVehicleZone().getHeight(),spawnPoint.getNoVehicleZone().getWidth()) >
+                        followingDistance){
+                    VehicleSimView vehicle = makeVehicle(spawnPoint, spawnSpec);
+                    VinRegistry.registerVehicle(vehicle); // Get vehicle a VIN number
+                    vinToVehicles.put(vehicle.getVIN(), vehicle);
+                } // otherwise there is not enough space to slow down so don't spawn this vehicle
+            }
+            // Otherwise this is the first time we spawn vehicles
+            else {
+              VehicleSimView vehicle = makeVehicle(spawnPoint, spawnSpec);
+              VinRegistry.registerVehicle(vehicle); // Get vehicle a VIN number
+              vinToVehicles.put(vehicle.getVIN(), vehicle);
+            }
+            break; // Only the first vehicle needed. TODO: FIX THIS
           }
         } // else ignore the spawnSpecs and do nothing
       }
@@ -402,7 +434,7 @@ public class AutoDriverOnlySimulator implements Simulator {
       }
     }
     // Now add each of the Vehicles, but make sure to exclude those that are
-    // already inside (partially or entirely) the intersection
+    // already inside (entirely) the intersection
     for(VehicleSimView vehicle : vinToVehicles.values()) {
       // Find out what lanes it is in.
       Set<Lane> lanes = vehicle.getDriver().getCurrentlyOccupiedLanes();
@@ -410,13 +442,24 @@ public class AutoDriverOnlySimulator implements Simulator {
         // Find out what IntersectionManager is coming up for this vehicle
         IntersectionManager im =
           lane.getLaneIM().nextIntersectionManager(vehicle.getPosition());
-        // Only include this Vehicle if it is not in the intersection.
-        if(lane.getLaneIM().distanceToNextIntersection(vehicle.getPosition())>0
-            || im == null || !im.intersects(vehicle.getShape().getBounds2D())) {
+        // Only include this Vehicle if it is not entirely in the intersection.
+        if(im == null ||
+                !(im.intersectsPoint(vehicle.getPosition()) && im.intersectsPoint(vehicle.getPointAtRear()))) {
           // Now find how far along the lane it is.
           double dst = lane.distanceAlongLane(vehicle.getPosition());
           // Now add it to the map.
           vehicleLists.get(lane).put(dst, vehicle);
+          // Now check if this vehicle intersects any other lanes
+          for (Road road : Debug.currentMap.getRoads()) {
+            for (Lane otherLane : road.getLanes()) {
+              if (otherLane.getId() != lane.getId()) {
+                if (otherLane.getShape().getBounds2D().intersects(vehicle.getShape().getBounds2D())) {
+                  double dstAlongOtherLane = otherLane.distanceAlongLane(vehicle.getPosition());
+                  vehicleLists.get(otherLane).put(dstAlongOtherLane, vehicle);
+                }
+              }
+            }
+          }
         }
       }
     }

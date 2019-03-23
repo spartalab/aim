@@ -606,6 +606,21 @@ public class VehicleUtil {
     }
   }
 
+  /**
+   * Determines whether or not two vehicles have collided.
+   *
+   * @param v1     vehicle 1
+   * @param v2     vehicle 2
+   * @return      true if the two vehicles have collided, false otherwise
+   */
+  public static boolean collision(VehicleSimView v1, VehicleSimView v2) {
+    Area vehicle1Area = new Area(v1.getShape());
+    Area vehicle2Area = new Area(v2.getShape());
+
+    vehicle1Area.intersect(vehicle2Area);
+    return !vehicle1Area.isEmpty();
+  }
+
 
   /////////////////////////////////
   // CONSTRUCTORS
