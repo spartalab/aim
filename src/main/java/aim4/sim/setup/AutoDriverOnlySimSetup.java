@@ -40,7 +40,6 @@ import aim4.map.GridMap;
 import aim4.map.GridMapUtil;
 import aim4.sim.AutoDriverOnlySimulator;
 import aim4.sim.Simulator;
-import javafx.util.Pair;
 
 import java.util.HashMap;
 import java.util.Map;
