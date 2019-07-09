@@ -8,3 +8,5 @@
 # IDE files
 .idea/*
 .settings/*
+nbactions.xml
+nb-configuration.xml
