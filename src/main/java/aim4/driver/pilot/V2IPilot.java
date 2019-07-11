@@ -56,7 +56,7 @@ public class V2IPilot extends BasicPilot {
    * The minimum distance to maintain between the Vehicle controlled by this
    * AutonomousPilot and the one in front of it. {@value} meters.
    */
-  public static final double MINIMUM_FOLLOWING_DISTANCE = 0.5; // meters
+  public static double MINIMUM_FOLLOWING_DISTANCE = 0.5; // meters
 
   /**
    * The default shortest distance before an intersection at which the vehicle

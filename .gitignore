@@ -10,6 +10,10 @@
 .settings/*
 nbactions.xml
 nb-configuration.xml
+*.classpath
+*.project
+*.iml
+*.kotlin_module
 
 # Experiments results
 out.*

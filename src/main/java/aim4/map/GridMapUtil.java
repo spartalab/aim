@@ -290,36 +290,51 @@ public class GridMapUtil {
       // running until time == initTime + timeStep
       // each time, timeStep increased by SPAWN_TIME_STEP
       while ((initTime + timeStep) - time > 0.0001) {
-      	SpawnCase spawnCase = laneInfo.getSpawnVehicle();
-      	VEHICLE_TYPE vehicleType = spawnCase.getVehicleType();
+        VehicleSpec vehicleSpec;
+        Road destinationRoad;
 
-      	if (spawnCase.vehicleSpawned()) {
-          int i = Util.randomIndex(proportion);
-          VehicleSpec vehicleSpec = VehicleSpecDatabase.getVehicleSpecById(i);
-          Road destinationRoad =
-            destinationSelector.selectDestination(spawnPoint.getLane());
+        if (laneInfo != null) {
+          SpawnCase spawnCase = laneInfo.getSpawnVehicle();
+          VEHICLE_TYPE vehicleType = spawnCase.getVehicleType();
 
-          // determine whether it's a human
-          if (vehicleType == VEHICLE_TYPE.HUMAN) {
-          	// if it's platooning, we generate human drivin vehicles in groups
-          	if (Platoon.platooning) {
-          		// for example, if we group 5 human vehicles at one time
-          		// we divide the spawning possibility by 5.
-          		if (Util.random.nextDouble() < 1.0 / Platoon.vehiclesNumExpection) {
-          			// okay, we generate this vehicle here, but we need to generate more vehicles
-          			// when it's possible.
-          			vehiclesToBeGenerated += Platoon.vehiclesNumExpection - 1;
-          		}
-          		else {
-          			continue;
-          		}
-          	}
+          if (spawnCase.vehicleSpawned()) {
+            int i = Util.randomIndex(proportion);
+            vehicleSpec = VehicleSpecDatabase.getVehicleSpecById(i);
+            destinationRoad =
+                    destinationSelector.selectDestination(spawnPoint.getLane());
+
+            // determine whether it's a human
+            if (vehicleType == VEHICLE_TYPE.HUMAN) {
+              // if it's platooning, we generate human drivin vehicles in groups
+              if (Platoon.platooning) {
+                // for example, if we group 5 human vehicles at one time
+                // we divide the spawning possibility by 5.
+                if (Util.random.nextDouble() < 1.0 / Platoon.vehiclesNumExpection) {
+                  // okay, we generate this vehicle here, but we need to generate more vehicles
+                  // when it's possible.
+                  vehiclesToBeGenerated += Platoon.vehiclesNumExpection - 1;
+                } else {
+                  continue;
+                }
+              }
+            }
+
+            result.add(new SpawnSpec(spawnPoint.getCurrentTime(),
+                    vehicleSpec,
+                    destinationRoad,
+                    vehicleType));
           }
+        } else {
+          if (Util.random.nextDouble() < prob) {
+            int i = Util.randomIndex(proportion);
+            vehicleSpec = VehicleSpecDatabase.getVehicleSpecById(i);
+            destinationRoad = destinationSelector.selectDestination(spawnPoint.getLane());
 
-          result.add(new SpawnSpec(spawnPoint.getCurrentTime(),
-                                   vehicleSpec,
-                                   destinationRoad,
-                                   vehicleType));
+            result.add(new SpawnSpec(spawnPoint.getCurrentTime(),
+                    vehicleSpec,
+                    destinationRoad,
+                    VEHICLE_TYPE.AUTO));
+          }
         }
 
         time += SimConfig.SPAWN_TIME_STEP;

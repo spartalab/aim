@@ -34,6 +34,7 @@ import java.awt.Color;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -82,6 +83,7 @@ import aim4.vehicle.ProxyVehicleSimView;
 import aim4.vehicle.VehicleSpec;
 import aim4.vehicle.VinRegistry;
 import aim4.vehicle.VehicleSimView;
+import aim4.vehicle.VehicleUtil;
 
 /**
  * The autonomous drivers only simulator.

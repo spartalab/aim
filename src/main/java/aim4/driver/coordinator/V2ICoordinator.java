@@ -568,13 +568,13 @@ public class V2ICoordinator implements Coordinator {
           driver.setCurrentLane(targetLane);  // set the targetLane immediately
           driver.addCurrentlyOccupiedLane(currentLane);
           // update the driver's state
-          setState(State.LC_CHANGING_LANE);
+          setState(LaneChangeController.State.LC_CHANGING_LANE);
           return true;  // check stopping condition immediately
         } else if (vehicle.gaugeTime() > initiateTimeLimit) { // fail and stop
           // must turn off the sensor
           vehicle.setVehicleTracking(false) ;
           isLaneChangeSuccessful = false;
-          setState(State.LC_TERMINAL_STATE);
+          setState(LaneChangeController.State.LC_TERMINAL_STATE);
           return false;
         } else {
           // keep going
@@ -608,7 +608,7 @@ public class V2ICoordinator implements Coordinator {
           driver.setCurrentLane(driver.getCurrentLane());
           // done
           isLaneChangeSuccessful = true;
-          setState(State.LC_TERMINAL_STATE);
+          setState(LaneChangeController.State.LC_TERMINAL_STATE);
           return false;
         } else {
           // do nothing; continue lane changing
