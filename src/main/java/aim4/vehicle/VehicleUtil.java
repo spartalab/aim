@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 import aim4.config.SimConfig;
+import aim4.config.SimConfig.VEHICLE_TYPE;
 import aim4.driver.CrashTestDummy;
 import aim4.driver.Driver;
 import aim4.im.IntersectionManager;
@@ -192,7 +193,8 @@ public class VehicleUtil {
       traversalVelocity, // velocity
       0.0, // target velocity
       0.0, // Acceleration
-      0.0);
+      0.0,
+      VEHICLE_TYPE.AUTO);
 
     // Create a dummy driver to steer it
     Driver dummy = new CrashTestDummy(testVehicle, arrivalLane, departureLane);

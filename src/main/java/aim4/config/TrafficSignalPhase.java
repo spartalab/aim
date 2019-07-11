@@ -117,12 +117,25 @@ public class TrafficSignalPhase {
       }
 
       activeRoads.add(roads);
-      // the duration of the green signal
-      greenDurations.add(Double.parseDouble(tokens[1]));
+
+      if (GreenPhaseData.on) {
+      	// in this case, we use our generated green phase length
+      	// this is used for experiment of finding best green phase length
+      	greenDurations.add(GreenPhaseData.getGreenPhase(i - 1)); // be careful, i starts at 1
+      }
+      else {
+	      // the duration of the green signal
+	      greenDurations.add(Double.parseDouble(tokens[1]));
+      }
       // the duration of the yellow signal
       yellowDurations.add(Double.parseDouble(tokens[2]));
       // the duration of the red signal
       redDurations.add(Double.parseDouble(tokens[3]));
+    }
+
+    // for test
+    if (GreenPhaseData.on) {
+    	System.out.println(greenDurations);
     }
   }
 
@@ -218,7 +231,7 @@ public class TrafficSignalPhase {
 
     int j = 0;
     for(int i=0; i<phaseNum; i++) {
-      // check whether the road is active in ths current phase
+      // check whether the road is active in this current phase
       boolean isActive = false;
       for(Road r: activeRoads.get(i)) {
         if (r.getName().equals(road.getName())) {
@@ -271,5 +284,16 @@ public class TrafficSignalPhase {
     }
     return s;
   }
+
+  /**
+   * Setting the red signal time by passing parameters in running environment.
+   * This helps to find the best policy by changing red phase time.
+   * @param redPhaseTime time for red signal
+   */
+	public void resetRedDurations(double redPhaseTime) {
+		for (int i = 0; i < redDurations.size(); i++) {
+			redDurations.set(i, redPhaseTime);
+		}
+	}
 
 }

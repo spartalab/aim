@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package aim4.sim.setup;
 
 import aim4.config.Debug;
+import aim4.config.Resources;
 import aim4.config.SimConfig;
 import aim4.driver.pilot.V2IPilot;
 import aim4.im.v2i.reservation.ReservationGridManager;

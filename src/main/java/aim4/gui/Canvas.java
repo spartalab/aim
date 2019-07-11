@@ -66,6 +66,9 @@ import javax.swing.SwingUtilities;
 
 import aim4.config.Debug;
 import aim4.config.DebugPoint;
+import aim4.config.Resources;
+import aim4.config.SimConfig;
+import aim4.config.SimConfig.VEHICLE_TYPE;
 import aim4.driver.AutoDriver;
 import aim4.driver.coordinator.V2ICoordinator;
 import aim4.im.IntersectionManager;
@@ -168,6 +171,12 @@ public class Canvas extends JPanel implements ComponentListener,
   // private static final double EMERGENCY_VEHICLE_COLOR_PERIOD = 0.5; // sec
   /** The color of vehicles that have been clicked on by the user */
   private static final Color VEHICLE_SELECTED_COLOR = Color.ORANGE;
+  /** The color of a human driven vehicle */
+  private static final Color HUMAN_DRIVEN_COLOR = Color.MAGENTA;
+  /** The color of a human driver with cruise control on */
+  private static final Color CONSTANT_HUMAN_DRIVEN_COLOR = Color.GREEN;
+  /** The color of a informed human driver */
+  private static final Color ADAPTIVE_HUMAN_DRIVEN_COLOR = Color.BLUE;
   /** The color of vehicle's tires. */
   private static final Color TIRE_COLOR = Color.BLACK;
   /** The tire color */
@@ -229,6 +238,10 @@ public class Canvas extends JPanel implements ComponentListener,
   private static final int SIMULATION_TIME_LOCATION_X = 12;
   /** Simulation time location Y */
   private static final int SIMULATION_TIME_LOCATION_Y = 24;
+  /** Yielding information location X */
+  private static final int YIELDING_LOCATION_X = 12;
+  /** Yielding information location Y */
+  private static final int YIELDING_LOCATION_Y = 48;
   // the highlighted vehicle
   /** The color of the highlighted vehicle */
   private static final Color HIGHLIGHTED_VEHICLE_COLOR = Color.GREEN;
@@ -739,7 +752,7 @@ public class Canvas extends JPanel implements ComponentListener,
       for (VehicleSimView v : sim.getActiveVehicles()) {
         drawVehicle(displayBuffer, v, sim.getSimulationTime());
       }
-      // draw the traffic lights
+      // if we need to guide human, draw the traffic lights
       for (IntersectionManager im : ims) {
         drawTrafficLights(displayBuffer, im);
       }
@@ -805,7 +818,21 @@ public class Canvas extends JPanel implements ComponentListener,
     // whether the vehicle is selected
     boolean selectedVehicle = (Debug.getTargetVIN() == vehicle.getVIN());
     // check to see if we use another color
-    if (selectedVehicle) {
+
+  	// if it's human-driven vehicle, change color
+  	if (SimConfig.signalType != null && SimConfig.signalType != SimConfig.SIGNAL_TYPE.DEFAULT && vehicle.getVehicleType() != VEHICLE_TYPE.AUTO) {
+  		VEHICLE_TYPE type = vehicle.getVehicleType();
+
+  		if (type == VEHICLE_TYPE.HUMAN) {
+  			buffer.setPaint(HUMAN_DRIVEN_COLOR);
+  		}
+  		else if (type == VEHICLE_TYPE.CRUISE) {
+  			buffer.setPaint(CONSTANT_HUMAN_DRIVEN_COLOR);
+  		}
+  		else if (type == VEHICLE_TYPE.ADAPTIVE_CRUISE) {
+  			buffer.setPaint(ADAPTIVE_HUMAN_DRIVEN_COLOR);
+  		}
+  	} else if (selectedVehicle) {
       buffer.setPaint(VEHICLE_SELECTED_COLOR);
     } else if (vehicle.getVIN() == MARVIN_VEHICLE_VIN) {
       buffer.setPaint(MARVIN_VEHICLE_COLOR);
@@ -835,7 +862,6 @@ public class Canvas extends JPanel implements ComponentListener,
     }
 
     buffer.setStroke(VEHICLE_STROKE);
-
     // Now draw the vehicle's shape
     buffer.fill(vehicle.getShape());
     // Draw wheels and stuff if needed

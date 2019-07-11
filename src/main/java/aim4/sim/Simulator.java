@@ -110,4 +110,18 @@ public interface Simulator {
    * @param vehicle  the proxy vehicle
    */
   void addProxyVehicle(ProxyVehicleSimView vehicle);
+
+  /**
+   * Get number of vehicles inhibited because of no enough space
+   *
+   * @return number of vehicles inhibited
+   */
+  int getProhibitedVehiclesNum();
+
+  /**
+   * Get number of vehicles generated
+   *
+   * @return number of vehicles generated
+   */
+  int getGeneratedVehiclesNum();
 }

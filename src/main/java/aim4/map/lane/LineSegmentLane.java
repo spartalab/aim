@@ -35,6 +35,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.Shape;
 
+import aim4.map.Road;
 import aim4.util.GeomMath;
 
 /**

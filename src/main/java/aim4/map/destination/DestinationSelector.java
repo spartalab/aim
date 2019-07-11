@@ -30,6 +30,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package aim4.map.destination;
 
+import java.util.List;
+
 import aim4.map.Road;
 import aim4.map.lane.Lane;
 
@@ -47,4 +49,13 @@ public interface DestinationSelector {
    *                    destination
    */
   Road selectDestination(Lane currentLane);
+
+  /**
+   * Get all the possible road this lane can get to.
+   * Basically, the vehicle can only get to the one most straight forward.
+   *
+   * @param currentLane
+   * @return the road it can get to.
+   */
+  List<Road> getPossibleDestination(Lane currentLane);
 }

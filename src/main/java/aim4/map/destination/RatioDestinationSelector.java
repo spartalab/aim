@@ -39,6 +39,8 @@ import aim4.map.SpawnPoint;
 import aim4.map.TrafficVolume;
 import aim4.map.lane.Lane;
 import aim4.util.Util;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -115,4 +117,29 @@ public class RatioDestinationSelector implements DestinationSelector {
       return currentRoad;
     }
   }
+
+	@Override
+	public List<Road> getPossibleDestination(Lane currentLane) {
+		Road currentRoad = Debug.currentMap.getRoad(currentLane);
+		List<Road> result = new ArrayList<Road>();
+		int laneId = currentLane.getId();
+
+		if (leftTurnProb.get(laneId) > 0) {
+			// it can turn left
+			result.add(trafficVolume.getLeftTurnRoad(currentRoad));
+		}
+
+		if (rightTurnProb.get(laneId) > 0) {
+			// it can turn right
+			result.add(trafficVolume.getRightTurnRoad(currentRoad));
+		}
+
+		if (leftTurnProb.get(laneId) + rightTurnProb.get(laneId) < 0.99) {
+			// it can go straight ahead
+			result.add(currentRoad);
+		}
+
+		return result;
+	}
+
 }

@@ -44,6 +44,8 @@ import java.util.Set;
 
 import aim4.config.Constants;
 import aim4.config.Debug;
+import aim4.config.SimConfig;
+import aim4.config.SimConfig.VEHICLE_TYPE;
 import aim4.driver.CrashTestDummy;
 import aim4.driver.Driver;
 import aim4.im.Intersection;
@@ -479,6 +481,10 @@ public class ReservationGridManager implements
    */
   private int internalTileTimeBufferSteps;
   /**
+   * Similar to the one above, but for human
+   */
+  private int internalTileTimeBufferStepsForHuman;
+  /**
    * The size of the time buffer, in time steps, used for edge tiles.
    */
   private int edgeTileTimeBufferSteps;
@@ -543,6 +549,8 @@ public class ReservationGridManager implements
     this.isEdgeTileTimeBufferEnabled = config.getIsEdgeTileTimeBufferEnabled();
     this.internalTileTimeBufferSteps =
       (int) (config.getInternalTileTimeBufferSize() / config.getGridTimeStep());
+    this.internalTileTimeBufferStepsForHuman =
+    	(int)(this.internalTileTimeBufferSteps * SimConfig.HUMAN_TARDINESS);
     this.edgeTileTimeBufferSteps =
       (int) (config.getEdgeTileTimeBufferSize() / config.getGridTimeStep());
 
@@ -604,13 +612,13 @@ public class ReservationGridManager implements
    * a request message.  This attempt can be either with attempting to
    * setMaxAccelWithMaxTargetVelocity to maximum velocity or with a constant velocity.
    * @param q  the query object
+   * @param isHuman if it's a human driver
    *
    * @return a set of space-time tiles on the trajectory and
    *         the exit velocity of the vehicle if the reservation is
    *         successful; otherwise return null.
    */
-  @Override
-  public Plan query(Query q) {
+  public Plan query(Query q, VEHICLE_TYPE vehicleType) {
 
     // Position the Vehicle to be ready to start the simulation
     Lane arrivalLane =
@@ -623,7 +631,8 @@ public class ReservationGridManager implements
       createTestVehicle(q.getSpec(),
                         q.getArrivalVelocity(),
                         q.getMaxTurnVelocity(),
-                        arrivalLane);
+                        arrivalLane,
+                        vehicleType);
 
     // Create a dummy driver to steer it
     Driver dummy = new CrashTestDummy(testVehicle, arrivalLane, departureLane);
@@ -632,11 +641,12 @@ public class ReservationGridManager implements
     // testVehicle.setDriver(dummy);  // TODO fix this later.
 
     // Keep track of the TileTimes that will make up this reservation
-    FindTileTimesBySimulationResult fResult
-      = findTileTimesBySimulation(testVehicle,
-                                  dummy,
-                                  q.getArrivalTime(),
-                                  q.isAccelerating());
+    FindTileTimesBySimulationResult fResult = null;
+
+    fResult = findTileTimesBySimulation(testVehicle,
+				                                  dummy,
+				                                  q.getArrivalTime(),
+				                                  q.isAccelerating());
 
     if (fResult != null) {
       List<TimeTile> workingList = fResult.getWorkingList();
@@ -699,7 +709,8 @@ public class ReservationGridManager implements
                                           Request.VehicleSpecForRequestMsg spec,
                                           double arrivalVelocity,
                                           double maxVelocity,
-                                          Lane arrivalLane) {
+                                          Lane arrivalLane,
+                                          VEHICLE_TYPE vehicleType) {
 
     VehicleSpec newSpec = new VehicleSpec(
         "TestVehicle",
@@ -725,7 +736,8 @@ public class ReservationGridManager implements
       arrivalVelocity, // velocity
       0.0, // target velocity
       0.0, // Acceleration
-      0.0); // the current time   // TODO: need to think about the appropriate
+      0.0,
+      vehicleType); // the current time   // TODO: need to think about the appropriate
                                   // current time
 
     return testVehicle;
@@ -800,6 +812,8 @@ public class ReservationGridManager implements
 
     // The list of tile-times that will make up this reservation
     List<TimeTile> workingList = new ArrayList<TimeTile>();
+    // for occupation estimate
+    List<Tile> occupied = null;
 
     // A discrete representation of the time throughout the internal simulation
     // Notice that currentIntTime != arrivalTime
@@ -812,8 +826,10 @@ public class ReservationGridManager implements
       moveTestVehicle(testVehicle, dummy, currentDuration, accelerating);
       // Find out which tiles are occupied by the vehicle
       currentIntTime++;  // Record that we've moved forward one time step
-      List<Tile> occupied =
-        tiledArea.findOccupiedTiles(testVehicle.getShape(staticBufferSize));
+
+      // if it's not human driver, we should simulate its position
+      // otherwise, use the occupied in argument
+    	occupied = tiledArea.findOccupiedTiles(testVehicle.getShape(staticBufferSize));
 
       // Make sure none of these tiles are reserved by someone else already
       for(Tile tile : occupied) {
@@ -821,10 +837,16 @@ public class ReservationGridManager implements
         // Figure out how large of a time buffer to use, based on whether or
         // not this is an edge tile
         int buffer;
+        double expand = 1;
+
+        if (SimConfig.signalType != null && SimConfig.signalType != SimConfig.SIGNAL_TYPE.DEFAULT && testVehicle.isHuman()) {
+        	expand = SimConfig.HUMAN_TARDINESS;
+        }
+
         if (isEdgeTileTimeBufferEnabled && tile.isEdgeTile()) {
-          buffer = edgeTileTimeBufferSteps;
+          buffer = (int)(edgeTileTimeBufferSteps * expand);
         } else {
-          buffer = internalTileTimeBufferSteps;
+          buffer = (int)(internalTileTimeBufferSteps * expand);
         }
         int tileId = tile.getId();
         for(int t = currentIntTime - buffer; t <= currentIntTime + buffer; t++){
@@ -849,6 +871,7 @@ public class ReservationGridManager implements
    *
    * @param testVehicle   the test vehicle
    * @param dummy         the dummy driver
+   * @param duration
    * @param accelerating  whether or not to setMaxAccelWithMaxTargetVelocity to maximum velocity
    *                      during the traversal
    */
@@ -939,5 +962,11 @@ public class ReservationGridManager implements
     }
     return reservedRects;
   }
+
+@Override
+public Plan query(Query q) {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }

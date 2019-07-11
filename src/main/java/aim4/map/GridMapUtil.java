@@ -30,17 +30,38 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package aim4.map;
 
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import aim4.config.Debug;
+import aim4.config.OneLaneTimeConfig;
+import aim4.config.Platoon;
+import aim4.config.RedPhaseData;
+import aim4.config.Resources;
+import aim4.config.RevisedPhaseConfig;
 import aim4.config.SimConfig;
+import aim4.config.SimConfig.SIGNAL_TYPE;
+import aim4.config.SimConfig.VEHICLE_TYPE;
 import aim4.config.TrafficSignalPhase;
+import aim4.im.DedicatedTrafficController;
+import aim4.im.LaneTrafficController;
+import aim4.im.LaneTrafficController.LaneInfo;
+import aim4.im.LaneTrafficController.SpawnCase;
+import aim4.im.NormalTrafficController;
 import aim4.im.RoadBasedIntersection;
 import aim4.im.RoadBasedTrackModel;
 import aim4.im.v2i.RequestHandler.ApproxSimpleTrafficSignalRequestHandler;
 import aim4.im.v2i.V2IManager;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.AdaptiveSignalController;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.DedicatedLanesSignalController;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.OneLaneSignalController;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.RevisedPhaseSignalController;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.SignalController;
 import aim4.im.v2i.RequestHandler.ApproxStopSignRequestHandler;
 import aim4.im.v2i.RequestHandler.Approx4PhasesTrafficSignalRequestHandler;
 import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler;
@@ -58,6 +79,7 @@ import aim4.map.destination.RandomDestinationSelector;
 import aim4.map.destination.RatioDestinationSelector;
 import aim4.map.destination.TurnBasedDestinationSelector;
 import aim4.map.lane.Lane;
+import aim4.sim.setup.AdaptiveTrafficSignalSuperviser;
 import aim4.util.Util;
 import aim4.vehicle.VehicleSpec;
 import aim4.vehicle.VehicleSpecDatabase;
@@ -67,9 +89,108 @@ import aim4.vehicle.VehicleSpecDatabase;
  */
 public class GridMapUtil {
 
+	private static IntersectionBoard roadBoard = null;
+
   /////////////////////////////////
   // NESTED CLASSES
   /////////////////////////////////
+
+
+  /**
+   * Make each entrance of the lane as a point on the board,
+   * so we can know whether two path would intersect.
+   *
+
+   *
+   * @author menie
+   *
+   */
+  interface IntersectionBoard {
+  	/**
+  	 * whether two lanes intersect
+  	 *
+  	 * @param firstLaneIn
+  	 * @param firstLaneOut
+  	 * @param secondLaneIn
+  	 * @param secondlaneOut
+  	 * @return
+  	 */
+  	boolean intersects(int firstLaneIn, int firstLaneOut, int secondLaneIn, int secondlaneOut);
+  }
+
+  /**
+   * For example, lane 1 -> lane 1, lane 9 -> lane 3,
+   * corresponding to  (5, 0) -> (5, 7), (7, 4) -> (3, 0). Intersect!
+   *
+   * @author menie
+   */
+  static class StantardIntersectionBoard implements IntersectionBoard {
+  	/** map from laneId to its corresponding point on board*/
+  	private Map<Integer, Point2D> laneInSet, laneOutSet;
+
+  	/**
+  	 * Constructor.
+  	 */
+  	public StantardIntersectionBoard() {
+  		// I hard code here, so it's only compatible to 3 x 3 intersection
+  		laneInSet = new HashMap<Integer, Point2D>();
+  		laneOutSet = new HashMap<Integer, Point2D>();
+
+  		// for lane in
+  		laneInSet.put(0, new Point2D.Double(4, 0));
+  		laneInSet.put(1, new Point2D.Double(5, 0));
+  		laneInSet.put(2, new Point2D.Double(6, 0));
+
+  		laneInSet.put(3, new Point2D.Double(3, 7));
+  		laneInSet.put(4, new Point2D.Double(2, 7));
+  		laneInSet.put(5, new Point2D.Double(1, 7));
+
+  		laneInSet.put(6, new Point2D.Double(0, 3));
+  		laneInSet.put(7, new Point2D.Double(0, 2));
+  		laneInSet.put(8, new Point2D.Double(0, 1));
+
+  		laneInSet.put(9, new Point2D.Double(7, 4));
+  		laneInSet.put(10, new Point2D.Double(7, 5));
+  		laneInSet.put(11, new Point2D.Double(7, 6));
+
+  		// for lane out
+  		laneOutSet.put(0, new Point2D.Double(4, 7));
+  		laneOutSet.put(1, new Point2D.Double(5, 7));
+  		laneOutSet.put(2, new Point2D.Double(6, 7));
+
+  		laneOutSet.put(3, new Point2D.Double(3, 0));
+  		laneOutSet.put(4, new Point2D.Double(2, 0));
+  		laneOutSet.put(5, new Point2D.Double(1, 0));
+
+  		laneOutSet.put(6, new Point2D.Double(7, 3));
+  		laneOutSet.put(7, new Point2D.Double(7, 2));
+  		laneOutSet.put(8, new Point2D.Double(7, 1));
+
+  		laneOutSet.put(9, new Point2D.Double(0, 4));
+  		laneOutSet.put(10, new Point2D.Double(0, 5));
+  		laneOutSet.put(11, new Point2D.Double(0, 6));
+  	}
+
+		@Override
+		public boolean intersects(int firstLaneIn, int firstLaneOut,
+				int secondLaneIn, int secondLaneOut) {
+			// TODO Auto-generated method stub
+			Point2D firstLaneInPoint = laneInSet.get(firstLaneIn);
+			Point2D firstLaneOutPoint = laneOutSet.get(firstLaneOut);
+			Point2D secondLaneInPoint = laneInSet.get(secondLaneIn);
+			Point2D secondLaneOutPoint = laneOutSet.get(secondLaneOut);
+
+			// check whether they intersect
+			return Line2D.linesIntersect(firstLaneInPoint.getX(),
+																		firstLaneInPoint.getY(),
+																		firstLaneOutPoint.getX(),
+																		firstLaneOutPoint.getY(),
+																		secondLaneInPoint.getX(),
+																		secondLaneInPoint.getY(),
+																		secondLaneOutPoint.getX(),
+																		secondLaneOutPoint.getY());
+		}
+  }
 
   /**
    * The null spawn spec generator that generates nothing.
@@ -80,6 +201,12 @@ public class GridMapUtil {
       public List<SpawnSpec> act(SpawnPoint spawnPoint, double timeStep) {
         return new ArrayList<SpawnSpec>();
       }
+
+		@Override
+		public void vehicleGenerated() {
+			// TODO Auto-generated method stub
+
+		}
     };
 
   /**
@@ -92,6 +219,10 @@ public class GridMapUtil {
     private DestinationSelector destinationSelector;
     /** probability of generating a vehicle in each spawn time step */
     private double prob;
+    /** how many human driven vehicles are to be generated */
+    private int vehiclesToBeGenerated = 0;
+    /** This contains the traffic level of each type of vehicle. */
+		private LaneInfo laneInfo;
 
     /**
      * Create an uniform spawn specification generator.
@@ -108,6 +239,7 @@ public class GridMapUtil {
         proportion.add(p);
       }
       this.destinationSelector = destinationSelector;
+      Resources.destinationSelector = destinationSelector;
 
       prob = trafficLevel * SimConfig.SPAWN_TIME_STEP;
       // Cannot generate more than one vehicle in each spawn time step
@@ -115,30 +247,96 @@ public class GridMapUtil {
     }
 
     /**
+     * The traffic level is not required here - can be got by laneInfo.
+     * Just for compacibilty.
+     * @param laneInfo
+     * @param trafficLevel
+     * @param selector
+     */
+    public UniformSpawnSpecGenerator(LaneInfo laneInfo,
+				double trafficLevel, DestinationSelector selector) {
+			this(trafficLevel, selector);
+			this.laneInfo = laneInfo;
+		}
+
+		/**
      * {@inheritDoc}
      */
+
     @Override
     public List<SpawnSpec> act(SpawnPoint spawnPoint, double timeStep) {
       List<SpawnSpec> result = new LinkedList<SpawnSpec>();
 
       double initTime = spawnPoint.getCurrentTime();
-      for(double time = initTime; time < initTime + timeStep;
-          time += SimConfig.SPAWN_TIME_STEP) {
-        if (Util.random.nextDouble() < prob) {
+      double time = initTime;
+
+      if (vehiclesToBeGenerated > 0) {
+      	// it's now possible to spawn vehicles not generated before
+      	int i = Util.randomIndex(proportion);
+        VehicleSpec vehicleSpec = VehicleSpecDatabase.getVehicleSpecById(i);
+        Road destinationRoad =
+          destinationSelector.selectDestination(spawnPoint.getLane());
+
+        VEHICLE_TYPE vehicleType = VEHICLE_TYPE.HUMAN;
+
+        result.add(new SpawnSpec(spawnPoint.getCurrentTime(),
+            vehicleSpec,
+            destinationRoad,
+            vehicleType));
+
+        return result;
+      }
+
+      // running until time == initTime + timeStep
+      // each time, timeStep increased by SPAWN_TIME_STEP
+      while ((initTime + timeStep) - time > 0.0001) {
+      	SpawnCase spawnCase = laneInfo.getSpawnVehicle();
+      	VEHICLE_TYPE vehicleType = spawnCase.getVehicleType();
+
+      	if (spawnCase.vehicleSpawned()) {
           int i = Util.randomIndex(proportion);
           VehicleSpec vehicleSpec = VehicleSpecDatabase.getVehicleSpecById(i);
           Road destinationRoad =
             destinationSelector.selectDestination(spawnPoint.getLane());
 
-          // maybe spawnPoint.getCurrentTime() is incorrect
+          // determine whether it's a human
+          if (vehicleType == VEHICLE_TYPE.HUMAN) {
+          	// if it's platooning, we generate human drivin vehicles in groups
+          	if (Platoon.platooning) {
+          		// for example, if we group 5 human vehicles at one time
+          		// we divide the spawning possibility by 5.
+          		if (Util.random.nextDouble() < 1.0 / Platoon.vehiclesNumExpection) {
+          			// okay, we generate this vehicle here, but we need to generate more vehicles
+          			// when it's possible.
+          			vehiclesToBeGenerated += Platoon.vehiclesNumExpection - 1;
+          		}
+          		else {
+          			continue;
+          		}
+          	}
+          }
 
           result.add(new SpawnSpec(spawnPoint.getCurrentTime(),
                                    vehicleSpec,
-                                   destinationRoad));
+                                   destinationRoad,
+                                   vehicleType));
         }
+
+        time += SimConfig.SPAWN_TIME_STEP;
       }
 
       return result;
+    }
+
+    /**
+     * To tell this class that the platooning vehicle is successfully generated.
+     * Because of the no vehicle zone, this class is not sure whether his spawning is satisfied.
+     */
+    @Override
+    public void vehicleGenerated() {
+    	if (vehiclesToBeGenerated > 0) {
+    		vehiclesToBeGenerated --;
+    	}
     }
   }
 
@@ -187,12 +385,19 @@ public class GridMapUtil {
 
           result.add(new SpawnSpec(spawnPoint.getCurrentTime(),
                                    vehicleSpec,
-                                   destinationRoad));
+                                   destinationRoad,
+                                   VEHICLE_TYPE.AUTO));
         }
       }
 
       return result;
     }
+
+		@Override
+		public void vehicleGenerated() {
+			// TODO Auto-generated method stub
+
+		}
   }
 
   /**
@@ -230,10 +435,17 @@ public class GridMapUtil {
         isDone = true;
         result.add(new SpawnSpec(spawnPoint.getCurrentTime(),
                                  vehicleSpec,
-                                 destinationRoad));
+                                 destinationRoad,
+                                 VEHICLE_TYPE.AUTO));
       }
       return result;
     }
+
+		@Override
+		public void vehicleGenerated() {
+			// TODO Auto-generated method stub
+
+		}
   }
 
   /**
@@ -289,7 +501,8 @@ public class GridMapUtil {
             destinationRoads.get(destinationRoadId);
           result.add(new SpawnSpec(spawnPoint.getCurrentTime(),
                                    vehicleSpec,
-                                   destinationRoad));
+                                   destinationRoad,
+                                   VEHICLE_TYPE.AUTO));
           nextSpawnTime += spawnPeriod;
           destinationRoadId++;
           if (destinationRoadId >= destinationRoads.size()) {
@@ -300,13 +513,31 @@ public class GridMapUtil {
       } // else wait until next spawn time
       return result;
     }
+
+		@Override
+		public void vehicleGenerated() {
+			// TODO Auto-generated method stub
+
+		}
   }
 
+
+  private static double currentTrafficLevel;
 
   /////////////////////////////////
   // PUBLIC STATIC METHODS
   /////////////////////////////////
 
+
+  public static boolean laneIntersect(int firstLaneIn, int firstLaneOut,
+			int secondLaneIn, int secondLaneOut) {
+  	if (roadBoard == null) {
+  		// initialize this, if needed.
+  		roadBoard = new StantardIntersectionBoard();
+  	}
+
+  	return roadBoard.intersects(firstLaneIn, firstLaneOut, secondLaneIn, secondLaneOut);
+  }
 
   /**
    * Set the FCFS managers at all intersections.
@@ -469,16 +700,55 @@ public class GridMapUtil {
         TrafficSignalPhase phase =
             TrafficSignalPhase.makeFromFile(layout, trafficSignalPhaseFileName);
 
+        Resources.phase = phase;
+
         for(Road road : im.getIntersection().getEntryRoads()) {
           for(Lane lane : road.getLanes()) {
-            CyclicSignalController controller =
-                phase.calcCyclicSignalController(road);
-            requestHandler.setSignalControllers(lane.getId(), controller);
+          	if (SimConfig.signalType == SimConfig.SIGNAL_TYPE.RED_PHASE_ADAPTIVE) {
+          		RedPhaseData.readRedPhaseData();
+          		phase.resetRedDurations(RedPhaseData.defaultRedPhaseTime);
+
+          		CyclicSignalController controller =
+	                phase.calcCyclicSignalController(road);
+	            requestHandler.setSignalControllers(lane.getId(), controller);
+          	}
+          	else if (SimConfig.signalType == SimConfig.SIGNAL_TYPE.ONE_LANE_VERSION) {
+          		OneLaneSignalController controller =
+          				new OneLaneSignalController(lane.getId(), OneLaneTimeConfig.greenTime, OneLaneTimeConfig.redTime);
+          		requestHandler.setSignalControllers(lane.getId(), controller);
+          	}
+          	else if (SimConfig.signalType == SimConfig.SIGNAL_TYPE.REVISED_PHASE) {
+          		RevisedPhaseSignalController controller =
+          				RevisedPhaseConfig.getController(lane.getId());
+          		requestHandler.setSignalControllers(lane.getId(), controller);
+          	}
+          	else if (SimConfig.signalType == SimConfig.SIGNAL_TYPE.TRADITIONAL) {
+          		phase.resetRedDurations(SimConfig.RED_PHASE_LENGTH);
+	            CyclicSignalController controller =
+	                phase.calcCyclicSignalController(road);
+	            requestHandler.setSignalControllers(lane.getId(), controller);
+          	}
+          	else if (SimConfig.signalType == SIGNAL_TYPE.HUMAN_ADAPTIVE) {
+          		SignalController controller = AdaptiveTrafficSignalSuperviser.addTrafficSignalController(lane);
+          		requestHandler.setSignalControllers(lane.getId(), controller);
+          	}
+          	else if (SimConfig.DEDICATED_LANES > 0) {
+          		DedicatedLanesSignalController controller =
+          				new DedicatedLanesSignalController(lane.getId());
+          		requestHandler.setSignalControllers(lane.getId(), controller);
+          	}
+          	else {
+	            CyclicSignalController controller =
+	                phase.calcCyclicSignalController(road);
+	            requestHandler.setSignalControllers(lane.getId(), controller);
+          	}
           }
         }
 
         im.setPolicy(new BasePolicy(im, requestHandler));
         layout.setManager(column, row, im);
+
+        Resources.im = im;
       }
     }
   }
@@ -546,28 +816,51 @@ public class GridMapUtil {
    *
    * @param map                    the map
    * @param trafficVolumeFileName  the traffic volume filename
+   * @param trafficLevel		   the traffic level
    */
   public static void setUniformRatioSpawnPoints(GridMap map,
-                                                String trafficVolumeFileName) {
+                                                String trafficVolumeFileName,
+                                                double trafficLevel) {
+  	// no worry - (traffic volume / total traffic volume) is the useful information
+  	// so, how much a specific traffic volume is does not make any sense
+  	TrafficVolume trafficVolume = TrafficVolume.makeVolume(map, trafficVolumeFileName);
 
-    TrafficVolume trafficVolume =
-        TrafficVolume.makeFromFile(map, trafficVolumeFileName);
+  	DestinationSelector selector = new RatioDestinationSelector(map,
+        trafficVolume);
 
-    DestinationSelector selector = new RatioDestinationSelector(map,
-                                                                trafficVolume);
+    // see how much volume in total - this helps to figure out portion of each sp
+    double totalVolume = 0;
+    int spNum = map.getSpawnPoints().size();
 
-    for (SpawnPoint sp : map.getSpawnPoints()) {
-      int laneId = sp.getLane().getId();
-      double trafficLevel =
-          trafficVolume.getLeftTurnVolume(laneId) +
-          trafficVolume.getThroughVolume(laneId) +
-          trafficVolume.getRightTurnVolume(laneId);
-      sp.setVehicleSpecChooser(
-          new UniformSpawnSpecGenerator(trafficLevel, selector));
+    LaneTrafficController trafficController;
+
+    // check the lane spawning setting - dedicated lanes or not
+    if (SimConfig.DEDICATED_LANES > 0) {
+    	trafficController = new DedicatedTrafficController(
+      		trafficLevel, SimConfig.HUMAN_PERCENTAGE, SimConfig.CONSTANT_HUMAN_PERCENTAGE);
     }
+    else {
+    	trafficController = new NormalTrafficController(
+    			trafficLevel,
+    			SimConfig.HUMAN_PERCENTAGE,
+    			SimConfig.CONSTANT_HUMAN_PERCENTAGE,
+    			SimConfig.ADAPTIVE_HUMAN_PERCENTAGE,
+    			trafficVolume);
+    }
+
+    // find out traffic level for each spawning point
+    for (SpawnPoint sp : map.getSpawnPoints()) {
+
+      int laneId = sp.getLane().getId();
+
+      sp.setVehicleSpecChooser(
+          new UniformSpawnSpecGenerator(trafficController.getLaneInfo(laneId), trafficLevel, selector));
+    }
+
+    currentTrafficLevel = trafficLevel;
   }
 
-  /**
+	/**
    * Set the directional spawn points which has different traffic volumes
    * in different directions.
    *
@@ -620,4 +913,7 @@ public class GridMapUtil {
     }
   }
 
+  public static double getTrafficLevel() {
+  	return currentTrafficLevel;
+  }
 }

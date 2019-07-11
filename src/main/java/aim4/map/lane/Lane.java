@@ -34,6 +34,8 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.Shape;
 
+import aim4.map.Road;
+
 /**
  * This is a base class for all lanes. Creates an ID system for lanes such
  * that all lanes will have a different integer ID. Also handles traffic

@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package aim4.util;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * A registry based on HashMap
@@ -105,4 +106,9 @@ public class HashMapRegistry<T> implements Registry<T> {
   public void setNull(int id) {
     idToObj.remove(id);  // remove both key and object to save space
   }
+
+	@Override
+	public List<T> getValues() {
+		return (List)(idToObj.values());
+	}
 }

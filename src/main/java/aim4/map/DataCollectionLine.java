@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import aim4.config.Resources;
 import aim4.vehicle.VehicleSimView;
 
 /**
@@ -65,6 +66,9 @@ public class DataCollectionLine {
   private Line2D line;
   /** The record of the times of the vehicle passing through the line */
   private Map<Integer,List<Double>> vinToTime;
+  /** corresponding to vinToTime, the value is whether it's a human driver */
+  private Map<Integer,List<Boolean>> vinToIfHuman;
+
   /**
    * Whether vehicles should not be counted more than once when it passes
    * through the line more than once within the NO_REPEAT_TIME_PERIOD.
@@ -91,6 +95,7 @@ public class DataCollectionLine {
     this.name = name;
     this.id = id;
     this.vinToTime = new HashMap<Integer,List<Double>>();
+    this.vinToIfHuman = new HashMap<Integer,List<Boolean>>();
     this.line = new Line2D.Double(p1, p2);
     this.isNoRepeat = isNoRepeat;
   }
@@ -125,12 +130,20 @@ public class DataCollectionLine {
       || vinToTime.get(vin).get(vinToTime.get(vin).size()-1)
         + NO_REPEAT_TIME_PERIOD < time) {
       if (line.intersectsLine(p1.getX(), p1.getY(), p2.getX(), p2.getY())) {
+      	VehicleSimView vehicle = Resources.vinToVehicles.get(vin);
+      	
         if (!vinToTime.containsKey(vin)) {
           List<Double> times = new LinkedList<Double>();
+          List<Boolean> ifHumans = new LinkedList<Boolean>();
+          
           times.add(time);
+          ifHumans.add(vehicle.isHuman());
+          
           vinToTime.put(vin, times);
+          vinToIfHuman.put(vin, ifHumans);
         } else {
           vinToTime.get(vin).add(time);
+          vinToIfHuman.get(vin).add(vehicle.isHuman());
         }
         return true;
       } else {
@@ -179,4 +192,15 @@ public class DataCollectionLine {
     return vinToTime.get(vin);
   }
 
+  /**
+   * Similar to getTimes, but return whether it's human.
+   * Well, I apologize for this weird way to implement, but this is the easiset way
+   * to do so. To accommodate what already exists, you know.
+   *
+   * @param vin
+   * @return the list of whether the vehicles are human
+   */
+  public List<Boolean> getIfHumans(int vin) {
+  	return vinToIfHuman.get(vin);
+  }
 }

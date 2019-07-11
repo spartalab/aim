@@ -36,6 +36,7 @@ import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Queue;
 
+import aim4.config.SimConfig.VEHICLE_TYPE;
 import aim4.driver.AutoDriver;
 import aim4.msg.v2i.V2IMessage;
 
@@ -200,5 +201,39 @@ public interface VehicleSimView extends VehicleDriverView {
    * @param timeStep the size of the time step to simulate, in seconds
    */
   void move(double timeStep);
+
+  /**
+   * is human or not
+   * @return
+   */
+  boolean isHuman();
+
+  /**
+   * is informed human or not
+   * @return
+   */
+  boolean withCruiseControll();
+
+  /**
+   * with adaptive cruise controll or not
+   * @return
+   */
+  boolean withAdaptiveCruiseControll();
+
+  /**
+   * return vehicle type
+   */
+  VEHICLE_TYPE getVehicleType();
+
+  /**
+   * Tell this vehicle he has been stop
+   */
+	void askedToStop();
+
+	/**
+	 * Whether this vehicle is asked to stop.
+	 * @return
+	 */
+	boolean hasStopped();
 
 }

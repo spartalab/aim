@@ -34,25 +34,54 @@ import java.awt.Color;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Queue;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import aim4.config.Debug;
 import aim4.config.DebugPoint;
+import aim4.config.RedPhaseData;
+import aim4.config.Resources;
+import aim4.config.SimConfig;
+import aim4.config.SimConfig.SIGNAL_TYPE;
+import aim4.config.SimConfig.VEHICLE_TYPE;
+import aim4.config.TrafficSignalPhase;
 import aim4.driver.AutoDriver;
 import aim4.driver.DriverSimView;
 import aim4.driver.ProxyDriver;
 import aim4.driver.pilot.V2IPilot;
 import aim4.im.IntersectionManager;
 import aim4.im.v2i.V2IManager;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.CyclicSignalController;
+import aim4.im.v2i.RequestHandler.ApproxNPhasesTrafficSignalRequestHandler.SignalController;
+import aim4.im.v2i.policy.BasePolicy;
 import aim4.map.DataCollectionLine;
 import aim4.map.BasicMap;
+import aim4.map.GridMapUtil;
 import aim4.map.Road;
 import aim4.map.SpawnPoint;
 import aim4.map.SpawnPoint.SpawnSpec;
 import aim4.map.lane.Lane;
 import aim4.msg.i2v.I2VMessage;
 import aim4.msg.v2i.V2IMessage;
-import aim4.vehicle.*;
+import aim4.sim.setup.AdaptiveTrafficSignalSuperviser;
+import aim4.vehicle.AutoVehicleSimView;
+import aim4.vehicle.BasicAutoVehicle;
+import aim4.vehicle.HumanDrivenVehicleSimView;
+import aim4.vehicle.ProxyVehicleSimView;
+import aim4.vehicle.VehicleSpec;
+import aim4.vehicle.VinRegistry;
+import aim4.vehicle.VehicleSimView;
 
 /**
  * The autonomous drivers only simulator.
@@ -106,6 +135,10 @@ public class AutoDriverOnlySimulator implements Simulator {
   private int totalBitsTransmittedByCompletedVehicles;
   /** The total number of bits received by the completed vehicles */
   private int totalBitsReceivedByCompletedVehicles;
+  /** The number of vehicles that are inhibited because of no enough space */
+  private int inhibitedVehicles = 0;
+  /** The number of vehicles generated */
+  private int generatedVehicles = 0;
 
 
   /////////////////////////////////
@@ -120,6 +153,7 @@ public class AutoDriverOnlySimulator implements Simulator {
   public AutoDriverOnlySimulator(BasicMap basicMap) {
     this.basicMap = basicMap;
     this.vinToVehicles = new HashMap<Integer,VehicleSimView>();
+    Resources.vinToVehicles = this.vinToVehicles;
 
     currentTime = 0.0;
     numOfCompletedVehicles = 0;
@@ -142,34 +176,61 @@ public class AutoDriverOnlySimulator implements Simulator {
       System.err.printf("--------------------------------------\n");
       System.err.printf("------SIM:spawnVehicles---------------\n");
     }
+
+    // update red signal for dynamic FCFS-SIGNAL
+    if (SimConfig.signalType == SimConfig.SIGNAL_TYPE.RED_PHASE_ADAPTIVE
+    		&& ApproxNPhasesTrafficSignalRequestHandler.CyclicSignalController.needRecalculate(currentTime)) {
+    	updateTrafficSignal();
+    }
+
+    // spawning vehicles from spawning points according to traffic level
     spawnVehicles(timeStep);
     if (Debug.PRINT_SIMULATOR_STAGE) {
       System.err.printf("------SIM:provideSensorInput---------------\n");
     }
+
+    // generate information like the linked-table of vehicles, intervals between vehicles, signal, etc
     provideSensorInput();
     if (Debug.PRINT_SIMULATOR_STAGE) {
       System.err.printf("------SIM:letDriversAct---------------\n");
     }
+
+    // allow driver proposals
     letDriversAct();
     if (Debug.PRINT_SIMULATOR_STAGE) {
       System.err.printf("------SIM:letIntersectionManagersAct--------------\n");
     }
+
+    // intersection dealing with proposals
     letIntersectionManagersAct(timeStep);
     if (Debug.PRINT_SIMULATOR_STAGE) {
       System.err.printf("------SIM:communication---------------\n");
     }
+
     communication();
     if (Debug.PRINT_SIMULATOR_STAGE) {
       System.err.printf("------SIM:moveVehicles---------------\n");
     }
+
+    // move vehicles graphically. DCL information calculated here.
     moveVehicles(timeStep);
+
     if (Debug.CHECK_FOR_COLLISIONS) {
       System.err.printf("------SIM:checkForCollisions---------------\n");
       checkForCollisions();
     }
+
     if (Debug.PRINT_SIMULATOR_STAGE) {
       System.err.printf("------SIM:cleanUpCompletedVehicles---------------\n");
     }
+
+    // for human-adaptive traffic signals, run green phases periodically
+    if (SimConfig.signalType == SIGNAL_TYPE.HUMAN_ADAPTIVE) {
+    	if (currentTime % AdaptiveTrafficSignalSuperviser.getPhaseLength() < timeStep) {
+    		AdaptiveTrafficSignalSuperviser.runGreenLight(currentTime);
+    	}
+    }
+
     List<Integer> completedVINs = cleanUpCompletedVehicles();
     currentTime += timeStep;
     // debug
@@ -345,6 +406,8 @@ public class AutoDriverOnlySimulator implements Simulator {
                     VehicleSimView vehicle = makeVehicle(spawnPoint, spawnSpec);
                     VinRegistry.registerVehicle(vehicle); // Get vehicle a VIN number
                     vinToVehicles.put(vehicle.getVIN(), vehicle);
+                    spawnPoint.vehicleGenerated(); // so it knows a platooning vehicle is generated.
+                    generatedVehicles++; // counter for vehicles generated
                 } // otherwise there is not enough space to slow down so don't spawn this vehicle
             }
             // Otherwise this is the first time we spawn vehicles
@@ -352,6 +415,8 @@ public class AutoDriverOnlySimulator implements Simulator {
               VehicleSimView vehicle = makeVehicle(spawnPoint, spawnSpec);
               VinRegistry.registerVehicle(vehicle); // Get vehicle a VIN number
               vinToVehicles.put(vehicle.getVIN(), vehicle);
+              spawnPoint.vehicleGenerated(); // so it knows a platooning vehicle is generated.
+              generatedVehicles++; // counter for vehicles generated
             }
             break; // Only the first vehicle needed. TODO: FIX THIS
           }
@@ -360,6 +425,13 @@ public class AutoDriverOnlySimulator implements Simulator {
     }
   }
 
+  public int getProhibitedVehiclesNum() {
+	  return inhibitedVehicles;
+  }
+
+  public int getGeneratedVehiclesNum() {
+	  return generatedVehicles;
+  }
 
   /**
    * Whether a spawn point can spawn any vehicle
@@ -383,6 +455,7 @@ public class AutoDriverOnlySimulator implements Simulator {
    *
    * @param spawnPoint  the spawn point
    * @param spawnSpec   the spawn specification
+   * @param isHuman	    is a human driver or not
    * @return the vehicle
    */
   private VehicleSimView makeVehicle(SpawnPoint spawnPoint,
@@ -401,7 +474,8 @@ public class AutoDriverOnlySimulator implements Simulator {
                            initVelocity, // velocity
                            initVelocity,  // target velocity
                            spawnPoint.getAcceleration(),
-                           spawnSpec.getSpawnTime());
+                           spawnSpec.getSpawnTime(),
+                           spawnSpec.getVehicleType());
     // Set the driver
     AutoDriver driver = new AutoDriver(vehicle, basicMap);
     driver.setCurrentLane(lane);
@@ -506,7 +580,10 @@ public class AutoDriverOnlySimulator implements Simulator {
         if(lastVehicle != null) {
           // Create the mapping from the previous Vehicle to the current one
           nextVehicle.put(lastVehicle,currVehicle);
+
+          lastVehicle.setFrontVehicle(currVehicle);
         }
+
         lastVehicle = currVehicle;
       }
     }
@@ -532,6 +609,24 @@ public class AutoDriverOnlySimulator implements Simulator {
     provideIntervalInfo(nextVehicle);
     provideVehicleTrackingInfo(vehicleLists);
     provideTrafficSignal();
+
+    // for debug
+    /*
+    for(SortedMap<Double,VehicleSimView> vehicleList : vehicleLists.values()) {
+      for(VehicleSimView currVehicle : vehicleList.values()) {
+      	VehicleSimView frontVehicle = currVehicle.getFrontVehicle();
+
+      	System.out.print(currVehicle.getVIN());
+
+      	if (frontVehicle == null) {
+      		System.out.println("Nothing");
+      	}
+      	else {
+      		System.out.println(frontVehicle.getVIN());
+      	}
+      }
+    }
+    */
   }
 
   /**
@@ -596,6 +691,7 @@ public class AutoDriverOnlySimulator implements Simulator {
       if (vehicle instanceof AutoVehicleSimView) {
         AutoVehicleSimView autoVehicle = (AutoVehicleSimView)vehicle;
 
+        // vehicle tracking is set to be false. Nothing run here in this if clause
         if (autoVehicle.isVehicleTracking()) {
           DriverSimView driver = autoVehicle.getDriver();
           Lane targetLane = autoVehicle.getTargetLaneForVehicleTracking();
@@ -660,6 +756,8 @@ public class AutoDriverOnlySimulator implements Simulator {
               new DebugPoint(p2, p1, "cl", Color.RED.brighter()));
           }
         }
+
+        // we need each vehicle to keep the vehicle before it
       }
     }
 
@@ -942,10 +1040,25 @@ public class AutoDriverOnlySimulator implements Simulator {
    * @param timeStep  the time step
    */
   private void moveVehicles(double timeStep) {
+	// calculate vehicles inside the intersection
+ 	int vehiclesInside = 0;
+
     for(VehicleSimView vehicle : vinToVehicles.values()) {
       Point2D p1 = vehicle.getPosition();
       vehicle.move(timeStep);
       Point2D p2 = vehicle.getPosition();
+
+      if (p1.distance(p2) < 0.001) {
+      	vehicle.askedToStop();
+      }
+
+      // if this vehicle is in the intersection, judged by DCL,
+      // vehiclesInside++, it's the counter
+      // TODO not understanding where to get intersection boundary data!!
+      if (p2.getX() >= 149.5 && p2.getX() <= 175.5
+    		  && p2.getY() >= 149.5 && p2.getY() <= 175.5)
+    	  vehiclesInside++;
+
       for(DataCollectionLine line : basicMap.getDataCollectionLines()) {
         line.intersect(vehicle, currentTime, p1, p2);
       }
@@ -953,6 +1066,13 @@ public class AutoDriverOnlySimulator implements Simulator {
         vehicle.printState();
       }
     }
+
+    /*
+    // output only when it's x.00 sec
+    if (currentTime % 0.1 < 0.001 || currentTime % 0.1 > 0.099) {
+      System.out.printf("%f,%d\n", currentTime, vehiclesInside);
+    }
+    */
   }
 
 
@@ -1013,5 +1133,38 @@ public class AutoDriverOnlySimulator implements Simulator {
     }
   }
 
+  /////////////////////////////////
+	// PUBLIC METHODS
+	/////////////////////////////////
 
+	// information retrieval
+
+	/**
+   * If the current time exceeds the end of the total duration of traffic lights,
+   * re-select the proper red signal time.
+   */
+  private void updateTrafficSignal() {
+  	// get the list of signal controllers
+  	double tl = GridMapUtil.getTrafficLevel(); // traffic level
+  	double hp = SimConfig.HUMAN_PERCENTAGE; // human percentage
+
+  	double rp = RedPhaseData.getRedPhase(hp, tl); // red phase
+  	double offset = ApproxNPhasesTrafficSignalRequestHandler.CyclicSignalController.getEndTime();
+
+  	TrafficSignalPhase phase = Resources.phase;
+  	Map<Integer, SignalController> signalControllers = Resources.signalControllers;
+
+  	phase.resetRedDurations(rp);
+  	System.out.printf("Appropriate Red Phase Length: %f\n", rp);
+
+  	for(Road road : Resources.im.getIntersection().getEntryRoads()) {
+      for(Lane lane : road.getLanes()) {
+    		CyclicSignalController controller =
+            phase.calcCyclicSignalController(road);
+    		controller.setOffset(offset);
+
+    		signalControllers.put(lane.getId(), controller);
+      }
+  	}
+  }
 }

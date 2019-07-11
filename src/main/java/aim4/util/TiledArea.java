@@ -161,7 +161,7 @@ public class TiledArea {
     this.yLength = yLength;
     xNum = ((int)(rectangle.getWidth() / xLength)) + 1;
     yNum = ((int)(rectangle.getHeight() / yLength)) + 1;
-    tiles = new Tile[xNum][yNum];
+    tiles = new Tile[yNum][xNum];
     idToTiles = new ArrayList<Tile>(xNum*yNum) ;
     createTiles();
     identifyEdgeTiles();

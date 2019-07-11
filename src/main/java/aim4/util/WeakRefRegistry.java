@@ -32,6 +32,7 @@ package aim4.util;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -111,4 +112,9 @@ public class WeakRefRegistry<T> implements Registry<T> {
   public void setNull(int id) {
     idToObj.remove(id);
   }
+
+	@Override
+	public List<T> getValues() {
+		return (List)(idToObj.values());
+	}
 }

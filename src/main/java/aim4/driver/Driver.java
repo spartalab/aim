@@ -37,6 +37,7 @@ import java.util.Set;
 
 import aim4.config.Debug;
 import aim4.config.DebugPoint;
+import aim4.driver.coordinator.V2ICoordinator.State;
 import aim4.im.IntersectionManager;
 import aim4.map.Road;
 import aim4.map.SpawnPoint;
@@ -82,6 +83,9 @@ public abstract class Driver implements DriverSimView {
   /////////////////////////////////
 
   // origin and destination
+
+	/** The state of the driver */
+	private State state = null;
 
   /** Where this DriverAgent is coming from. */
   private SpawnPoint spawnPoint;
@@ -273,6 +277,18 @@ public abstract class Driver implements DriverSimView {
        distanceFromPrevIntersection(getVehicle().gaugePosition());
      return Math.max(0.0, d - getVehicle().getSpec().getLength());
    }
+
+
+ 	public void setState(State state) {
+ 		// TODO Auto-generated method stub
+ 		this.state = state;
+ 	}
+
+
+ 	public State getState() {
+ 		// TODO Auto-generated method stub
+ 		return this.state;
+ 	}
 
 
 }

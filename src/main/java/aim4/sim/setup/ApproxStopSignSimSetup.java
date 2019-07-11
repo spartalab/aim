@@ -140,7 +140,7 @@ public class ApproxStopSignSimSetup extends BasicSimSetup
         GridMapUtil.setUniformRandomSpawnPoints(layout, trafficLevel);
       }
     } else {
-      GridMapUtil.setUniformRatioSpawnPoints(layout, trafficVolumeFileName);
+      GridMapUtil.setUniformRatioSpawnPoints(layout, trafficVolumeFileName, trafficLevel);
     }
 
     V2IPilot.DEFAULT_STOP_DISTANCE_BEFORE_INTERSECTION =

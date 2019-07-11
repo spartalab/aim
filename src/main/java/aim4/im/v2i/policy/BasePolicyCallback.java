@@ -84,6 +84,12 @@ public interface BasePolicyCallback {
    */
   boolean hasReservation(int vin);
 
+  /**
+   * Check whether a vehicle has been told to slow down, or to stop,
+   * that is, he has received reject message before
+   * @return
+   */
+  boolean hasBeenRejected(int vin);
 
   // TODO: remove this function
   TrackModel getTrackMode();

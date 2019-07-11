@@ -82,7 +82,7 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
   /** The time buffer for internal tiles */
   private double internalTileTimeBufferSize = 0.1;
   /** The time buffer for edge tiles */
-  private double edgeTileTimeBufferSize;
+  private double edgeTileTimeBufferSize = 0.25;
   /** Whether the edge time buffer is enabled */
   private boolean isEdgeTileTimeBufferEnabled = true;
   /** The granularity of the reservation grid */
@@ -91,6 +91,7 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
   private double processingInterval = RoadBasedReordering.DEFAULT_PROCESSING_INTERVAL;
   /** The name of the file about the traffic volume */
   private String trafficVolumeFileName = null;
+
 
   /////////////////////////////////
   // CONSTRUCTORS
@@ -314,14 +315,14 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
                                                  vTrafficLevel);
         break;
       case FILE:
-        GridMapUtil.setUniformRatioSpawnPoints(layout, trafficVolumeFileName);
+    	// we'll call this --menie
+        GridMapUtil.setUniformRatioSpawnPoints(layout, trafficVolumeFileName, trafficLevel);
         break;
       }
     } else {
       GridMapUtil.setFCFSManagers(layout, currentTime, gridConfig);
       GridMapUtil.setBaselineSpawnPoints(layout, 12.0);
     }
-
 
     V2IPilot.DEFAULT_STOP_DISTANCE_BEFORE_INTERSECTION =
       stopDistBeforeIntersection;

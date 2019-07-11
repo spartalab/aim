@@ -234,4 +234,17 @@ public interface VehicleDriverView {
    */
   void printState();
 
+  /**
+   * set the vehicle in front of it
+   *
+   * @param currVehicle the current vehicle
+   */
+  void setFrontVehicle(VehicleSimView currVehicle);
+
+  /**
+   * get the vehicle in front of it
+   *
+   * @param currVehicle the current vehicle
+   */
+  VehicleSimView getFrontVehicle();
 }

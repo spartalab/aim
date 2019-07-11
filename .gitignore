@@ -10,3 +10,7 @@
 .settings/*
 nbactions.xml
 nb-configuration.xml
+
+# Experiments results
+out.*
+err.*

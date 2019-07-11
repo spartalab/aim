@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Queue;
 
 import aim4.config.Debug;
+import aim4.config.SimConfig.VEHICLE_TYPE;
 import aim4.driver.AutoDriver;
 import aim4.driver.DriverSimView;
 import aim4.map.lane.Lane;
@@ -87,7 +88,11 @@ public class BasicAutoVehicle extends BasicVehicle
    * The Driver controlling this vehicle.
    */
   private AutoDriver driver;
-
+  /**
+   * The vehicle in front of it.
+   * As default, it's null. This is true for the vehicle in the most front
+   */
+  private BasicAutoVehicle frontVehicle = null;
 
   /////////////////////////////////
   // PRIVATE FIELDS
@@ -247,8 +252,25 @@ public class BasicAutoVehicle extends BasicVehicle
    * The last V2I message
    */
   private V2IMessage lastV2IMessage;
+  /**
+   * it's unique id!!
+   */
+  private int uid;
+  /**
+   * The type of vehicle
+   */
+	private VEHICLE_TYPE vehicleType;
 
-
+	/**
+	 * Whether this vehicle is asked to stopped before.
+	 * If so, we conclude that it turned off the cruise control, for simple cruise control vehicles.
+	 */
+	private boolean stopped = false;
+	
+  /**
+   * how many vehicles are generated
+   */
+  private static int vehicleNum = 0;
 
   /////////////////////////////////
   // CONSTRUCTORS
@@ -267,6 +289,7 @@ public class BasicAutoVehicle extends BasicVehicle
    * @param targetVelocity  the initial target velocity
    * @param acceleration    the initial acceleration of the Vehicle
    * @param currentTime     the current time
+   * @param isHuman         is human or not
    */
   public BasicAutoVehicle(VehicleSpec spec,
                           Point2D pos,
@@ -275,9 +298,14 @@ public class BasicAutoVehicle extends BasicVehicle
                           double velocity,
                           double targetVelocity,
                           double acceleration,
-                          double currentTime) {
+                          double currentTime,
+                          VEHICLE_TYPE vehicleType) {
     super(spec, pos, heading, velocity, steeringAngle, acceleration,
           targetVelocity, currentTime);
+    this.vehicleType = vehicleType;
+
+    this.uid = vehicleNum;
+    vehicleNum++;
   }
 
 
@@ -472,6 +500,28 @@ public class BasicAutoVehicle extends BasicVehicle
     return transmissionPower;
   }
 
+  @Override
+	public VEHICLE_TYPE getVehicleType() {
+		// TODO Auto-generated method stub
+		return this.vehicleType;
+	}
+
+
+	/**
+   * return whether it's human
+   * 
+   * @return
+   */
+  public boolean isHuman() {
+	  return (this.vehicleType == VEHICLE_TYPE.HUMAN);
+  }
+
+  @Override
+	public boolean withCruiseControll() {
+  	return (this.vehicleType == VEHICLE_TYPE.CRUISE);
+	}
+
+
   /**
    * {@inheritDoc}
    */
@@ -539,5 +589,34 @@ public class BasicAutoVehicle extends BasicVehicle
   public V2IMessage getLastV2IMessage() {
     return lastV2IMessage;
   }
+
+
+	@Override
+	public void setFrontVehicle(VehicleSimView currVehicle) {
+		this.frontVehicle = (BasicAutoVehicle) currVehicle;
+	}
+
+
+	@Override
+	public VehicleSimView getFrontVehicle() {
+		return this.frontVehicle;
+	}
+
+
+	@Override
+	public boolean withAdaptiveCruiseControll() {
+		// TODO Auto-generated method stub
+		return this.getVehicleType() == VEHICLE_TYPE.ADAPTIVE_CRUISE;
+	}
+
+	@Override
+	public void askedToStop() {
+		this.stopped = true;
+	}
+
+	@Override
+	public boolean hasStopped() {
+		return this.stopped;
+	}
 
 }
