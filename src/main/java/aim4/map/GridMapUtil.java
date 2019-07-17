@@ -860,6 +860,7 @@ public class GridMapUtil {
     			SimConfig.HUMAN_PERCENTAGE,
     			SimConfig.CONSTANT_HUMAN_PERCENTAGE,
     			SimConfig.ADAPTIVE_HUMAN_PERCENTAGE,
+    			SimConfig.HUD_HUMAN_PERCENTAGE,
     			trafficVolume);
     }
 

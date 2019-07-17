@@ -25,7 +25,8 @@ public class SimConfig {
 		AUTO,
 		HUMAN,
 		CRUISE,
-		ADAPTIVE_CRUISE
+		ADAPTIVE_CRUISE,
+		HUD
 	}
 
 	public static double RED_PHASE_LENGTH = 0;
@@ -78,7 +79,7 @@ public class SimConfig {
 
   /**
    * The portion of human drivers
-   * This data shoule be passed through command line for experiment.
+   * This data should be passed through command line for experiment.
    */
   public static double HUMAN_PERCENTAGE = 0;
 
@@ -92,6 +93,11 @@ public class SimConfig {
    * The percentage of drivers who can strictly follow the vehicles in front of it.
    */
   public static double ADAPTIVE_HUMAN_PERCENTAGE = 0;
+
+	/**
+	 * The percentage of (human) drivers who are following heads-up display (HUD) trajectory.
+	 */
+	public static double HUD_HUMAN_PERCENTAGE = 0;
 
   /**
    * Allowing the assumption that the IM can also have the information of the positions of the

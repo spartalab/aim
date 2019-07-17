@@ -15,6 +15,11 @@ nb-configuration.xml
 *.iml
 *.kotlin_module
 
+# Python support
+**/__pycache__/*
+**/.ipynb_checkpoints/*
+
 # Experiments results
 out.*
 err.*
+output/*

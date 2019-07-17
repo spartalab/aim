@@ -34,10 +34,10 @@ public class DedicatedTrafficController extends LaneTrafficController {
 		
 		for (int laneId = 0; laneId < laneNum; laneId++) {
 			if (laneId % 3 < SimConfig.DEDICATED_LANES) {
-				trafficSpawnInfoList.put(laneId, new LaneInfo(humanLaneLevel, 1, 0, 0));
+				trafficSpawnInfoList.put(laneId, new LaneInfo(humanLaneLevel, 1, 0, 0, 0));
 			}
 			else {
-				trafficSpawnInfoList.put(laneId, new LaneInfo(nonHumanLaneLevel, humanPercentage * ihdPercentage, 1, 0));
+				trafficSpawnInfoList.put(laneId, new LaneInfo(nonHumanLaneLevel, humanPercentage * ihdPercentage, 1, 0, 0));
 			}
 		}
 	}

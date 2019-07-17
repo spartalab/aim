@@ -289,7 +289,7 @@ public class BasicAutoVehicle extends BasicVehicle
    * @param targetVelocity  the initial target velocity
    * @param acceleration    the initial acceleration of the Vehicle
    * @param currentTime     the current time
-   * @param isHuman         is human or not
+   * @param vehicleType     type of vehicle (e.g. human, auto, cruise control, etc.)
    */
   public BasicAutoVehicle(VehicleSpec spec,
                           Point2D pos,
@@ -513,7 +513,8 @@ public class BasicAutoVehicle extends BasicVehicle
    * @return
    */
   public boolean isHuman() {
-	  return (this.vehicleType == VEHICLE_TYPE.HUMAN);
+      // TODO: discriminate between HUD and pure HUMAN?
+	  return (this.vehicleType == VEHICLE_TYPE.HUMAN) || (this.vehicleType == VEHICLE_TYPE.HUD);
   }
 
   @Override

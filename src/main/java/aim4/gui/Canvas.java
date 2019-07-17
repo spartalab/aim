@@ -177,6 +177,8 @@ public class Canvas extends JPanel implements ComponentListener,
   private static final Color CONSTANT_HUMAN_DRIVEN_COLOR = Color.GREEN;
   /** The color of a informed human driver */
   private static final Color ADAPTIVE_HUMAN_DRIVEN_COLOR = Color.BLUE;
+  /** The color of a human driver using a HUD */
+  private static final Color HUD_HUMAN_DRIVEN_COLOR = Color.PINK;
   /** The color of vehicle's tires. */
   private static final Color TIRE_COLOR = Color.BLACK;
   /** The tire color */
@@ -832,6 +834,8 @@ public class Canvas extends JPanel implements ComponentListener,
   		else if (type == VEHICLE_TYPE.ADAPTIVE_CRUISE) {
   			buffer.setPaint(ADAPTIVE_HUMAN_DRIVEN_COLOR);
   		}
+    } else if (vehicle.getVehicleType() == VEHICLE_TYPE.HUD) {
+      buffer.setPaint(HUD_HUMAN_DRIVEN_COLOR);
   	} else if (selectedVehicle) {
       buffer.setPaint(VEHICLE_SELECTED_COLOR);
     } else if (vehicle.getVIN() == MARVIN_VEHICLE_VIN) {

@@ -11,16 +11,15 @@ import aim4.map.TrafficVolume;
 public class NormalTrafficController extends LaneTrafficController {
 
 	public NormalTrafficController(double trafficLevel, double humanPercentage,
-			double cstPercentage, double adhPercentage, TrafficVolume trafficVolume) {
+			double cstPercentage, double adhPercentage, double hudPercentage, TrafficVolume trafficVolume) {
 		super();
 		
-		// Surely, the sume of these percentage cannot be more than 1.
+		// Surely, the sum of these percentages cannot be more than 1.
 		// Constitution of vehicles: auto, human, constant_velocity, adaptive_cruise_control
-		if (humanPercentage + cstPercentage + adhPercentage > 1) {
+		if (humanPercentage + cstPercentage + adhPercentage + hudPercentage > 1) {
 			try {
-				throw new Exception("Percentage error! Sum of them exceeds 1.");
+				throw new Exception("Percentage error! Sum of vehicle type percentages exceeds 1.");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -33,7 +32,7 @@ public class NormalTrafficController extends LaneTrafficController {
 		
 		for (int laneId = 0; laneId < laneNum; laneId++) {
 			double thisLevel = trafficLevel * laneNum * trafficVolume.getTotalVolume(laneId)/ totalVolume;
-			trafficSpawnInfoList.put(laneId, new LaneInfo(thisLevel, humanPercentage, cstPercentage, adhPercentage));
+			trafficSpawnInfoList.put(laneId, new LaneInfo(thisLevel, humanPercentage, cstPercentage, adhPercentage, hudPercentage));
 		}
 	}
 }

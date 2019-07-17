@@ -89,6 +89,10 @@ public class ReservationGridManager implements
      */
     private double staticBufferSize;
     /**
+     * The factor to be applied to the static buffer for HUD-trajectory-following vehicles.
+     */
+    public double bufferFactorForHUD = 1;
+    /**
      * The size of the time buffer, in seconds, used for internal tiles.
      */
     private double internalTileTimeBufferSize;
@@ -133,6 +137,31 @@ public class ReservationGridManager implements
     }
 
     /**
+     * Create a configuration object.
+     *
+     * @param timeStep
+     * @param gridTimeStep
+     * @param staticBufferSize
+     * @param internalTileTimeBufferSize
+     * @param edgeTileTimeBufferSize
+     * @param isEdgeTileTimeBufferEnabled
+     * @param granularity
+     * @param bufferFactorForHUD
+     */
+    public Config(double timeStep,
+                  double gridTimeStep,
+                  double staticBufferSize,
+                  double internalTileTimeBufferSize,
+                  double edgeTileTimeBufferSize,
+                  boolean isEdgeTileTimeBufferEnabled,
+                  double granularity,
+                  double bufferFactorForHUD) {
+      this(timeStep, gridTimeStep, staticBufferSize, internalTileTimeBufferSize, edgeTileTimeBufferSize,
+              isEdgeTileTimeBufferEnabled, granularity);
+      this.bufferFactorForHUD = bufferFactorForHUD;
+    }
+
+    /**
      * Get the time step.
      *
      * @return the time step
@@ -158,6 +187,13 @@ public class ReservationGridManager implements
     public double getStaticBufferSize() {
       return staticBufferSize;
     }
+
+    /**
+     * Get the buffer size factor for HUD-trajectory-following vehicles.
+     *
+     * @return the static buffer size
+     */
+    public double getBufferFactorForHUD() { return bufferFactorForHUD; }
 
     /**
      * Get the internal time buffer size.
@@ -473,6 +509,10 @@ public class ReservationGridManager implements
    */
   public double staticBufferSize;
   /**
+   * The factor to be applied to the static buffer for HUD-trajectory-following vehicles.
+   */
+  public double bufferFactorForHUD;
+  /**
    * Whether or not the edge tile time buffer is enabled.
    */
   private boolean isEdgeTileTimeBufferEnabled;
@@ -546,6 +586,7 @@ public class ReservationGridManager implements
     this.currentTime = currentTime;
     this.config = config;
     this.staticBufferSize = config.getStaticBufferSize();
+    this.bufferFactorForHUD = config.getBufferFactorForHUD();
     this.isEdgeTileTimeBufferEnabled = config.getIsEdgeTileTimeBufferEnabled();
     this.internalTileTimeBufferSteps =
       (int) (config.getInternalTileTimeBufferSize() / config.getGridTimeStep());
@@ -611,8 +652,9 @@ public class ReservationGridManager implements
    * Find a set of space-time tile for a particular traversal proposal in
    * a request message.  This attempt can be either with attempting to
    * setMaxAccelWithMaxTargetVelocity to maximum velocity or with a constant velocity.
-   * @param q  the query object
-   * @param isHuman if it's a human driver
+   * @param q             the query object
+   * @param vehicleType   describes if the vehicle is an AV or some type of human-driven
+   *                      vehicle (such as running adaptive cruise control, a HUD, etc.)
    *
    * @return a set of space-time tiles on the trajectory and
    *         the exit velocity of the vehicle if the reservation is
@@ -788,7 +830,7 @@ public class ReservationGridManager implements
   /**
    * Find a list of unreserved tiletimes by simulation
    *
-   * @param TestVehicle   the test vehicle
+   * @param testVehicle   the test vehicle
    * @param dummy         the dummy driver
    * @param arrivalTime   the arrival time of the vehicle
    * @param accelerating  whether or not to setMaxAccelWithMaxTargetVelocity to maximum velocity
@@ -829,7 +871,15 @@ public class ReservationGridManager implements
 
       // if it's not human driver, we should simulate its position
       // otherwise, use the occupied in argument
-    	occupied = tiledArea.findOccupiedTiles(testVehicle.getShape(staticBufferSize));
+      if (testVehicle.getVehicleType() == VEHICLE_TYPE.HUD) {
+        // SPARTA TODO: reactively increase occupied size
+        occupied = tiledArea.findOccupiedTiles(testVehicle.getShape(staticBufferSize * this.bufferFactorForHUD));
+        BasicAutoVehicle testAutoVehicle = testVehicle;
+        // BasicHUDVehicle testHUDVehicle = testVehicle;
+        // occupied = tiledArea.findOccupiedTiles(testVehicle.getShape(staticBufferSize * 4));
+      } else {
+        occupied = tiledArea.findOccupiedTiles(testVehicle.getShape(staticBufferSize));
+      }
 
       // Make sure none of these tiles are reserved by someone else already
       for(Tile tile : occupied) {

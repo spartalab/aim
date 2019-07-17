@@ -124,13 +124,13 @@ def operate(array, runningForOneData):
 
     for timeForData in range(runningForOneData):
       # informative
-      print command
-      print 'for the ' + str(timeForData) + " time"
+      print(command)
+      print('for the ' + str(timeForData) + " time")
 	  
       os.system(command)
       delay_time = read_delay(fileName)
       avg_delay_time = avg_delay(delay_time)
-      print "delay time is " + str(avg_delay_time)
+      print("delay time is " + str(avg_delay_time))
 
       writer.writerow(avg_delay_time)
     os.system("rm " + fileName)

@@ -32,6 +32,7 @@ package aim4.sim.setup;
 
 import aim4.config.Constants;
 import aim4.config.Debug;
+import aim4.config.Resources;
 import aim4.config.SimConfig;
 import aim4.driver.pilot.V2IPilot;
 import aim4.im.v2i.batch.RoadBasedReordering;
@@ -40,9 +41,6 @@ import aim4.map.GridMap;
 import aim4.map.GridMapUtil;
 import aim4.sim.AutoDriverOnlySimulator;
 import aim4.sim.Simulator;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The setup for the simulator in which all vehicles are autonomous.
@@ -60,7 +58,7 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
     UNIFORM_RANDOM,
     UNIFORM_TURNBASED,
     HVDIRECTIONAL_RANDOM,
-    FILE,
+    FILE
   }
 
   /////////////////////////////////
@@ -91,6 +89,8 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
   private double processingInterval = RoadBasedReordering.DEFAULT_PROCESSING_INTERVAL;
   /** The name of the file about the traffic volume */
   private String trafficVolumeFileName = null;
+  /** The buffer size factor for HUD-trajectory-following vehicles */
+  private double bufferFactorForHUD = 1;
 
 
   /////////////////////////////////
@@ -231,6 +231,15 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
   }
 
   /**
+   * Set the buffer factor for HUD following vehicles. Multiplies the staticBufferSize.
+   *
+   * @param bufferFactor
+   */
+  public void setBufferFactorForHUD(double bufferFactor) {
+    this.bufferFactorForHUD = bufferFactor;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -244,6 +253,7 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
                                        lanesPerRoad,
                                        medianSize,
                                        distanceBetween);
+    Resources.map = layout;
     // Set the edge tile time buffer based on the maximum speed limit
     try {
       edgeTileTimeBufferSize = Constants.getEdgeTileTimeBufferBasedOnVelocity(speedLimit);
@@ -266,7 +276,8 @@ public class AutoDriverOnlySimSetup extends BasicSimSetup implements SimSetup {
                                         internalTileTimeBufferSize,
                                         edgeTileTimeBufferSize,
                                         isEdgeTileTimeBufferEnabled,
-                                        granularity);  // granularity
+                                        granularity,
+                                        bufferFactorForHUD);  // granularity
 
 /* for demo */
 /*

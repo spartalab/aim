@@ -50,15 +50,18 @@ public abstract class LaneTrafficController {
 		protected double ihdPercent;
 		protected double humanPercent;
 		protected double adhPercent;
-		
-		LaneInfo(double trafficLevel, double humanPercentage, double ihdPercentage, double adhPercentage) {
+		protected double hudPercent;
+
+		LaneInfo(double trafficLevel,
+				 double humanPercentage, double ihdPercentage, double adhPercentage, double hudPercentage) {
 			double timeStep = SimConfig.SPAWN_TIME_STEP;
-			
+
 			humanPercent = timeStep * trafficLevel * humanPercentage;
 			ihdPercent = timeStep * trafficLevel * ihdPercentage;
 			adhPercent = timeStep * trafficLevel * adhPercentage;
-			
-			autoPercent = timeStep * trafficLevel * (1 - humanPercentage - ihdPercentage - adhPercentage);
+			hudPercent = timeStep * trafficLevel * hudPercentage;
+
+			autoPercent = timeStep * trafficLevel * (1 - humanPercentage - ihdPercentage - adhPercentage - hudPercentage);
 		}
 		
 		/**
@@ -70,18 +73,16 @@ public abstract class LaneTrafficController {
 			
 			if (rand < autoPercent) {
 				return new SpawnCase(VEHICLE_TYPE.AUTO);
-			}
-			else if (rand < autoPercent + humanPercent) {
+			} else if (rand < autoPercent + humanPercent) {
 				return new SpawnCase(VEHICLE_TYPE.HUMAN);
-			}
-			else if (rand < autoPercent + humanPercent + ihdPercent) {
+			} else if (rand < autoPercent + humanPercent + ihdPercent) {
 				return new SpawnCase(VEHICLE_TYPE.CRUISE);
-			}
-			else if (rand < autoPercent + humanPercent + ihdPercent + adhPercent) {
+			} else if (rand < autoPercent + humanPercent + ihdPercent + adhPercent) {
 				// nothing generated
 				return new SpawnCase(VEHICLE_TYPE.ADAPTIVE_CRUISE);
-			}
-			else {
+			} else if (rand < autoPercent + humanPercent + ihdPercent + adhPercent + hudPercent) {
+				return new SpawnCase(VEHICLE_TYPE.HUD);
+			} else {
 				// return nothing
 				return new SpawnCase();
 			}
