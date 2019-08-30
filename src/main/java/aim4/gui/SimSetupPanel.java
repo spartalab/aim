@@ -147,8 +147,8 @@ public class SimSetupPanel extends JPanel implements ItemListener {
       // simSetup2.setTrafficVolume("src/main/resources/SignalPhases/AIM4Volumes.csv");
       ApproxNPhasesTrafficSignalSimSetup simSetup2 =
         new ApproxNPhasesTrafficSignalSimSetup(simSetup,
-                                               "src/main/java/6phases/AIM4Phases.csv");
-      simSetup2.setTrafficVolume("src/main/java/6phases/AIM4Volumes.csv");
+                                               "src/main/java/bin/6phases/AIM4Phases.csv");
+      simSetup2.setTrafficVolume("src/main/java/bin/6phases/AIM4Volumes.csv");
 
       simSetup2.setLanesPerRoad(trafficSignalSetupPanel.getLanesPerRoad());
       simSetup2.setStopDistBeforeIntersection(1.0);
